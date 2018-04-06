@@ -24,7 +24,7 @@ function GetStorageStatus(props) {
 GetStorageStatus.propTypes = {
   storageValue: PropTypes.oneOfType([PropTypes.number]),
   getStorageValueLoading: PropTypes.bool,
-  getStorageValueError:  PropTypes.oneOfType([PropTypes.bool,PropTypes.string]),
+  getStorageValueError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 };
 
 export default GetStorageStatus;

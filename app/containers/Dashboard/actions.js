@@ -38,7 +38,7 @@ import {
  */
 export function changeWindow(window) {
   console.log('changeWindow');
-  
+
   return {
     type: COMMIT_ETH_SEND_CHANGE_WINDOW,
     window,

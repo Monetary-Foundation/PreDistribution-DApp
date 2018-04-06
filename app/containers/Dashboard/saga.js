@@ -68,8 +68,6 @@ function* initDashboardAsync() {
 
       web3js.eth.defaultAccount = web3.eth.defaultAccount;
       console.log((web3js.eth.defaultAccount));
-      
-
     } else {
       throw new Error('No web3 injected (Mist/Metamask...), Aborting');
     }
@@ -78,14 +76,14 @@ function* initDashboardAsync() {
     try {
       netId = yield call(web3js.eth.net.getId);
     } catch (err) {
-      throw new Error('web3.eth.net.getId error, check connection to RPC endpoint and refresh page. ' + err);
+      throw new Error(`web3.eth.net.getId error, check connection to RPC endpoint and refresh page. ${err}`);
     }
     console.log(`netid: ${netId}`);
 
     const networkContracts = distributionContracts[netId] || distributionContracts.default;
 
     const networkName = networkContracts.networkName;
-    console.log('Network Name: ' + networkName);
+    console.log(`Network Name: ${networkName}`);
     // console.log(networkContracts);
 
     const token = networkContracts.tokenList.find(
@@ -255,12 +253,12 @@ function* commitEthSendAsync() {
     const window = yield select(makeSelectCommitEthSendWindow());
     const amount = (yield select(makeSelectCommitEthSendAmount()));
 
-    console.log('window: ' + window);
-    console.log('amount: ' + amount);
-    console.log('typeof amount: ' + typeof (amount));
+    console.log(`window: ${window}`);
+    console.log(`amount: ${amount}`);
+    console.log(`typeof amount: ${typeof (amount)}`);
 
     console.log(web3.eth.defaultAccount);
-    
+
 
     const sendPromise = () =>
       distributionContract.methods.commitOn(window).send({

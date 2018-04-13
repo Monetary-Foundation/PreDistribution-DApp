@@ -272,7 +272,7 @@ export const erc20Abi = [
 ];
 
 /* eslint-disable */
-export const distributionAbi = [
+export const distributionAbi =  [
   {
     "constant": true,
     "inputs": [
@@ -732,6 +732,39 @@ export const distributionAbi = [
     "type": "function"
   },
   {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "from",
+        "type": "address"
+      }
+    ],
+    "name": "getCommitmentsOf",
+    "outputs": [
+      {
+        "name": "commitments",
+        "type": "uint256[365]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getTotals",
+    "outputs": [
+      {
+        "name": "ethTotals",
+        "type": "uint256[365]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "constant": false,
     "inputs": [],
     "name": "moveFunds",
@@ -745,6 +778,6 @@ export const distributionAbi = [
     "stateMutability": "nonpayable",
     "type": "function"
   }
-];
+]
 
 /* eslint-enable */

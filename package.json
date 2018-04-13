@@ -1,5 +1,5 @@
 {
-  "name": "MCoin-PreDistribution-DApp",
+  "name": "mcoin-predistribution-dapp",
   "private": true,
   "version": "0.1.0",
   "description": "a DApp for interacting with MCoin-PreDistribution contract",

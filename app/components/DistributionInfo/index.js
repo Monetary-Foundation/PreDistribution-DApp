@@ -20,11 +20,18 @@ function DistributionInfo(props) {
     return <div> {getDistributionInfoError} </div>;
   }
 
-  return (
-    <div>
-      DistributionInfo component <pre> {distributionInfo && JSON.stringify(distributionInfo, 0, 2)}</pre>
-    </div>
-  );
+  if (distributionInfo) {
+    const { totals } = distributionInfo;
+    delete distributionInfo.totals;
+    return (
+      <div>
+        {/* DistributionInfo component <pre> {distributionInfo && JSON.stringify(distributionInfo, 0, 0)}</pre> */}
+        DistributionInfo component <br /> {distributionInfo && JSON.stringify(distributionInfo, 0, 2)} <br />
+        totals: {totals && JSON.stringify(totals, 0, 0)}
+      </div>
+    );
+  }
+  return null;
 }
 
 DistributionInfo.propTypes = {

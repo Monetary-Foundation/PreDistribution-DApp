@@ -9,10 +9,9 @@ import { distributionAbi } from 'utils/contracts/abi';
 
 import {
   INIT_DASHBOARD,
-  SET_STORAGE_VALUE,
-  GET_STORAGE_VALUE,
   // ADD_NEW_SET_EVENT,
   GET_DISTRIBUTION_INFO,
+  GET_ADDRESS_INFO,
   COMMIT_ETH_SEND,
 } from './constants';
 
@@ -24,28 +23,25 @@ import {
   getDistributionInfoSuccess,
   getDistributionInfoError,
 
+  getAddressInfo,
+  getAddressInfoSuccess,
+  getAddressInfoError,
+
   commitEthSendSuccess,
   commitEthSendError,
 
   addNewEvent,
 
-  setStorageValueSuccess,
-  setStorageValueError,
-  getStorageValueSuccess,
-  getStorageValueError,
 } from './actions';
 
 import {
   makeSelectWeb3,
-  makeSelectSimpleStorage,
   makeSelectDistributionAddress,
 
   makeSelectCommitEthSendWindow,
   makeSelectCommitEthSendAmount,
 } from './selectors';
 
-// import SimpleStorageContract from '../../../truffle/build/contracts/SimpleStorage.json'
-// import contract from 'truffle-contract';
 
 export const timer = (ms) =>
   new Promise((resolve) => setTimeout(() => resolve('timer end'), ms));
@@ -67,7 +63,8 @@ function* initDashboardAsync() {
       web3js = new Web3(web3.currentProvider);
 
       web3js.eth.defaultAccount = web3.eth.defaultAccount;
-      console.log((web3js.eth.defaultAccount));
+      console.log('web3js.eth.defaultAccount on init:');
+      console.log(web3js.eth.defaultAccount);
     } else {
       throw new Error('No web3 injected (Mist/Metamask...), Aborting');
     }
@@ -147,48 +144,6 @@ function* handleEvents() {
 }
 
 
-/**
- * setStorageValue
- */
-function* setStorageValueAsync(action) {
-  try {
-    const selectWeb3 = yield select(makeSelectWeb3());
-    const accounts = yield call(selectWeb3.eth.getAccounts);
-
-    const simpleStorage = yield select(makeSelectSimpleStorage());
-
-    const simpleStorageInstance = yield call(simpleStorage.deployed);
-
-    // promise will resolve only when transaction is mined
-    const setValueResult = yield call(simpleStorageInstance.set, action.value, { from: accounts[0] });
-    console.log('setValueResult:');
-    // console.log(setValueResult);
-
-    if (setValueResult.receipt.logs.length > 0) { // receipt includes value from logs
-      yield put(setStorageValueSuccess());
-    } else {
-      yield put(setStorageValueError('contract not found on network'));
-    }
-  } catch (err) {
-    yield put(setStorageValueError(err.toString()));
-  }
-}
-
-/**
- * getStorageValue
- */
-function* getStorageValueAsync() {
-  try {
-    const simpleStorage = yield select(makeSelectSimpleStorage());
-
-    const simpleStorageInstance = yield call(simpleStorage.deployed);
-    const setValueResult = yield call(simpleStorageInstance.get.call);
-    yield put(getStorageValueSuccess(setValueResult.toNumber()));
-  } catch (err) {
-    yield put(getStorageValueError(err.toString()));
-  }
-}
-
 // TODO: ??
 let distributionContract;
 
@@ -202,7 +157,7 @@ function* getDistributionInfoAsync() {
     distributionContract = new web3.eth.Contract(distributionAbi, distributionAddress);
 
     // TODO:Remove
-    yield call(timer, 1500);
+    yield call(timer, 500);
 
     const getLatestBlock = web3.eth.getBlock('latest');
 
@@ -219,12 +174,15 @@ function* getDistributionInfoAsync() {
     const getSecondPeriodSupply = distributionContract.methods.secondPeriodSupply().call();
 
 
+    const getTotals = distributionContract.methods.getTotals().call();
+
     const getAllPromises = () =>
       Promise.all([getLatestBlock, getCurrentWindow, getTotalWindows, getStartTimestamp, getWindowLenght,
-        getFirstPeriodWindows, getSecondPeriodWindows, getFirstPeriodSupply, getSecondPeriodSupply]);
+        getFirstPeriodWindows, getSecondPeriodWindows, getFirstPeriodSupply, getSecondPeriodSupply, getTotals]);
 
     const [latestBlock, currentWindow, totalWindows, startTimestamp, windowLenght,
-      firstPeriodWindows, secondPeriodWindows, firstPeriodSupply, secondPeriodSupply] = yield call(getAllPromises);
+      firstPeriodWindows, secondPeriodWindows, firstPeriodSupply, secondPeriodSupply, totals] =
+      yield call(getAllPromises);
 
     const distributionInfo = {
       timestamp: latestBlock.timestamp,
@@ -236,11 +194,52 @@ function* getDistributionInfoAsync() {
       secondPeriodWindows,
       firstPeriodSupply,
       secondPeriodSupply,
+      totals,
     };
 
+    // console.log(totals);
+
     yield put(getDistributionInfoSuccess(distributionInfo));
+    yield put(getAddressInfo());
   } catch (err) {
     yield put(getDistributionInfoError(err.toString()));
+  }
+}
+/**
+ * getAddressInfoAsync
+ */
+function* getAddressInfoAsync() {
+  try {
+    const web3 = yield select(makeSelectWeb3());
+    // const distributionAddress = yield select(makeSelectDistributionAddress());
+    // distributionContract = new web3.eth.Contract(distributionAbi, distributionAddress);
+
+    // TODO:Remove
+    // yield call(timer, 500);
+
+    const address = (yield call(() => web3.eth.getAccounts()))[0];
+
+    const getCommitments = distributionContract.methods.getCommitmentsOf(address).call();
+    const getRewards = distributionContract.methods.getAllRewards().call();
+
+    const getAllPromises = () =>
+      Promise.all([getCommitments, getRewards]);
+
+    const [commitments, rewards] = yield call(getAllPromises);
+
+    const distributionInfo = {
+      address,
+      commitments,
+      rewards,
+    };
+
+    // const getRewards = () => distributionContract.methods.getAllRewards().call();
+    // const rewards = yield call(getRewards);
+
+
+    yield put(getAddressInfoSuccess(distributionInfo));
+  } catch (err) {
+    yield put(getAddressInfoError(err.toString()));
   }
 }
 
@@ -257,22 +256,26 @@ function* commitEthSendAsync() {
     console.log(`amount: ${amount}`);
     console.log(`typeof amount: ${typeof (amount)}`);
 
-    console.log(web3.eth.defaultAccount);
-
+    const defaultAccount = (yield call(() => web3.eth.getAccounts()))[0];
+    console.log(defaultAccount);
 
     const sendPromise = () =>
       distributionContract.methods.commitOn(window).send({
-        from: web3.eth.defaultAccount,
-        value: web3.utils.toWei(amount, 'ether'),
+        from: defaultAccount,
+        gas: (100000).toString(),
+        gasPrice: web3.utils.toWei((10).toString(), 'gwei'),
+        value: web3.utils.toWei(amount.toString(), 'ether'),
       });
-    // TODO:Remove
-    // yield call(timer, 1500);
+
 
     const receipt = yield call(sendPromise);
+    console.log(receipt);
 
-    yield put(commitEthSendSuccess(receipt));
+    yield put(commitEthSendSuccess('receipt'));
   } catch (err) {
-    yield put(commitEthSendError(err.toString()));
+    const errMsg = err.toString();
+    const shortErr = errMsg.substring(0, errMsg.indexOf('.') + 1);
+    yield put(commitEthSendError(shortErr));
   }
 }
 
@@ -281,9 +284,7 @@ export default function* defaultSaga() {
   yield takeLatest(INIT_DASHBOARD, initDashboardAsync);
 
   yield takeLatest(GET_DISTRIBUTION_INFO, getDistributionInfoAsync);
+  yield takeLatest(GET_ADDRESS_INFO, getAddressInfoAsync);
 
   yield takeLatest(COMMIT_ETH_SEND, commitEthSendAsync);
-
-  yield takeLatest(SET_STORAGE_VALUE, setStorageValueAsync);
-  yield takeLatest(GET_STORAGE_VALUE, getStorageValueAsync);
 }

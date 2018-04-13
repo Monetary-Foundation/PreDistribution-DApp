@@ -13,22 +13,156 @@ import {
   GET_DISTRIBUTION_INFO_SUCCESS,
   GET_DISTRIBUTION_INFO_ERROR,
 
+  GET_ADDRESS_INFO,
+  GET_ADDRESS_INFO_SUCCESS,
+  GET_ADDRESS_INFO_ERROR,
+
   COMMIT_ETH_SEND_CHANGE_WINDOW,
   COMMIT_ETH_SEND_CHANGE_AMOUNT,
   COMMIT_ETH_SEND,
   COMMIT_ETH_SEND_SUCCESS,
   COMMIT_ETH_SEND_ERROR,
+
+  WITHDRAW_CHANGE_WINDOW,
+  WITHDRAW_SEND,
+  WITHDRAW_SEND_SUCCESS,
+  WITHDRAW_MINED_SUCCESS,
+  WITHDRAW_ERROR,
+
   // ADD_NEW_SET_EVENT,
-
-  SET_STORAGE_VALUE,
-  SET_STORAGE_VALUE_SUCCESS,
-  SET_STORAGE_VALUE_ERROR,
-
-  GET_STORAGE_VALUE,
-  GET_STORAGE_VALUE_SUCCESS,
-  GET_STORAGE_VALUE_ERROR,
-
 } from './constants';
+
+
+/**
+ * Initiate init process
+ *
+ * @return {object} An action object with a type of INIT_DASHBOARD passing the repos
+ */
+export function initDashboard() {
+  return {
+    type: INIT_DASHBOARD,
+  };
+}
+
+/**
+ * Init process completed successfully
+ *
+ * @param  {object} web3
+ * @param  {string} networkName
+ * @param  {string} tokenName
+ * @param  {string} tokenAddress
+ * @param  {string} distributionAddress
+ * @param  {object []} tokenList
+ *
+ * @return {object} An action object with a type of INIT_DASHBOARD_SUCCESS
+ */
+export function initDashboardSuccess(web3, networkName, tokenName, tokenAddress, distributionAddress, tokenList) {
+  return {
+    type: INIT_DASHBOARD_SUCCESS,
+    web3,
+    networkName,
+    tokenName,
+    tokenAddress,
+    distributionAddress,
+    tokenList,
+  };
+}
+
+/**
+ * Init process completed with error
+ *
+ * @param  {string} error
+ *
+ * @return {object} An action object with a type of INIT_DASHBOARD_ERROR and error string
+ */
+export function initDashboardError(error) {
+  console.log(error);
+  return {
+    type: INIT_DASHBOARD_ERROR,
+    error,
+  };
+}
+
+/**
+ * get distribution contract info
+ *
+ * @return {object} An action object with a type of GET_DISTRIBUTION_INFO passing the repos
+ */
+export function getDistributionInfo() {
+  return {
+    type: GET_DISTRIBUTION_INFO,
+  };
+}
+
+/**
+ * getDistributionInfo completed successfully
+ *
+ * @param  {object} distributionInfo
+ *
+ * @return {object} An action object with a type of GET_DISTRIBUTION_INFO_SUCCESS and distributionInfo
+ */
+export function getDistributionInfoSuccess(distributionInfo) {
+  return {
+    type: GET_DISTRIBUTION_INFO_SUCCESS,
+    distributionInfo,
+  };
+}
+
+/**
+ * Init process completed with error
+ *
+ * @param  {string} error
+ *
+ * @return {object} An action object with a type of GET_DISTRIBUTION_INFO_ERROR and error string
+ */
+export function getDistributionInfoError(error) {
+  console.log(error);
+  return {
+    type: GET_DISTRIBUTION_INFO_ERROR,
+    error,
+  };
+}
+
+/**
+ * get address specific distribution contract info
+ *
+ * @return {object} An action object with a type of GET_ADDRESS_INFO
+ */
+export function getAddressInfo() {
+  return {
+    type: GET_ADDRESS_INFO,
+  };
+}
+
+/**
+ * getDistributionInfo completed successfully
+ *
+ * @param  {object} addressInfo
+ *
+ * @return {object} An action object with a type of GET_ADDRESS_INFO_SUCCESS and addressInfo
+ */
+export function getAddressInfoSuccess(addressInfo) {
+  return {
+    type: GET_ADDRESS_INFO_SUCCESS,
+    addressInfo,
+  };
+}
+
+/**
+ * getAddressInfo completed with error
+ *
+ * @param  {string} error
+ *
+ * @return {object} An action object with a type of GET_ADDRESS_INFO_ERROR and error string
+ */
+export function getAddressInfoError(error) {
+  console.log(error);
+  return {
+    type: GET_ADDRESS_INFO_ERROR,
+    error,
+  };
+}
+
 
 /**
  * Update the commit window
@@ -98,92 +232,74 @@ export function commitEthSendError(error) {
   };
 }
 
+
 /**
- * Initiate init process
+ * Update the withdraw window
  *
- * @return {object} An action object with a type of INIT_DASHBOARD passing the repos
+ * @param  {number} window number of window commit to
+ *
+ * @return {object}    An action object with a type of WITHDRAW_CHANGE_WINDOW and window number
  */
-export function initDashboard() {
+export function changeWithdrawWindow(window) {
+  console.log('changeWithdrawWindow');
   return {
-    type: INIT_DASHBOARD,
+    type: WITHDRAW_CHANGE_WINDOW,
+    window,
+  };
+}
+
+
+/**
+ * create withdraw transaction and send
+ *
+ * @return {object} An action object with a type of WITHDRAW_SEND
+ */
+export function withdrawSend() {
+  return {
+    type: WITHDRAW_SEND,
   };
 }
 
 /**
- * Init process compleated successfully
+ * withdraw transaction were sent successfully
  *
- * @param  {object} web3
- * @param  {string} networkName
- * @param  {string} tokenName
- * @param  {string} tokenAddress
- * @param  {string} distributionAddress
- * @param  {object []} tokenList
+ * @param  {string} withdrawSendTx transaction tx
  *
- * @return {object} An action object with a type of INIT_DASHBOARD_SUCCESS
+ * @return {object} An action object with a type of WITHDRAW_SEND_SUCCESS and tx
  */
-export function initDashboardSuccess(web3, networkName, tokenName, tokenAddress, distributionAddress, tokenList) {
+export function withdrawSendSuccess(withdrawSendTx) {
   return {
-    type: INIT_DASHBOARD_SUCCESS,
-    web3,
-    networkName,
-    tokenName,
-    tokenAddress,
-    distributionAddress,
-    tokenList,
+    type: WITHDRAW_SEND_SUCCESS,
+    withdrawSendTx,
+  };
+}
+
+
+/**
+ * withdraw transaction were sent successfully
+ *
+ * @param  {string} withdrawMinedRecipt recipt
+ *
+ * @return {object} An action object with a type of WITHDRAW_SEND_SUCCESS and tx
+ */
+export function withdrawMinedSuccess(withdrawMinedRecipt) {
+  return {
+    type: WITHDRAW_MINED_SUCCESS,
+    withdrawMinedRecipt,
   };
 }
 
 /**
- * Init process compleated with error
+ * error during a withdraw
  *
  * @param  {string} error
  *
- * @return {object} An action object with a type of INIT_DASHBOARD_ERROR and error string
+ * @return {object} An action object with a type of WITHDRAW_ERROR and error string
  */
-export function initDashboardError(error) {
+export function withdrawError(error) {
   console.log(error);
   return {
-    type: INIT_DASHBOARD_ERROR,
-    error,
-  };
-}
-
-/**
- * get distribution contract info
- *
- * @return {object} An action object with a type of GET_DISTRIBUTION_INFO passing the repos
- */
-export function getDistributionInfo() {
-  return {
-    type: GET_DISTRIBUTION_INFO,
-  };
-}
-
-/**
- * getDistributionInfo compleated successfully
- *
- * @param  {object} distributionInfo
- *
- * @return {object} An action object with a type of GET_DISTRIBUTION_INFO_SUCCESS and distributionInfo
- */
-export function getDistributionInfoSuccess(distributionInfo) {
-  return {
-    type: GET_DISTRIBUTION_INFO_SUCCESS,
-    distributionInfo,
-  };
-}
-
-/**
- * Init process compleated with error
- *
- * @param  {string} error
- *
- * @return {object} An action object with a type of GET_DISTRIBUTION_INFO_ERROR and error string
- */
-export function getDistributionInfoError(error) {
-  console.log(error);
-  return {
-    type: GET_DISTRIBUTION_INFO_ERROR,
+    type: WITHDRAW_ERROR,
     error,
   };
 }
@@ -200,86 +316,3 @@ export function addNewEvent(eventAction) {
   // event already in the right format
   return eventAction;
 }
-
-
-/**
- * Set storage value
- *
- * @param  {number} value
- *
- * @return {object} An action object with a type of SET_STORAGE_VALUE
- */
-export function setStorageValue(value) {
-  return {
-    type: SET_STORAGE_VALUE,
-    value,
-  };
-}
-
-/**
- * setStorageValue success
- *
- * @return {object} An action object with a type of SET_STORAGE_VALUE_SUCCESS
- */
-export function setStorageValueSuccess() {
-  return {
-    type: SET_STORAGE_VALUE_SUCCESS,
-  };
-}
-
-/**
- * setStorageValue failed
- *
- * @param  {string} error
- *
- * @return {object} An action object with a type of SET_STORAGE_VALUE_ERROR and error string
- */
-export function setStorageValueError(error) {
-  console.log(error);
-  return {
-    type: SET_STORAGE_VALUE_ERROR,
-    error,
-  };
-}
-
-/**
- * Get storage value
- *
- * @return {object} An action object with a type of GET_STORAGE_VALUE
- */
-export function getStorageValue() {
-  console.log('getStorageValue()');
-
-  return {
-    type: GET_STORAGE_VALUE,
-  };
-}
-
-/**
- * setStorageValue success
- * @param  {number} storageValue
- *
- * @return {object} An action object with a type of SET_STORAGE_VALUE_SUCCESS
- */
-export function getStorageValueSuccess(storageValue) {
-  return {
-    type: GET_STORAGE_VALUE_SUCCESS,
-    storageValue,
-  };
-}
-
-/**
- * setStorageValue failed
- *
- * @param  {string} error
- *
- * @return {object} An action object with a type of GET_STORAGE_VALUE_ERROR and error string
- */
-export function getStorageValueError(error) {
-  console.log(error);
-  return {
-    type: GET_STORAGE_VALUE_ERROR,
-    error,
-  };
-}
-

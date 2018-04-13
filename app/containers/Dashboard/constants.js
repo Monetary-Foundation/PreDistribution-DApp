@@ -14,6 +14,9 @@ export const GET_DISTRIBUTION_INFO = 'app/Dashboard/GET_DISTRIBUTION_INFO';
 export const GET_DISTRIBUTION_INFO_SUCCESS = 'app/Dashboard/GET_DISTRIBUTION_INFO_SUCCESS';
 export const GET_DISTRIBUTION_INFO_ERROR = 'app/Dashboard/GET_DISTRIBUTION_INFO_ERROR';
 
+export const GET_ADDRESS_INFO = 'app/Dashboard/GET_ADDRESS_INFO';
+export const GET_ADDRESS_INFO_SUCCESS = 'app/Dashboard/GET_ADDRESS_INFO_SUCCESS';
+export const GET_ADDRESS_INFO_ERROR = 'app/Dashboard/GET_ADDRESS_INFO_ERROR';
 
 export const COMMIT_ETH_SEND_CHANGE_WINDOW = 'app/Dashboard/COMMIT_ETH_SEND_CHANGE_WINDOW';
 export const COMMIT_ETH_SEND_CHANGE_AMOUNT = 'app/Dashboard/COMMIT_ETH_SEND_CHANGE_AMOUNT';
@@ -25,13 +28,15 @@ export const COMMIT_ETH_MINED = 'app/Dashboard/COMMIT_ETH_MINED';
 export const COMMIT_ETH_MINED_SUCCESS = 'app/Dashboard/COMMIT_ETH_MINED_SUCCESS';
 export const COMMIT_ETH_MINED_ERROR = 'app/Dashboard/COMMIT_ETH_MINED_ERROR';
 
+export const WITHDRAW_CHANGE_WINDOW = 'app/Dashboard/WITHDRAW_CHANGE_WINDOW';
+export const WITHDRAW_SEND = 'app/Dashboard/WITHDRAW_SEND';
+export const WITHDRAW_SEND_SUCCESS = 'app/Dashboard/WITHDRAW_SEND_SUCCESS';
+export const WITHDRAW_MINED_SUCCESS = 'app/Dashboard/WITHDRAW_MINED_SUCCESS';
+export const WITHDRAW_ERROR = 'app/Dashboard/WITHDRAW_SEND_ERROR';
 
-export const SET_STORAGE_VALUE = 'app/Dashboard/SET_STORAGE_VALUE';
-export const SET_STORAGE_VALUE_SUCCESS = 'app/Dashboard/SET_STORAGE_VALUE_SUCCESS';
-export const SET_STORAGE_VALUE_ERROR = 'app/Dashboard/SET_STORAGE_VALUE_ERROR';
-
-export const GET_STORAGE_VALUE = 'app/Dashboard/GET_STORAGE_VALUE';
-export const GET_STORAGE_VALUE_SUCCESS = 'app/Dashboard/GET_STORAGE_VALUE_SUCCESS';
-export const GET_STORAGE_VALUE_ERROR = 'app/Dashboard/GET_STORAGE_VALUE_ERROR';
+export const WITHDRAW_ALL_SEND = 'app/Dashboard/WITHDRAW_ALL_SEND';
+export const WITHDRAW_ALL_SEND_SUCCESS = 'app/Dashboard/WITHDRAW_ALL_SEND_SUCCESS';
+export const WITHDRAW_ALL_MINED_SUCCESS = 'app/Dashboard/WITHDRAW_ALL_MINED_SUCCESS';
+export const WITHDRAW_ALL_ERROR = 'app/Dashboard/WITHDRAW_ALL_ERROR';
 
 export const ADD_NEW_SET_EVENT = 'app/Dashboard/ADD_NEW_SET_EVENT';

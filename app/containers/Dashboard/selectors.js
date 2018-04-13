@@ -47,6 +47,21 @@ const makeSelectDistributionInfo = () => createSelector(
   (substate) => substate.get('distributionInfo') ? substate.get('distributionInfo').toJS() : null
 );
 
+const makeSelectGetAddressInfoLoading = () => createSelector(
+  selectDashboardDomain,
+  (substate) => substate.get('getAddressInfoLoading')
+);
+const makeSelectGetAddressInfoError = () => createSelector(
+  selectDashboardDomain,
+  (substate) => substate.get('getAddressInfoError')
+);
+const makeSelectAddressInfo = () => createSelector(
+  selectDashboardDomain,
+  (substate) => substate.get('addressInfo') ? substate.get('addressInfo').toJS() : null
+);
+
+/* CommitEth */
+
 const makeSelectCommitEthSendWindow = () => createSelector(
   selectDashboardDomain,
   (substate) => substate.get('commitEthSendWindow')
@@ -72,43 +87,64 @@ const makeSelectCommitEthSendTx = () => createSelector(
   (substate) => substate.get('commitEthSendTx')
 );
 
+/* Withdraw */
 
-/* ----------------Remove ----------*/
-const makeSelectSimpleStorage = () => createSelector(
+const makeSelectWithdrawWindow = () => createSelector(
   selectDashboardDomain,
-  (substate) => substate.get('simpleStorage')
+  (substate) => substate.get('withdrawWindow')
 );
 
-const makeSelectSetStorageValue = () => createSelector(
+const makeSelectWithdrawSendLoading = () => createSelector(
   selectDashboardDomain,
-  (substate) => substate.get('setStorageValue')
+  (substate) => substate.get('withdrawSendLoading')
 );
 
-const makeSelectSetStorageLoading = () => createSelector(
+const makeSelectWithdrawMinedLoading = () => createSelector(
   selectDashboardDomain,
-  (substate) => substate.get('setStorageLoading')
+  (substate) => substate.get('withdrawMinedLoading')
 );
 
-const makeSelectSetStorageError = () => createSelector(
+const makeSelectWithdrawError = () => createSelector(
   selectDashboardDomain,
-  (substate) => substate.get('setStorageError')
+  (substate) => substate.get('withdrawError')
 );
 
-const makeSelectStorageValue = () => createSelector(
+const makeSelectWithdrawSendTx = () => createSelector(
   selectDashboardDomain,
-  (substate) => substate.get('storageValue')
+  (substate) => substate.get('withdrawSendTx')
 );
 
-const makeSelectGetStorageValueLoading = () => createSelector(
+const makeSelectWithdrawMinedRecipt = () => createSelector(
   selectDashboardDomain,
-  (substate) => substate.get('getStorageValueLoading')
+  (substate) => substate.get('withdrawMinedRecipt')
 );
 
-const makeSelectGetStorageValueError = () => createSelector(
+/* WithdrawAll */
+
+const makeSelectWithdrawAllSendLoading = () => createSelector(
   selectDashboardDomain,
-  (substate) => substate.get('getStorageValueError')
+  (substate) => substate.get('withdrawAllSendLoading')
 );
 
+const makeSelectWithdrawAllMinedLoading = () => createSelector(
+  selectDashboardDomain,
+  (substate) => substate.get('withdrawAllMinedLoading')
+);
+
+const makeSelectWithdrawAllError = () => createSelector(
+  selectDashboardDomain,
+  (substate) => substate.get('withdrawAllError')
+);
+
+const makeSelectWithdrawAllSendTx = () => createSelector(
+  selectDashboardDomain,
+  (substate) => substate.get('withdrawAllSendTx')
+);
+
+const makeSelectWithdrawAllMinedRecipt = () => createSelector(
+  selectDashboardDomain,
+  (substate) => substate.get('withdrawAllMinedRecipt')
+);
 
 /**
  * Default selector used by Dashboard
@@ -135,17 +171,26 @@ export {
   makeSelectGetDistributionInfoError,
   makeSelectDistributionInfo,
 
+  makeSelectGetAddressInfoLoading,
+  makeSelectGetAddressInfoError,
+  makeSelectAddressInfo,
+
   makeSelectCommitEthSendWindow,
   makeSelectCommitEthSendAmount,
   makeSelectCommitEthSendLoading,
   makeSelectCommitEthSendError,
   makeSelectCommitEthSendTx,
 
-  makeSelectSimpleStorage,
-  makeSelectSetStorageValue,
-  makeSelectSetStorageLoading,
-  makeSelectSetStorageError,
-  makeSelectStorageValue,
-  makeSelectGetStorageValueLoading,
-  makeSelectGetStorageValueError,
+  makeSelectWithdrawWindow,
+  makeSelectWithdrawSendLoading,
+  makeSelectWithdrawMinedLoading,
+  makeSelectWithdrawError,
+  makeSelectWithdrawSendTx,
+  makeSelectWithdrawMinedRecipt,
+
+  makeSelectWithdrawAllSendLoading,
+  makeSelectWithdrawAllMinedLoading,
+  makeSelectWithdrawAllError,
+  makeSelectWithdrawAllSendTx,
+  makeSelectWithdrawAllMinedRecipt,
 };

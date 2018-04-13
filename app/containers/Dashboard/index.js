@@ -19,20 +19,19 @@ import injectReducer from 'utils/injectReducer';
 import Web3Status from 'components/Web3Status';
 import DistributionInfo from 'components/DistributionInfo';
 import Commit from 'components/Commit';
-import SetStorageStatus from 'components/SetStorageStatus';
-import GetStorageStatus from 'components/GetStorageStatus';
-import Btn from './btn';
+import Withdraw from 'components/Withdraw';
+
 
 import reducer from './reducer';
 import saga from './saga';
 import {
   initDashboard,
-  setStorageValue,
-  getStorageValue,
-
   changeWindow,
   changeAmount,
   commitEthSend,
+
+  changeWithdrawWindow,
+  withdrawSend,
 } from './actions';
 
 import {
@@ -49,20 +48,32 @@ import {
   makeSelectGetDistributionInfoError,
   makeSelectDistributionInfo,
 
+  makeSelectGetAddressInfoLoading,
+  makeSelectGetAddressInfoError,
+  makeSelectAddressInfo,
+
   makeSelectCommitEthSendWindow,
   makeSelectCommitEthSendAmount,
   makeSelectCommitEthSendLoading,
   makeSelectCommitEthSendError,
   makeSelectCommitEthSendTx,
 
+  makeSelectWithdrawWindow,
+  makeSelectWithdrawSendLoading,
+  makeSelectWithdrawMinedLoading,
+  makeSelectWithdrawError,
+  makeSelectWithdrawSendTx,
+  makeSelectWithdrawMinedRecipt,
 
-  makeSelectSetStorageValue,
-  makeSelectSetStorageLoading,
-  makeSelectSetStorageError,
-  makeSelectStorageValue,
-  makeSelectGetStorageValueLoading,
-  makeSelectGetStorageValueError,
+  makeSelectWithdrawAllSendLoading,
+  makeSelectWithdrawAllMinedLoading,
+  makeSelectWithdrawAllError,
+  makeSelectWithdrawAllSendTx,
+  makeSelectWithdrawAllMinedRecipt,
+
 } from './selectors';
+
+import AddressInfo from '../../components/AddressInfo';
 
 
 const Div = styled.div`
@@ -88,6 +99,10 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       getDistributionInfoError,
       distributionInfo,
 
+      getAddressInfoLoading,
+      getAddressInfoError,
+      addressInfo,
+
       commitEthSendWindow,
       commitEthSendAmount,
       commitEthSendLoading,
@@ -97,31 +112,16 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       onChangeAmount,
       onCommitEthSend,
 
-      setStorageValue,
-      setStorageLoading,
-      setStorageError,
-      storageValue,
-      getStorageValueLoading,
-      getStorageValueError,
+      onChangeWithdrawWindow,
+      onWithdrawSend,
+      withdrawWindow,
+      withdrawSendLoading,
+      withdrawMinedLoading,
+      withdrawError,
+      withdrawSendTx,
+      withdrawMinedRecipt,
 
-      onSetStorageValue,
-      onGetStorageValue,
     } = this.props;
-
-    const distributionInfoProps = { getDistributionInfoLoading, getDistributionInfoError, distributionInfo };
-    const commitProps = {
-      commitEthSendWindow,
-      commitEthSendAmount,
-      commitEthSendLoading,
-      commitEthSendError,
-      commitEthSendTx,
-      onChangeWindow,
-      onChangeAmount,
-      onCommitEthSend,
-    };
-
-    const setStorageStatusProps = { setStorageValue, setStorageLoading, setStorageError };
-    const getStorageStatusProps = { storageValue, getStorageValueLoading, getStorageValueError };
 
     const initStatusProps = {
       initStatus,
@@ -132,6 +132,29 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       distributionAddress,
       tokenList,
     };
+    const distributionInfoProps = { getDistributionInfoLoading, getDistributionInfoError, distributionInfo };
+    const addressInfoProps = { getAddressInfoLoading, getAddressInfoError, addressInfo };
+    const commitProps = {
+      commitEthSendWindow,
+      commitEthSendAmount,
+      commitEthSendLoading,
+      commitEthSendError,
+      commitEthSendTx,
+      onChangeWindow,
+      onChangeAmount,
+      onCommitEthSend,
+    };
+    const withdrawProps = {
+      onChangeWithdrawWindow,
+      onWithdrawSend,
+      withdrawWindow,
+      withdrawSendLoading,
+      withdrawMinedLoading,
+      withdrawError,
+      withdrawSendTx,
+      withdrawMinedRecipt,
+    };
+
 
     return (
       <Div>
@@ -144,19 +167,20 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
         <hr />
         <DistributionInfo {...distributionInfoProps} />
         <hr />
+        <AddressInfo {...addressInfoProps} />
+        <hr />
         <Commit {...commitProps} />
-        <br />
-        <Btn className="btn" onClick={() => onSetStorageValue(99)}>Set Storage</Btn>
-        <SetStorageStatus {...setStorageStatusProps} />
-        <Btn className="btn" onClick={() => onGetStorageValue()}>Get Storage</Btn>
-        <GetStorageStatus {...getStorageStatusProps} />
+        <hr />
+        <Withdraw {...withdrawProps} />
       </Div>
     );
   }
 }
 
 Dashboard.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  dispatch: PropTypes.func,
+
+  onInitDashboard: PropTypes.func,
 
   initStatus: PropTypes.string,
   web3: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
@@ -170,6 +194,10 @@ Dashboard.propTypes = {
   getDistributionInfoError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   distributionInfo: PropTypes.object,
 
+  getAddressInfoLoading: PropTypes.bool,
+  getAddressInfoError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  addressInfo: PropTypes.object,
+
   commitEthSendWindow: PropTypes.number,
   commitEthSendAmount: PropTypes.number,
   commitEthSendLoading: PropTypes.bool,
@@ -179,16 +207,14 @@ Dashboard.propTypes = {
   onChangeAmount: PropTypes.func,
   onCommitEthSend: PropTypes.func,
 
-  setStorageValue: PropTypes.number,
-  setStorageLoading: PropTypes.bool,
-  setStorageError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-  storageValue: PropTypes.oneOfType([PropTypes.number]),
-  getStorageValueLoading: PropTypes.bool,
-  getStorageValueError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-
-  onInitDashboard: PropTypes.func,
-  onSetStorageValue: PropTypes.func,
-  onGetStorageValue: PropTypes.func,
+  onChangeWithdrawWindow: PropTypes.func,
+  onWithdrawSend: PropTypes.func,
+  withdrawWindow: PropTypes.number,
+  withdrawSendLoading: PropTypes.bool,
+  withdrawMinedLoading: PropTypes.bool,
+  withdrawError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  withdrawSendTx: PropTypes.string,
+  withdrawMinedRecipt: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -205,31 +231,34 @@ const mapStateToProps = createStructuredSelector({
   getDistributionInfoError: makeSelectGetDistributionInfoError(),
   distributionInfo: makeSelectDistributionInfo(),
 
+  getAddressInfoLoading: makeSelectGetAddressInfoLoading(),
+  getAddressInfoError: makeSelectGetAddressInfoError(),
+  addressInfo: makeSelectAddressInfo(),
+
   commitEthSendWindow: makeSelectCommitEthSendWindow(),
   commitEthSendAmount: makeSelectCommitEthSendAmount(),
   commitEthSendLoading: makeSelectCommitEthSendLoading(),
   commitEthSendError: makeSelectCommitEthSendError(),
   commitEthSendTx: makeSelectCommitEthSendTx(),
 
-  setStorageValue: makeSelectSetStorageValue(),
-  setStorageLoading: makeSelectSetStorageLoading(),
-  setStorageError: makeSelectSetStorageError(),
-  storageValue: makeSelectStorageValue(),
-  getStorageValueLoading: makeSelectGetStorageValueLoading(),
-  getStorageValueError: makeSelectGetStorageValueError(),
+  withdrawWindow: makeSelectWithdrawWindow(),
+  withdrawSendLoading: makeSelectWithdrawSendLoading(),
+  withdrawMinedLoading: makeSelectWithdrawMinedLoading(),
+  withdrawError: makeSelectWithdrawError(),
+  withdrawSendTx: makeSelectWithdrawSendTx(),
+  withdrawMinedRecipt: makeSelectWithdrawMinedRecipt(),
 
+  withdrawAllSendLoading: makeSelectWithdrawAllSendLoading(),
+  withdrawAllMinedLoading: makeSelectWithdrawAllMinedLoading(),
+  withdrawAllError: makeSelectWithdrawAllError(),
+  withdrawAllSendTx: makeSelectWithdrawAllSendTx(),
+  withdrawAllMinedRecipt: makeSelectWithdrawAllMinedRecipt(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     onInitDashboard: () => {
       dispatch(initDashboard());
-    },
-    onSetStorageValue: (val) => {
-      dispatch(setStorageValue(val));
-    },
-    onGetStorageValue: () => {
-      dispatch(getStorageValue());
     },
     onChangeWindow: (value) => {
       dispatch(changeWindow(value));
@@ -239,6 +268,12 @@ function mapDispatchToProps(dispatch) {
     },
     onCommitEthSend: () => {
       dispatch(commitEthSend());
+    },
+    onChangeWithdrawWindow: (value) => {
+      dispatch(changeWithdrawWindow(value));
+    },
+    onWithdrawSend: () => {
+      dispatch(withdrawSend());
     },
     dispatch,
   };

@@ -23,7 +23,7 @@ function Commit(props) {
 
   return (
     <div>
-      Commit funds <br />
+      Commit ETH <br />
       Window:{' '}
       <input
         type="text"
@@ -39,7 +39,7 @@ function Commit(props) {
         onChange={(event) => onChangeAmount(event.target.value)}
       /><br />
       Loading: {commitEthSendLoading ? 'true' : 'false'} <br />
-      Error: {commitEthSendError ? 'true' : 'false'} <br />
+      Error: {commitEthSendError || 'false'} <br />
       sendTx: {commitEthSendTx || 'null'} <br />
       <BlueButton className="btn" onClick={() => onCommitEthSend()}>Commmit ETH</BlueButton>
     </div>

@@ -13,6 +13,7 @@ import {
   GET_DISTRIBUTION_INFO,
   GET_ADDRESS_INFO,
   COMMIT_ETH_SEND,
+  WITHDRAW_SEND,
 } from './constants';
 
 import {
@@ -30,6 +31,10 @@ import {
   commitEthSendSuccess,
   commitEthSendError,
 
+  // withdrawSendSuccess,
+  withdrawMinedSuccess,
+  withdrawError,
+
   addNewEvent,
 
 } from './actions';
@@ -40,6 +45,7 @@ import {
 
   makeSelectCommitEthSendWindow,
   makeSelectCommitEthSendAmount,
+  makeSelectWithdrawWindow,
 } from './selectors';
 
 
@@ -279,6 +285,40 @@ function* commitEthSendAsync() {
   }
 }
 
+/**
+ * withdrawSendAsync
+ */
+function* withdrawSendAsync() {
+  try {
+    const web3 = yield select(makeSelectWeb3());
+    const window = yield select(makeSelectWithdrawWindow());
+
+    console.log('withdrawSendAsync');
+    console.log(`window: ${window}`);
+
+    const defaultAccount = (yield call(() => web3.eth.getAccounts()))[0];
+    console.log(defaultAccount);
+
+    const sendPromise = () =>
+      distributionContract.methods.withdraw(window).send({
+        from: defaultAccount,
+        gas: (100000).toString(),
+        gasPrice: web3.utils.toWei((10).toString(), 'gwei'),
+        value: 0,
+      });
+
+
+    const receipt = yield call(sendPromise);
+    console.log(receipt);
+
+    yield put(withdrawMinedSuccess({ recipt: 'withdraw receipt' }));
+  } catch (err) {
+    const errMsg = err.toString();
+    const shortErr = errMsg.substring(0, errMsg.indexOf('.') + 1);
+    yield put(withdrawError(shortErr));
+  }
+}
+
 // Individual exports for testing
 export default function* defaultSaga() {
   yield takeLatest(INIT_DASHBOARD, initDashboardAsync);
@@ -287,4 +327,5 @@ export default function* defaultSaga() {
   yield takeLatest(GET_ADDRESS_INFO, getAddressInfoAsync);
 
   yield takeLatest(COMMIT_ETH_SEND, commitEthSendAsync);
+  yield takeLatest(WITHDRAW_SEND, withdrawSendAsync);
 }

@@ -5,16 +5,11 @@
 */
 import React from 'react';
 import PropTypes from 'prop-types';
-// import styled from 'styled-components';
+import styled from 'styled-components';
 
-// function Status({ web3 }) {
-//   const provider = web3.currentProvider && web3.currentProvider.constructor.name;
-//   return (
-//     <span>
-//       Initiated, provider: {provider || 'No connection to http provider, check connectivity to local node'}
-//     </span>
-//   );
-// }
+const Token = styled.div`
+  font-size: 50px;
+`;
 
 function Web3Status(props) {
   const {
@@ -38,13 +33,12 @@ function Web3Status(props) {
   const provider = web3 && web3.currentProvider && web3.currentProvider.constructor.name;
   return (
     <div>
-      Init successesful <br />
-      web3 provider: {provider || 'no provider specified'} <br />
-      networkName: {networkName} <br />
-      tokenName: {tokenName} <br />
-      tokenAddress: {tokenAddress} <br />
-      distributionAddress: {distributionAddress} <br />
-      tokenList: {JSON.stringify(tokenList, 0, 2)}<br />
+      <Token>
+        {tokenName}
+      </Token>
+      Distribution Contract: <br /> {distributionAddress} <br /><br />
+      Token Contract: <br /> {tokenAddress} <br /> <br />
+      {provider || 'no web3 provider specified'} <br />
     </div>
   );
 }

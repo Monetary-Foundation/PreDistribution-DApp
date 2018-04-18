@@ -54,14 +54,13 @@ export const timer = (ms) =>
 
 const eventChannel = channel();
 
+let distributionContract;
 
 /**
  * Init Dashboard
  */
-function* initDashboardAsync() {
+function* initDashboardAsync(action) {
   try {
-    console.log('initDashboardAsync1');
-
     let web3js;
     // Checking if Web3 has been injected by the browser (Mist/MetaMask)
     if (typeof web3 !== 'undefined') {
@@ -86,35 +85,13 @@ function* initDashboardAsync() {
     const networkContracts = distributionContracts[netId] || distributionContracts.default;
 
     const networkName = networkContracts.networkName;
-    console.log(`Network Name: ${networkName}`);
-    // console.log(networkContracts);
+
+    const tokenSelect = action.tokenName || networkContracts.defaultTokenName;
 
     const token = networkContracts.tokenList.find(
-      (token_) => token_.name === networkContracts.defaultTokenName
+      (token_) => token_.name === tokenSelect
     );
 
-    // console.log(token);
-
-    // const simpleStorage = contract(SimpleStorageContract)
-    // simpleStorage.setProvider(web3js.currentProvider)
-
-    // // dirty hack for web3@1.0.0 support for localhost testrpc,
-    // // see https://github.com/trufflesuite/truffle-contract/issues/56#issuecomment-331084530
-    // if (typeof simpleStorage.currentProvider.sendAsync !== "function") {
-    //   simpleStorage.currentProvider.sendAsync = function () {
-    //     return simpleStorage.currentProvider.send.apply(
-    //       simpleStorage.currentProvider,
-    //       arguments
-    //     );
-    //   };
-    // }
-
-    // const simpleStorageInstance = yield call(simpleStorage.deployed);
-
-    // console.log('Events:');
-
-    // events using truffle:
-    // fork the new saga from the main thread
     yield fork(handleEvents);
 
     // send every Set() event into eventChannel
@@ -133,7 +110,6 @@ function* initDashboardAsync() {
       initDashboardSuccess(web3js, networkName, token.name, token.address, token.distributionAddress, networkContracts.tokenList)
     );
     yield put(getDistributionInfo());
-    // v
   } catch (err) {
     yield put(initDashboardError(err.toString()));
   }
@@ -148,10 +124,6 @@ function* handleEvents() {
     yield put(addNewEvent(eventAction));
   }
 }
-
-
-// TODO: ??
-let distributionContract;
 
 /**
  * getDistributionInfo

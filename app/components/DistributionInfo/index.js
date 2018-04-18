@@ -27,7 +27,7 @@ function DistributionInfo(props) {
       <div>
         {/* DistributionInfo component <pre> {distributionInfo && JSON.stringify(distributionInfo, 0, 0)}</pre> */}
         DistributionInfo component <br /> {distributionInfo && JSON.stringify(distributionInfo, 0, 2)} <br />
-        totals: {totals && JSON.stringify(totals, 0, 0)}
+        totals: {/*totals && JSON.stringify(totals, 0, 0)*/}
       </div>
     );
   }

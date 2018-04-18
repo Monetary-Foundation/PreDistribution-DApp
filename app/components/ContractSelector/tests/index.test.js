@@ -1,9 +1,9 @@
 // import React from 'react';
 // import { shallow } from 'enzyme';
 
-// import GetStorageStatus from '../index';
+// import ContractSelector from '../index';
 
-describe('<GetStorageStatus />', () => {
+describe('<ContractSelector />', () => {
   it('Expect to have unit tests specified', () => {
     expect(true).toEqual(false);
   });

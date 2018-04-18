@@ -15,7 +15,9 @@ import styled from 'styled-components';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 
+import { Row, Col } from 'antd';
 
+import Header from 'components/Header';
 import Web3Status from 'components/Web3Status';
 import DistributionInfo from 'components/DistributionInfo';
 import Commit from 'components/Commit';
@@ -77,7 +79,7 @@ import AddressInfo from '../../components/AddressInfo';
 
 
 const Div = styled.div`
-  padding:20px;
+  
 `;
 
 
@@ -94,6 +96,7 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       tokenAddress,
       distributionAddress,
       tokenList,
+      onInitDashboard,
 
       getDistributionInfoLoading,
       getDistributionInfoError,
@@ -123,6 +126,15 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
 
     } = this.props;
 
+    const headerProps = {
+      initStatus,
+      networkName,
+      tokenName,
+      tokenAddress,
+      distributionAddress,
+      tokenList,
+      onInitDashboard,
+    };
     const initStatusProps = {
       initStatus,
       web3,
@@ -162,10 +174,16 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
           <title>MCoin-PreDistribution-Dapp - Dashboard</title>
           <meta name="description" content="MCoin-PreDistribution-Dapp" />
         </Helmet>
-        Dashboard <hr />
-        <Web3Status {...initStatusProps} />
-        <hr />
-        <DistributionInfo {...distributionInfoProps} />
+        <Header {...headerProps} />
+        <Row type="flex" align="left" >
+          <Col sm={{ span: 10, offset: 1 }} xs={{ span: 23, offset: 1 }}>
+            <Web3Status {...initStatusProps} />
+          </Col>
+          <Col sm={{ span: 10, offset: 1 }} xs={{ span: 23, offset: 1 }}>
+            <DistributionInfo {...distributionInfoProps} />
+          </Col>
+        </Row >
+        <br /><br />
         <hr />
         <AddressInfo {...addressInfoProps} />
         <hr />
@@ -257,8 +275,8 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    onInitDashboard: () => {
-      dispatch(initDashboard());
+    onInitDashboard: (tokenName) => {
+      dispatch(initDashboard(tokenName));
     },
     onChangeWindow: (value) => {
       dispatch(changeWindow(value));

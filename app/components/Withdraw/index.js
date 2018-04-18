@@ -7,6 +7,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // import styled from 'styled-components';
+import { Button } from 'antd';
 import BlueButton from 'components/BlueButton';
 
 function Withdraw(props) {
@@ -37,7 +38,9 @@ function Withdraw(props) {
       Error: {withdrawError || 'false'} <br />
       SendTx: {withdrawSendTx || 'null'} <br />
       MinedRecipt: {(withdrawMinedRecipt && JSON.stringify(withdrawMinedRecipt, 0, 2)) || 'null'} <br />
-      <BlueButton className="btn" onClick={() => onWithdrawSend()}>Withdraw Tokens</BlueButton>
+      <Button type="primary" size="large" onClick={() => onWithdrawSend()}>
+        Withdraw Tokens
+      </Button>
     </div>
   );
 }

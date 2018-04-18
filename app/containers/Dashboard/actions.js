@@ -38,9 +38,10 @@ import {
  *
  * @return {object} An action object with a type of INIT_DASHBOARD passing the repos
  */
-export function initDashboard() {
+export function initDashboard(tokenName) {
   return {
     type: INIT_DASHBOARD,
+    tokenName,
   };
 }
 

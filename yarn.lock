@@ -8501,6 +8501,10 @@ rc@^1.1.2, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-count-down@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-count-down/-/react-count-down-1.1.0.tgz#bae5559b4f704653a5680fc23e2962ed54196dc5"
+
 react-dom@16.3.1:
   version "16.3.1"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.3.1.tgz#6a3c90a4fb62f915bdbcf6204422d93a7d4ca573"

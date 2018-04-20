@@ -24,11 +24,11 @@ const HeaderWrapped = styled.header`
 
 function Header(props) {
   const {
-    initStatus,
+    // initStatus,
     networkName,
     tokenName,
-    tokenAddress,
-    distributionAddress,
+    // tokenAddress,
+    // distributionAddress,
     tokenList,
     onInitDashboard,
   } = props;
@@ -45,8 +45,6 @@ function Header(props) {
         </Col>
         <Col sm={{ span: 8, offset: 2 }} xs={24}>
           <Row type="flex" align="middle" justify="center">
-            {/* <NetworkIndicator {...networkIndicatorProps} />
-            <NetworkMenu {...networkMenuProps} /> */}
             <NetworkIndicator {...networkIndicatorProps} />
             <ContractSelector {...contractSelectorProps} />
           </Row>

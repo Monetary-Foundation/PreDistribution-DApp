@@ -61,17 +61,17 @@ export const distributionContracts = {
     networkName: 'LocalHost',
     defaultTokenName: 'MUSA',
     tokenList:
-      [
-        {
-          name: 'MUSA',
-          distributionAddress: '0xc00e3bced9888895f07823448d4712c51f007689',
-          address: '0xd7632660b2094e32eb870011af0c891a5d703ddf',
-        },
-        {
-          name: 'MUK',
-          distributionAddress: '0xc00e3bced9888895f07823448d4712c51f007689',
-          address: '0xd7632660b2094e32eb870011af0c891a5d703ddf',
-        },
-      ],
+    [
+      {
+        name: 'MUSA',
+        distributionAddress: '0x704708916d137965f8cb0bf59727d4a68716797b',
+        address: '0x84b628dd0d4a55ee1fb676cb747e1436829fb6c0',
+      },
+      {
+        name: 'MUK',
+        distributionAddress: '0x704708916d137965f8cb0bf59727d4a68716797b',
+        address: '0x84b628dd0d4a55ee1fb676cb747e1436829fb6c0',
+      },
+    ],
   },
 };

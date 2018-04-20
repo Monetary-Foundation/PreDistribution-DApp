@@ -20,7 +20,6 @@ const Div = styled.div`
 const Img = styled.img`
   height: 60px;
   line-height: 80px;
-  width: 60px;
   margin-right: 10px;
 `;
 

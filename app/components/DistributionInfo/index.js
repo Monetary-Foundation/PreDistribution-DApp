@@ -7,7 +7,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // import styled from 'styled-components';
-
+import WindowCountdown from 'components/WindowCountdown';
 
 function DistributionInfo(props) {
   const { getDistributionInfoLoading, getDistributionInfoError, distributionInfo } = props;
@@ -21,13 +21,19 @@ function DistributionInfo(props) {
   }
 
   if (distributionInfo) {
-    const { totals } = distributionInfo;
+    const windowCountdownProps = {
+      timestamp: distributionInfo.timestamp,
+      startTimestamp: Number(distributionInfo.startTimestamp),
+      windowLenght: Number(distributionInfo.windowLenght),
+    };
+    // const { totals } = distributionInfo;
     delete distributionInfo.totals;
     return (
       <div>
+        <WindowCountdown {...windowCountdownProps} />
         {/* DistributionInfo component <pre> {distributionInfo && JSON.stringify(distributionInfo, 0, 0)}</pre> */}
         DistributionInfo component <br /> {distributionInfo && JSON.stringify(distributionInfo, 0, 2)} <br />
-        totals: {/*totals && JSON.stringify(totals, 0, 0)*/}
+        totals: {/* totals && JSON.stringify(totals, 0, 0) */}
       </div>
     );
   }

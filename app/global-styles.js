@@ -38,4 +38,24 @@ injectGlobal`
     text-align:center !important;
     margin: 0 auto !important;
   }
+
+  .react-count-down {
+    margin: 0;
+    /* padding: 2em; */
+  }
+
+  .react-count-down .prefix {
+  font-size: 300%;
+  font-weight: 200;
+  line-height: 1.5;
+  color: #03CC85;  
+  }
+
+  .react-count-down .date {
+  font-size: 300%;
+  font-weight: 200;
+  line-height: 1.5;
+  color: #666;
+
+}
 `;

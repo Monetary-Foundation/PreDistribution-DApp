@@ -32,12 +32,12 @@ import {
   changeAmount,
   commitEthSend,
 
+  getDistributionInfo,
   changeWithdrawWindow,
   withdrawSend,
 } from './actions';
 
 import {
-
   makeSelectInitStatus,
   makeSelectWeb3,
   makeSelectNetworkName,
@@ -98,6 +98,7 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       tokenList,
       onInitDashboard,
 
+      onGetDistributionInfo,
       getDistributionInfoLoading,
       getDistributionInfoError,
       distributionInfo,
@@ -144,7 +145,7 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       distributionAddress,
       tokenList,
     };
-    const distributionInfoProps = { web3, getDistributionInfoLoading, getDistributionInfoError, distributionInfo };
+    const distributionInfoProps = { web3, onGetDistributionInfo, getDistributionInfoLoading, getDistributionInfoError, distributionInfo };
     const addressInfoProps = { getAddressInfoLoading, getAddressInfoError, addressInfo };
     const commitProps = {
       commitEthSendWindow,
@@ -208,6 +209,7 @@ Dashboard.propTypes = {
   distributionAddress: PropTypes.string,
   tokenList: PropTypes.array,
 
+  onGetDistributionInfo: PropTypes.func,
   getDistributionInfoLoading: PropTypes.bool,
   getDistributionInfoError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   distributionInfo: PropTypes.object,
@@ -277,6 +279,9 @@ function mapDispatchToProps(dispatch) {
   return {
     onInitDashboard: (tokenName) => {
       dispatch(initDashboard(tokenName));
+    },
+    onGetDistributionInfo: () => {
+      dispatch(getDistributionInfo());
     },
     onChangeWindow: (value) => {
       dispatch(changeWindow(value));

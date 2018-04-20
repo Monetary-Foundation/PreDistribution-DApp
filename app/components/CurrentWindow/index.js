@@ -18,12 +18,13 @@ const SmallSpan = styled.span`
   font-size: 110%;
 `;
 
+
 function CurrentWindow(props) {
   const { currentWindow, totalWindows } = props;
   return (
     <div>
       <SmallSpan>
-        Window number <BigSpan>{currentWindow}</BigSpan>/{totalWindows}
+        Window number <BigSpan>{currentWindow}</BigSpan>/{totalWindows - 1}
       </SmallSpan>
     </div>
   );

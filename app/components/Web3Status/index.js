@@ -38,7 +38,7 @@ function Web3Status(props) {
       </Token>
       Distribution Contract: <br /> {distributionAddress} <br /><br />
       Token Contract: <br /> {tokenAddress} <br /> <br />
-      {provider || 'no web3 provider specified'} <br />
+      Web3 Provider: <br /> {provider || 'no web3 provider specified'} <br />
     </div>
   );
 }

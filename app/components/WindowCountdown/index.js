@@ -10,13 +10,12 @@ import Countdown from 'react-count-down';
 // import styled from 'styled-components';
 
 
-const cb = () => {
-  console.log('expired callback for Countdown');
-};
-
-
 function WindowCountdown(props) {
-  const { timestamp, startTimestamp, windowLenght } = props;
+  const { timestamp, startTimestamp, windowLenght, onGetDistributionInfo } = props;
+  const cb = () => {
+    console.log('expired callback for Countdown');
+    onGetDistributionInfo();
+  };
 
   const elapsed = timestamp - startTimestamp;
   const currentWindowElapsed = elapsed % windowLenght;
@@ -31,6 +30,7 @@ function WindowCountdown(props) {
 }
 
 WindowCountdown.propTypes = {
+  onGetDistributionInfo: PropTypes.func,
   timestamp: PropTypes.number.isRequired,
   startTimestamp: PropTypes.number.isRequired,
   windowLenght: PropTypes.number.isRequired,

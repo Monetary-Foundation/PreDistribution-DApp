@@ -13,7 +13,7 @@ import CommitedForWindow from 'components/CommitedForWindow';
 import PriceForWindow from 'components/PriceForWindow';
 
 function DistributionInfo(props) {
-  const { web3, getDistributionInfoLoading, getDistributionInfoError, distributionInfo } = props;
+  const { web3, getDistributionInfoLoading, getDistributionInfoError, distributionInfo, onGetDistributionInfo } = props;
 
   if (getDistributionInfoLoading) {
     return <div> getDistributionInfoLoading ....</div>;
@@ -25,6 +25,7 @@ function DistributionInfo(props) {
 
   if (distributionInfo) {
     const windowCountdownProps = {
+      onGetDistributionInfo,
       timestamp: Number(distributionInfo.timestamp),
       startTimestamp: Number(distributionInfo.startTimestamp),
       windowLenght: Number(distributionInfo.windowLenght),
@@ -70,6 +71,7 @@ function DistributionInfo(props) {
 
 DistributionInfo.propTypes = {
   web3: PropTypes.object,
+  onGetDistributionInfo: PropTypes.func,
   getDistributionInfoLoading: PropTypes.bool,
   getDistributionInfoError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   distributionInfo: PropTypes.object,

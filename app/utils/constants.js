@@ -27,35 +27,35 @@ export const distributionContracts = {
     networkName: 'Mainnet',
     defaultTokenName: 'MUSA',
     tokenList:
-      [
-        {
-          name: 'MUSA',
-          address: '0x023be0e83e2711472179cb8123133f3eaf85a185',
-          distributionAddress: '0x023be0e83e2711472179cb8123133f3eaf85a185',
-        },
-        {
-          name: 'MUK',
-          address: '0x023be0e83e2711472179cb8123133f3eaf85a185',
-          distributionAddress: '0x023be0e83e2711472179cb8123133f3eaf85a185',
-        },
-      ],
+    [
+      {
+        name: 'MUSA',
+        address: '0x023be0e83e2711472179cb8123133f3eaf85a185',
+        distributionAddress: '0x023be0e83e2711472179cb8123133f3eaf85a185',
+      },
+      {
+        name: 'MUK',
+        address: '0x023be0e83e2711472179cb8123133f3eaf85a185',
+        distributionAddress: '0x023be0e83e2711472179cb8123133f3eaf85a185',
+      },
+    ],
   },
   3: {
     networkName: 'Ropsten',
     defaultTokenName: 'MUSA',
     tokenList:
-      [
-        {
-          name: 'MUSA',
-          address: '0x023be0e83e2711472179cb8123133f3eaf85a185',
-          distributionAddress: '0x023be0e83e2711472179cb8123133f3eaf85a185',
-        },
-        {
-          name: 'MUK',
-          address: '0x023be0e83e2711472179cb8123133f3eaf85a185',
-          distributionAddress: '0x023be0e83e2711472179cb8123133f3eaf85a185',
-        },
-      ],
+    [
+      {
+        name: 'MUSA',
+        address: '0x023be0e83e2711472179cb8123133f3eaf85a185',
+        distributionAddress: '0x023be0e83e2711472179cb8123133f3eaf85a185',
+      },
+      {
+        name: 'MUK',
+        address: '0x023be0e83e2711472179cb8123133f3eaf85a185',
+        distributionAddress: '0x023be0e83e2711472179cb8123133f3eaf85a185',
+      },
+    ],
   },
   default: {
     networkName: 'LocalHost',
@@ -64,13 +64,13 @@ export const distributionContracts = {
     [
       {
         name: 'MUSA',
-        distributionAddress: '0x704708916d137965f8cb0bf59727d4a68716797b',
-        address: '0x84b628dd0d4a55ee1fb676cb747e1436829fb6c0',
+        distributionAddress: '0x58c2aa13b0e7cf634e4e9b2b08bbd47124e28e63',
+        address: '0xf779fc7193eccf8cd019e584f536898c8df1e6a8',
       },
       {
         name: 'MUK',
-        distributionAddress: '0x704708916d137965f8cb0bf59727d4a68716797b',
-        address: '0x84b628dd0d4a55ee1fb676cb747e1436829fb6c0',
+        distributionAddress: '0x58c2aa13b0e7cf634e4e9b2b08bbd47124e28e63',
+        address: '0xf779fc7193eccf8cd019e584f536898c8df1e6a8',
       },
     ],
   },

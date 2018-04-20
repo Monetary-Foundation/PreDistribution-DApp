@@ -90,6 +90,7 @@ export function initDashboardError(error) {
  * @return {object} An action object with a type of GET_DISTRIBUTION_INFO passing the repos
  */
 export function getDistributionInfo() {
+  console.log('getDistributionInfo');
   return {
     type: GET_DISTRIBUTION_INFO,
   };

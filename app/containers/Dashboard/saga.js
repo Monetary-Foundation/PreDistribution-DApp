@@ -162,6 +162,7 @@ function* getDistributionInfoAsync() {
       firstPeriodWindows, secondPeriodWindows, firstPeriodSupply, secondPeriodSupply, totals] =
       yield call(getAllPromises);
 
+
     const distributionInfo = {
       timestamp: latestBlock.timestamp,
       currentWindow,

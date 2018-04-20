@@ -8,18 +8,18 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Token = styled.div`
-  font-size: 50px;
+  font-size: 330%;
 `;
 
 function Web3Status(props) {
   const {
     initStatus,
     web3,
-    networkName,
+    // networkName,
     tokenName,
     tokenAddress,
     distributionAddress,
-    tokenList,
+    // tokenList,
   } = props;
 
   if (initStatus === 'loading') {

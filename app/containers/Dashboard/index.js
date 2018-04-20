@@ -144,7 +144,7 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       distributionAddress,
       tokenList,
     };
-    const distributionInfoProps = { getDistributionInfoLoading, getDistributionInfoError, distributionInfo };
+    const distributionInfoProps = { web3, getDistributionInfoLoading, getDistributionInfoError, distributionInfo };
     const addressInfoProps = { getAddressInfoLoading, getAddressInfoError, addressInfo };
     const commitProps = {
       commitEthSendWindow,

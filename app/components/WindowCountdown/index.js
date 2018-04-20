@@ -11,7 +11,7 @@ import Countdown from 'react-count-down';
 
 
 const cb = () => {
-  console.log('expired callback');
+  console.log('expired callback for Countdown');
 };
 
 

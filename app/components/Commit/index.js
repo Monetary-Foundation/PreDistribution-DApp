@@ -7,7 +7,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // import styled from 'styled-components';
-import BlueButton from 'components/BlueButton';
+// import BlueButton from 'components/BlueButton';
+import { Button, InputNumber } from 'antd';
 
 function Commit(props) {
   const {
@@ -23,25 +24,30 @@ function Commit(props) {
 
   return (
     <div>
-      Commit ETH <br />
+      <h2> Commit ETH </h2>
       Window:{' '}
-      <input
-        type="text"
-        style={{ border: '1px solid blue' }}
+      <InputNumber
+        min={0}
+        max={365}
+        step={1}
         value={commitEthSendWindow}
-        onChange={(event) => onChangeWindow(event.target.value)}
-      /><br />
-      amount:{' '}
-      <input
-        type="text"
-        style={{ border: '1px solid blue' }}
+        onChange={(value) => onChangeWindow(value)}
+      />
+      <br />
+      Amount:{' '}
+      <InputNumber
+        min={0.01}
+        step={0.01}
         value={commitEthSendAmount}
-        onChange={(event) => onChangeAmount(event.target.value)}
-      /><br />
+        onChange={(value) => onChangeAmount(value)}
+      />
+      <br />
       Loading: {commitEthSendLoading ? 'true' : 'false'} <br />
       Error: {commitEthSendError || 'false'} <br />
       sendTx: {commitEthSendTx || 'null'} <br />
-      <BlueButton className="btn" onClick={() => onCommitEthSend()}>Commmit ETH</BlueButton>
+      <Button type="primary" loading={commitEthSendLoading} size="large" onClick={() => onCommitEthSend()}>
+        Commmit ETH
+      </Button>
     </div>
   );
 }

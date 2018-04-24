@@ -34,7 +34,7 @@ injectGlobal`
   }
   
   hr {
-    width: 200px;
+    width: 92%;
     text-align:center !important;
     margin: 0 auto !important;
   }

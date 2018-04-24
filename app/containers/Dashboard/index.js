@@ -20,7 +20,7 @@ import { Row, Col } from 'antd';
 import Header from 'components/Header';
 import Web3Status from 'components/Web3Status';
 import DistributionInfo from 'components/DistributionInfo';
-import Commit from 'components/Commit';
+
 import Withdraw from 'components/Withdraw';
 
 
@@ -76,11 +76,6 @@ import {
 } from './selectors';
 
 import AddressInfo from '../../components/AddressInfo';
-
-
-const Div = styled.div`
-  
-`;
 
 
 export class Dashboard extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -146,7 +141,9 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       tokenList,
     };
     const distributionInfoProps = { web3, onGetDistributionInfo, getDistributionInfoLoading, getDistributionInfoError, distributionInfo };
-    const addressInfoProps = { getAddressInfoLoading, getAddressInfoError, addressInfo };
+
+    const addressProps = { getAddressInfoLoading, getAddressInfoError, addressInfo };
+    
     const commitProps = {
       commitEthSendWindow,
       commitEthSendAmount,
@@ -157,6 +154,7 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       onChangeAmount,
       onCommitEthSend,
     };
+
     const withdrawProps = {
       onChangeWithdrawWindow,
       onWithdrawSend,
@@ -168,9 +166,12 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       withdrawMinedRecipt,
     };
 
+    const addressInfoProps = {};
+    Object.assign(addressInfoProps, addressProps, commitProps, withdrawProps);
+
 
     return (
-      <Div>
+      <div>
         <Helmet>
           <title>MCoin-PreDistribution-Dapp - Dashboard</title>
           <meta name="description" content="MCoin-PreDistribution-Dapp" />
@@ -187,11 +188,7 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
         <br /><br />
         <hr />
         <AddressInfo {...addressInfoProps} />
-        <hr />
-        <Commit {...commitProps} />
-        <hr />
-        <Withdraw {...withdrawProps} />
-      </Div>
+      </div>
     );
   }
 }

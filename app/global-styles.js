@@ -56,6 +56,5 @@ injectGlobal`
   font-weight: 200;
   line-height: 1.5;
   color: #666;
-
-}
+  }
 `;

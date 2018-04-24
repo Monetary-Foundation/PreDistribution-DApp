@@ -39,7 +39,7 @@ function AddressInfo(props) {
        addressInfo && JSON.stringify(addressInfo, 0, 2) */}
       <br />
       <Row type="flex" align="left" >
-        <Col sm={{ span: 10, offset: 1 }} xs={{ span: 23, offset: 1 }}>
+        <Col sm={{ span: 10, offset: 1 }} xs={{ span: 23, offset: 1 }} style={{ overflowX: 'hidden' }}>
           <h2> My Account </h2>
           <h4> Address: </h4> <BigSpan> {address && address.toUpperCase()} </BigSpan>
           <br />

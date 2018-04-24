@@ -8501,6 +8501,12 @@ rc@^1.1.2, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-calendar-heatmap@^1.6.3:
+  version "1.6.3"
+  resolved "https://registry.yarnpkg.com/react-calendar-heatmap/-/react-calendar-heatmap-1.6.3.tgz#17bf56ad175d85ee5793410c36881112246de570"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-count-down@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/react-count-down/-/react-count-down-1.1.0.tgz#bae5559b4f704653a5680fc23e2962ed54196dc5"

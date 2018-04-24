@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
@@ -20,9 +20,8 @@ import { Row, Col } from 'antd';
 import Header from 'components/Header';
 import Web3Status from 'components/Web3Status';
 import DistributionInfo from 'components/DistributionInfo';
-
-import Withdraw from 'components/Withdraw';
-
+import TotalsHeatmap from 'components/TotalsHeatmap';
+import AddressInfo from '../../components/AddressInfo';
 
 import reducer from './reducer';
 import saga from './saga';
@@ -74,8 +73,6 @@ import {
   makeSelectWithdrawAllMinedRecipt,
 
 } from './selectors';
-
-import AddressInfo from '../../components/AddressInfo';
 
 
 export class Dashboard extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -143,7 +140,7 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
     const distributionInfoProps = { web3, onGetDistributionInfo, getDistributionInfoLoading, getDistributionInfoError, distributionInfo };
 
     const addressProps = { getAddressInfoLoading, getAddressInfoError, addressInfo };
-    
+
     const commitProps = {
       commitEthSendWindow,
       commitEthSendAmount,
@@ -185,7 +182,11 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
             <DistributionInfo {...distributionInfoProps} />
           </Col>
         </Row >
-        <br /><br />
+        <TotalsHeatmap
+          totals={distributionInfo && distributionInfo.totals}
+          days={181}
+        />
+        <br />
         <hr />
         <AddressInfo {...addressInfoProps} />
       </div>

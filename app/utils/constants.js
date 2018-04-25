@@ -64,13 +64,13 @@ export const distributionContracts = {
     [
       {
         name: 'MUSA',
-        distributionAddress: '0xc00e3bced9888895f07823448d4712c51f007689',
-        address: '0x0e3b9c68160c11a1569ed054195b4e2527c42bc8',
+        distributionAddress: '0x704708916d137965f8cb0bf59727d4a68716797b',
+        address: '0x84b628dd0d4a55ee1fb676cb747e1436829fb6c0',
       },
       {
         name: 'MEU',
-        distributionAddress: '0xc00e3bced9888895f07823448d4712c51f007689',
-        address: '0x0e3b9c68160c11a1569ed054195b4e2527c42bc8',
+        distributionAddress: '0x704708916d137965f8cb0bf59727d4a68716797b',
+        address: '0x84b628dd0d4a55ee1fb676cb747e1436829fb6c0',
       },
     ],
   },

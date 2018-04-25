@@ -5,7 +5,7 @@
 */
 
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import CalendarHeatmap from 'react-calendar-heatmap';
 import { Row, Col } from 'antd';
@@ -121,7 +121,8 @@ function TotalsHeatmap(props) {
 }
 
 TotalsHeatmap.propTypes = {
-
+  days: PropTypes.number,
+  totals: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default TotalsHeatmap;

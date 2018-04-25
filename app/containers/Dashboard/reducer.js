@@ -41,6 +41,7 @@ import {
 const initialState = fromJS({
   initStatus: null,
   web3: null,
+  isWeb3Browser: null,
   networkName: null,
   tokenName: null,
   tokenAddress: null,
@@ -91,6 +92,7 @@ function dashboardReducer(state = initialState, action) {
       return state
         .set('initStatus', 'done')
         .set('web3', action.web3)
+        .set('isWeb3Browser', action.isWeb3Browser)
         .set('networkName', action.networkName)
         .set('tokenName', action.tokenName)
         .set('tokenAddress', action.tokenAddress)

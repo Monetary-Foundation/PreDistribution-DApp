@@ -62,16 +62,39 @@ let distributionContract;
 function* initDashboardAsync(action) {
   try {
     let web3js;
-    // Checking if Web3 has been injected by the browser (Mist/MetaMask)
+
+    // Will be set to true if no web3 is injected from external source.
+    let isWeb3Browser = false;
+
+    // Checking if Web3 has been injected by the browser (Mist/MetaMask...)
     if (typeof web3 !== 'undefined') {
       // Use Mist/MetaMask's provider
-      web3js = new Web3(web3.currentProvider);
+      web3js = new Web3(web3.currentProvider); // eslint-disable-line no-undef
 
-      web3js.eth.defaultAccount = web3.eth.defaultAccount;
-      console.log('web3js.eth.defaultAccount on init:');
-      console.log(web3js.eth.defaultAccount);
+      web3js.eth.defaultAccount = web3.eth.defaultAccount; // eslint-disable-line no-undef
+      isWeb3Browser = true;
     } else {
-      throw new Error('No web3 injected (Mist/Metamask...), Aborting');
+      // throw new Error('No web3 injected (Mist/Metamask...), Aborting');
+      console.log('No web3 injected (Mist/Metamask...), Using local fallback');
+      web3js = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'));
+      isWeb3Browser = false;
+      // web3js = new Web3(new Web3.providers.WebsocketProvider('wss://ropsten.infura.io/ws'));
+      // const web2 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws'));
+      // const web2 = new Web3(new Web3.providers.WebsocketProvider('wss://rinkeby.infura.io/ws'));
+      // console.log(web2);
+      // const subscription = web2.eth.subscribe('newBlockHeaders', (error, blockHeader) => {
+      //   if (error) return console.error(error);
+      //   console.log('Successfully subscribed!', blockHeader);
+      // }).on('data', (blockHeader) => {
+      //   console.log('data: ', blockHeader);
+      // });
+
+      // // unsubscribes the subscription
+      // subscription.unsubscribe((error, success) => {
+      //   if (error) return console.error(error);
+
+      //   console.log('Successfully unsubscribed!');
+      // });
     }
 
     let netId;
@@ -107,7 +130,7 @@ function* initDashboardAsync(action) {
     // );
 
     yield put(
-      initDashboardSuccess(web3js, networkName, token.name, token.address, token.distributionAddress, networkContracts.tokenList)
+      initDashboardSuccess(web3js, isWeb3Browser, networkName, token.name, token.address, token.distributionAddress, networkContracts.tokenList)
     );
     yield put(getDistributionInfo());
   } catch (err) {

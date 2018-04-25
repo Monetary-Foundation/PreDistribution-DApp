@@ -39,6 +39,7 @@ import {
 import {
   makeSelectInitStatus,
   makeSelectWeb3,
+  makeSelectIsWeb3Browser,
   makeSelectNetworkName,
   makeSelectTokenName,
   makeSelectTokenAddress,
@@ -83,6 +84,7 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
     const {
       initStatus,
       web3,
+      isWeb3Browser,
       networkName,
       tokenName,
       tokenAddress,
@@ -139,7 +141,9 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
     };
     const distributionInfoProps = { web3, onGetDistributionInfo, getDistributionInfoLoading, getDistributionInfoError, distributionInfo };
 
-    const addressProps = { getAddressInfoLoading, getAddressInfoError, addressInfo };
+    const addressInfoProps = {};
+
+    const addressProps = { getAddressInfoLoading, getAddressInfoError, addressInfo, isWeb3Browser };
 
     const commitProps = {
       commitEthSendWindow,
@@ -163,7 +167,6 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       withdrawMinedRecipt,
     };
 
-    const addressInfoProps = {};
     Object.assign(addressInfoProps, addressProps, commitProps, withdrawProps);
 
 
@@ -173,15 +176,18 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
           <title>MCoin-PreDistribution-Dapp - Dashboard</title>
           <meta name="description" content="MCoin-PreDistribution-Dapp" />
         </Helmet>
+
         <Header {...headerProps} />
-        <Row type="flex" align="left" >
+
+        <Row>
           <Col sm={{ span: 10, offset: 1 }} xs={{ span: 23, offset: 1 }}>
             <Web3Status {...initStatusProps} />
           </Col>
           <Col sm={{ span: 10, offset: 1 }} xs={{ span: 23, offset: 1 }}>
             <DistributionInfo {...distributionInfoProps} />
           </Col>
-        </Row >
+        </Row>
+
         <TotalsHeatmap
           totals={distributionInfo && distributionInfo.totals}
           days={181}
@@ -201,6 +207,7 @@ Dashboard.propTypes = {
 
   initStatus: PropTypes.string,
   web3: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  isWeb3Browser: PropTypes.bool,
   networkName: PropTypes.string,
   tokenName: PropTypes.string,
   tokenAddress: PropTypes.string,
@@ -239,6 +246,7 @@ const mapStateToProps = createStructuredSelector({
 
   initStatus: makeSelectInitStatus(),
   web3: makeSelectWeb3(),
+  isWeb3Browser: makeSelectIsWeb3Browser(),
   networkName: makeSelectNetworkName(),
   tokenName: makeSelectTokenName(),
   tokenAddress: makeSelectTokenAddress(),

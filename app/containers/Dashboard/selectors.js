@@ -13,6 +13,11 @@ const makeSelectWeb3 = () => createSelector(
   selectDashboardDomain,
   (substate) => substate.get('web3')
 );
+const makeSelectIsWeb3Browser = () => createSelector(
+  selectDashboardDomain,
+  (substate) => substate.get('isWeb3Browser')
+);
+
 const makeSelectNetworkName = () => createSelector(
   selectDashboardDomain,
   (substate) => substate.get('networkName')
@@ -161,6 +166,7 @@ export {
 
   makeSelectInitStatus,
   makeSelectWeb3,
+  makeSelectIsWeb3Browser,
   makeSelectNetworkName,
   makeSelectTokenName,
   makeSelectTokenAddress,

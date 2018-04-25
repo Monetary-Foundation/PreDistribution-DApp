@@ -58,7 +58,7 @@ export const distributionContracts = {
     ],
   },
   default: {
-    networkName: 'LocalHost',
+    networkName: 'Local Host',
     defaultTokenName: 'MUSA',
     tokenList:
     [
@@ -68,7 +68,7 @@ export const distributionContracts = {
         address: '0x84b628dd0d4a55ee1fb676cb747e1436829fb6c0',
       },
       {
-        name: 'MEU',
+        name: 'MERO',
         distributionAddress: '0x704708916d137965f8cb0bf59727d4a68716797b',
         address: '0x84b628dd0d4a55ee1fb676cb747e1436829fb6c0',
       },

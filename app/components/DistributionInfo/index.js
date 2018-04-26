@@ -12,11 +12,23 @@ import CurrentWindow from 'components/CurrentWindow';
 import CommitedForWindow from 'components/CommitedForWindow';
 import PriceForWindow from 'components/PriceForWindow';
 
+import { Col, Spin } from 'antd';
+
 function DistributionInfo(props) {
   const { web3, getDistributionInfoLoading, getDistributionInfoError, distributionInfo, onGetDistributionInfo } = props;
 
   if (getDistributionInfoLoading) {
-    return <div> getDistributionInfoLoading ....</div>;
+    return (
+      <Col sm={{ span: 3 }} xs={{ span: 23, offset: 1 }}>
+        <Spin
+          spinning={getDistributionInfoLoading}
+          style={{ marginTop: 80, position: 'static' }}
+          size="large"
+          tip="Loading distribution info..."
+        >
+          <br /> <br />
+        </Spin>
+      </Col>);
   }
 
   if (getDistributionInfoError) {
@@ -53,9 +65,9 @@ function DistributionInfo(props) {
     };
 
     // const { totals } = distributionInfo;
-    delete distributionInfo.totals;
+    // delete distributionInfo.totals;
     return (
-      <div>
+      <Col sm={{ span: 10, offset: 1 }} xs={{ span: 23, offset: 1 }}>
         <WindowCountdown {...windowCountdownProps} />
         <CurrentWindow {...currentWindowProps} />
         <CommitedForWindow {...commitedForWindowProps} />
@@ -63,7 +75,7 @@ function DistributionInfo(props) {
         {/* DistributionInfo component <pre> {distributionInfo && JSON.stringify(distributionInfo, 0, 0)}</pre>
               DistributionInfo component <br /> {distributionInfo && JSON.stringify(distributionInfo, 0, 2)} <br /> */}
         {/* totals:  totals && JSON.stringify(totals, 0, 0) */}
-      </div>
+      </Col>
     );
   }
   return null;

@@ -15,13 +15,18 @@ import { compose } from 'redux';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 
-import { Row, Col } from 'antd';
+import { Row } from 'antd';
 
 import Header from 'components/Header';
 import Web3Status from 'components/Web3Status';
 import DistributionInfo from 'components/DistributionInfo';
 import TotalsHeatmap from 'components/TotalsHeatmap';
-import AddressInfo from '../../components/AddressInfo';
+
+import AddressInfo from 'components/AddressInfo';
+
+import PageFooter from 'components/PageFooter';
+import { Content } from 'components/PageFooter/sticky';
+
 
 import reducer from './reducer';
 import saga from './saga';
@@ -141,6 +146,11 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
     };
     const distributionInfoProps = { web3, onGetDistributionInfo, getDistributionInfoLoading, getDistributionInfoError, distributionInfo };
 
+    const totalsHeatmapProps = {
+      totals: distributionInfo && distributionInfo.totals,
+      days: 181,
+    };
+
     const addressInfoProps = {};
 
     const addressProps = { getAddressInfoLoading, getAddressInfoError, addressInfo, isWeb3Browser };
@@ -177,24 +187,17 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
           <meta name="description" content="MCoin-PreDistribution-Dapp" />
         </Helmet>
 
-        <Header {...headerProps} />
-
-        <Row>
-          <Col sm={{ span: 10, offset: 1 }} xs={{ span: 23, offset: 1 }}>
+        <Content>
+          <Header {...headerProps} />
+          <Row>
             <Web3Status {...initStatusProps} />
-          </Col>
-          <Col sm={{ span: 10, offset: 1 }} xs={{ span: 23, offset: 1 }}>
             <DistributionInfo {...distributionInfoProps} />
-          </Col>
-        </Row>
+          </Row>
+          <TotalsHeatmap {...totalsHeatmapProps} />
+          <AddressInfo {...addressInfoProps} />
+        </Content>
+        <PageFooter />
 
-        <TotalsHeatmap
-          totals={distributionInfo && distributionInfo.totals}
-          days={181}
-        />
-        <br />
-        <hr />
-        <AddressInfo {...addressInfoProps} />
       </div>
     );
   }

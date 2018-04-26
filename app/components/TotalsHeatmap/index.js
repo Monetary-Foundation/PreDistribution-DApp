@@ -11,8 +11,7 @@ import CalendarHeatmap from 'react-calendar-heatmap';
 import { Row, Col } from 'antd';
 
 const Div = styled.div`
-  height: 10%;
-  padding-botom: 5px;
+  padding-bottom: 5px;
   padding-top: 25px;
 
   /*

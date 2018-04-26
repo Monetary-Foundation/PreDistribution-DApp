@@ -6,7 +6,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
+import { Col } from 'antd';
 const Token = styled.div`
   font-size: 330%;
 `;
@@ -32,14 +32,14 @@ function Web3Status(props) {
 
   const provider = web3 && web3.currentProvider && web3.currentProvider.constructor.name;
   return (
-    <div>
+    <Col sm={{ span: 10, offset: 1 }} xs={{ span: 23, offset: 1 }}>
       <Token>
         {tokenName}
       </Token>
       Distribution Contract: <br /> {distributionAddress} <br /><br />
       Token Contract: <br /> {tokenAddress} <br /> <br />
       Web3 Provider: <br /> {provider || 'no web3 provider specified'} <br />
-    </div>
+    </Col>
   );
 }
 

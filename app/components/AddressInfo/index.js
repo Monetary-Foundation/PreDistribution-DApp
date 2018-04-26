@@ -12,7 +12,8 @@ import CommitLayout from 'components/CommitLayout';
 import WithdrawLayout from 'components/WithdrawLayout';
 
 const Div = styled.div`
-  margin-top: 2%;
+  padding-top: 2%;
+  padding-bottom: 1%;
 `;
 
 const BigSpan = styled.span`
@@ -49,10 +50,11 @@ function AddressInfo(props) {
   if (!isWeb3Browser) {
     return (
       <Div>
+        <br /><hr />
         <Row type="flex" align="left" >
           <Col sm={{ span: 22, offset: 1 }} xs={{ span: 23, offset: 1 }}>
             <BigSpan> No web3 browser detected. </BigSpan> <br />
-            You can use web3 browser such as Mist, Metamask or Trust wallet to commit Eth and withdraw tokens from this page.
+            You can use web3 browser such as Mist, Metamask or Trust wallet to commit Eth and withdraw tokens directly from this page.
           </Col>
         </Row>
       </Div>
@@ -61,6 +63,7 @@ function AddressInfo(props) {
 
   return (
     <Div>
+      <br /><hr />
       <Row type="flex" align="left" >
         <Col sm={{ span: 10, offset: 1 }} xs={{ span: 23, offset: 1 }} style={{ overflowX: 'hidden' }}>
           <h2> My Account </h2>

@@ -38,7 +38,7 @@ function PageFooter() {
 
         <Span>
           <Col sm={12} xs={24}>
-            The MonetaryCoin Foundation 2018 <br />
+            The Monetary Foundation ©2018 <br />
           </Col>
         </Span>
 

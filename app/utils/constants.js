@@ -3,6 +3,7 @@ export const DAEMON = '@@saga-injector/daemon';
 export const ONCE_TILL_UNMOUNT = '@@saga-injector/once-till-unmount';
 
 export const website = 'https://github.com/MonetaryCoin/MCoin-PreDistribution-DApp';
+export const github = 'https://github.com/MonetaryCoin/MCoin-PreDistribution-DApp';
 
 // case 1:
 // console.log('This is mainnet')
@@ -64,13 +65,13 @@ export const distributionContracts = {
     [
       {
         name: 'MUSA',
-        distributionAddress: '0xb0d20366a4f6697b5e276c3597682b8cb4571027',
-        address: '0x54dca61511b6133a7a07ea15c9bd07a29166f433',
+        distributionAddress: '0x71b5d1acb86fc3c700d317c06b08b3f8aa4745f5',
+        address: '0xc00e3bced9888895f07823448d4712c51f007689',
       },
       {
         name: 'MERO',
-        distributionAddress: '0xb0d20366a4f6697b5e276c3597682b8cb4571027',
-        address: '0x54dca61511b6133a7a07ea15c9bd07a29166f433',
+        distributionAddress: '0x71b5d1acb86fc3c700d317c06b08b3f8aa4745f5',
+        address: '0xc00e3bced9888895f07823448d4712c51f007689',
       },
     ],
   },

@@ -24,7 +24,7 @@ function CommitedForWindow(props) {
   return (
     <div>
       <br />
-      <SmallSpan> Commited for current window:</SmallSpan> <BigSpan> {web3.utils.fromWei(totals[currentWindow], 'ether')} ETH </BigSpan>
+      <SmallSpan> Commited for current window:</SmallSpan> <BigSpan> {currentWindow < 365 ? web3.utils.fromWei(totals[currentWindow], 'ether') : 0} ETH </BigSpan>
     </div>
   );
 }

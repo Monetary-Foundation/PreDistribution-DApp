@@ -19,6 +19,8 @@ import 'sanitize.css/sanitize.css';
 // Import root app
 import App from 'containers/App';
 
+import repoName from 'utils/constants';
+
 // Import Language Provider
 import LanguageProvider from 'containers/LanguageProvider';
 
@@ -47,7 +49,7 @@ import './global-styles';
 
 // Create redux store with history
 const initialState = {};
-const history = createHistory();
+const history = createHistory({ basename: repoName });
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
 

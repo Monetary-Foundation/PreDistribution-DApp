@@ -15,6 +15,7 @@ const Div = styled.div`
   height: 80px;
   font-size: 18px;
   line-height: 80px; 
+  overflow-y: hidden
 `;
 
 const Img = styled.img`

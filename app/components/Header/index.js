@@ -40,10 +40,10 @@ function Header(props) {
   return (
     <HeaderWrapped className="clearfix">
       <Row type="flex" align="middle" justify="space-between" style={{ backgroundColor: '#fff' }}>
-        <Col sm={{ span: 6, offset: 1 }} xs={24}>
+        <Col sm={{ span: 14, offset: 1 }} xs={{ span: 22, offset: 1 }} >
           <Logo />
         </Col>
-        <Col sm={{ span: 8, offset: 2 }} xs={24}>
+        <Col sm={{ span: 8, offset: 1 }} xs={24}>
           <Row type="flex" align="middle" justify="center">
             <NetworkIndicator {...networkIndicatorProps} />
             <ContractSelector {...contractSelectorProps} />

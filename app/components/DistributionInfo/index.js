@@ -7,8 +7,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // import styled from 'styled-components';
-import WindowCountdown from 'components/WindowCountdown';
 import CurrentWindow from 'components/CurrentWindow';
+import WindowCountdown from 'components/WindowCountdown';
+import AllocatedForWindow from 'components/AllocatedForWindow';
 import CommitedForWindow from 'components/CommitedForWindow';
 import PriceForWindow from 'components/PriceForWindow';
 
@@ -48,6 +49,11 @@ function DistributionInfo(props) {
       totalWindows: Number(distributionInfo.totalWindows),
     };
 
+    const allocatedForWindowProps = {
+      web3,
+      allocation: distributionInfo.allocation,
+    };
+
     const commitedForWindowProps = {
       web3,
       currentWindow: Number(distributionInfo.currentWindow),
@@ -70,6 +76,7 @@ function DistributionInfo(props) {
       <Col sm={{ span: 10, offset: 1 }} xs={{ span: 23, offset: 1 }}>
         <CurrentWindow {...currentWindowProps} />
         <WindowCountdown {...windowCountdownProps} />
+        <AllocatedForWindow {...allocatedForWindowProps} />
         <CommitedForWindow {...commitedForWindowProps} />
         <PriceForWindow {...priceForWindowProps} />
         {/* DistributionInfo component <pre> {distributionInfo && JSON.stringify(distributionInfo, 0, 0)}</pre>

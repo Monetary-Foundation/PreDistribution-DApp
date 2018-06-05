@@ -164,27 +164,18 @@ function* getDistributionInfoAsync() {
     const allCalls = [];
 
     allCalls.push(web3.eth.getBlock('latest'));
-
-    const getCurrentWindow = distributionContract.methods.currentWindow().call();
     allCalls.push(distributionContract.methods.totalWindows().call());
-
     allCalls.push(distributionContract.methods.startTimestamp().call());
     allCalls.push(distributionContract.methods.windowLength().call());
-
     allCalls.push(distributionContract.methods.firstPeriodWindows().call());
     allCalls.push(distributionContract.methods.secondPeriodWindows().call());
-
     allCalls.push(distributionContract.methods.firstPeriodSupply().call());
     allCalls.push(distributionContract.methods.secondPeriodSupply().call());
-
     allCalls.push(distributionContract.methods.getTotals().call());
-
     allCalls.push(distributionContract.methods.detailsOfWindow().call());
 
-    console.log(1);
     const getAllPromises = () => Promise.all(allCalls);
 
-    console.log(2);
     const [
       latestBlock,
       totalWindows,
@@ -197,7 +188,7 @@ function* getDistributionInfoAsync() {
       totals,
       detailsOfWindow,
     ] = yield call(getAllPromises);
-    console.log(3);
+
     const {
       // start,
       // end,
@@ -227,7 +218,6 @@ function* getDistributionInfoAsync() {
     yield put(getDistributionInfoSuccess(distributionInfo));
     yield put(getAddressInfo());
   } catch (err) {
-    console.log(err.lineNumber);
     yield put(getDistributionInfoError(err.toString()));
   }
 }

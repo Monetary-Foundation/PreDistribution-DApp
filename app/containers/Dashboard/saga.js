@@ -165,8 +165,8 @@ function* getDistributionInfoAsync() {
 
     allCalls.push(web3.eth.getBlock('latest'));
     allCalls.push(distributionContract.methods.totalWindows().call());
-    allCalls.push(distributionContract.methods.startTimestamp().call());
-    allCalls.push(distributionContract.methods.windowLength().call());
+    // allCalls.push(distributionContract.methods.startTimestamp().call());
+    // allCalls.push(distributionContract.methods.windowLength().call());
     allCalls.push(distributionContract.methods.firstPeriodWindows().call());
     allCalls.push(distributionContract.methods.secondPeriodWindows().call());
     allCalls.push(distributionContract.methods.firstPeriodSupply().call());
@@ -179,8 +179,8 @@ function* getDistributionInfoAsync() {
     const [
       latestBlock,
       totalWindows,
-      startTimestamp,
-      windowLenght,
+      // startTimestamp,
+      // windowLenght,
       firstPeriodWindows,
       secondPeriodWindows,
       firstPeriodSupply,
@@ -202,8 +202,8 @@ function* getDistributionInfoAsync() {
       timestamp: latestBlock.timestamp,
       currentWindow: number,
       totalWindows,
-      startTimestamp,
-      windowLenght,
+      // startTimestamp,
+      // windowLenght,
       firstPeriodWindows,
       secondPeriodWindows,
       firstPeriodSupply,

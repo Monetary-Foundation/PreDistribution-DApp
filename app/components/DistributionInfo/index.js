@@ -39,9 +39,7 @@ function DistributionInfo(props) {
   if (distributionInfo) {
     const windowCountdownProps = {
       onGetDistributionInfo,
-      timestamp: Number(distributionInfo.timestamp),
-      startTimestamp: Number(distributionInfo.startTimestamp),
-      windowLenght: Number(distributionInfo.windowLenght),
+      remainingTime: Number(distributionInfo.remainingTime),
     };
 
     const currentWindowProps = {

@@ -144,7 +144,7 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       distributionAddress,
       tokenList,
     };
-    const distributionInfoProps = { web3, onGetDistributionInfo, getDistributionInfoLoading, getDistributionInfoError, distributionInfo };
+    const distributionInfoProps = { web3, tokenName, onGetDistributionInfo, getDistributionInfoLoading, getDistributionInfoError, distributionInfo };
 
     const totalsHeatmapProps = {
       totals: distributionInfo && distributionInfo.totals,

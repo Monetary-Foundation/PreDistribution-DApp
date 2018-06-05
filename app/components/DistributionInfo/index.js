@@ -16,7 +16,7 @@ import PriceForWindow from 'components/PriceForWindow';
 import { Col, Spin } from 'antd';
 
 function DistributionInfo(props) {
-  const { web3, getDistributionInfoLoading, getDistributionInfoError, distributionInfo, onGetDistributionInfo } = props;
+  const { web3, tokenName, getDistributionInfoLoading, getDistributionInfoError, distributionInfo, onGetDistributionInfo } = props;
 
   if (getDistributionInfoLoading) {
     return (
@@ -51,6 +51,7 @@ function DistributionInfo(props) {
 
     const allocatedForWindowProps = {
       web3,
+      tokenName,
       allocation: distributionInfo.allocation,
     };
 
@@ -76,8 +77,8 @@ function DistributionInfo(props) {
       <Col sm={{ span: 10, offset: 1 }} xs={{ span: 23, offset: 1 }}>
         <CurrentWindow {...currentWindowProps} />
         <WindowCountdown {...windowCountdownProps} />
-        <AllocatedForWindow {...allocatedForWindowProps} />
         <CommitedForWindow {...commitedForWindowProps} />
+        <AllocatedForWindow {...allocatedForWindowProps} />
         <PriceForWindow {...priceForWindowProps} />
         {/* DistributionInfo component <pre> {distributionInfo && JSON.stringify(distributionInfo, 0, 0)}</pre>
               DistributionInfo component <br /> {distributionInfo && JSON.stringify(distributionInfo, 0, 2)} <br /> */}
@@ -90,6 +91,7 @@ function DistributionInfo(props) {
 
 DistributionInfo.propTypes = {
   web3: PropTypes.object,
+  tokenName: PropTypes.string,
   onGetDistributionInfo: PropTypes.func,
   getDistributionInfoLoading: PropTypes.bool,
   getDistributionInfoError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),

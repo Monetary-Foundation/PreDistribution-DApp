@@ -6,27 +6,17 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-
-const BigSpan = styled.span`
-  color: #444444;
-  font-size: 200%;
-`;
-
-const SmallSpan = styled.span`
-  color: #8e8e8e;
-  font-size: 110%;
-`;
-
+import { Div, BigSpan, SmallSpan } from 'components/DistributionInfo/common';
+// import styled from 'styled-components';
 
 function CurrentWindow(props) {
   const { currentWindow, totalWindows } = props;
   return (
-    <div>
+    <Div>
       <SmallSpan>
-        Window number <BigSpan>{currentWindow}</BigSpan>/{totalWindows - 1}
+        Window # <BigSpan>{currentWindow}</BigSpan>/{totalWindows - 1} will close in
       </SmallSpan>
-    </div>
+    </Div>
   );
 }
 

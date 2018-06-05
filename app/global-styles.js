@@ -52,7 +52,7 @@ injectGlobal`
   }
 
   .react-count-down .date {
-  font-size: 300%;
+  font-size: 2.5em;
   font-weight: 200;
   line-height: 1.5;
   color: #666;

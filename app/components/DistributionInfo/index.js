@@ -68,8 +68,8 @@ function DistributionInfo(props) {
     // delete distributionInfo.totals;
     return (
       <Col sm={{ span: 10, offset: 1 }} xs={{ span: 23, offset: 1 }}>
-        <WindowCountdown {...windowCountdownProps} />
         <CurrentWindow {...currentWindowProps} />
+        <WindowCountdown {...windowCountdownProps} />
         <CommitedForWindow {...commitedForWindowProps} />
         <PriceForWindow {...priceForWindowProps} />
         {/* DistributionInfo component <pre> {distributionInfo && JSON.stringify(distributionInfo, 0, 0)}</pre>

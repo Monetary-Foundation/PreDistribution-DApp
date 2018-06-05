@@ -6,26 +6,17 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-
-const BigSpan = styled.span`
-  color: #444444;
-  font-size: 130%;
-`;
-
-const SmallSpan = styled.span`
-  color: #8e8e8e;
-  font-size: 110%;
-`;
+// import styled from 'styled-components';
+import { Div, BigSpan } from 'components/DistributionInfo/common';
 
 function CommitedForWindow(props) {
   const { web3, currentWindow, totals } = props;
 
   return (
-    <div>
-      <br />
-      <SmallSpan> Commited for current window:</SmallSpan> <BigSpan> {currentWindow < 365 ? web3.utils.fromWei(totals[currentWindow], 'ether') : 0} ETH </BigSpan>
-    </div>
+    <Div>
+      Commited for current window<br />
+      <BigSpan> {currentWindow < 365 ? web3.utils.fromWei(totals[currentWindow], 'ether') : 0} ETH </BigSpan>
+    </Div>
   );
 }
 

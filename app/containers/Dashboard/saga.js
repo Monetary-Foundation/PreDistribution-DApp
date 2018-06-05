@@ -163,7 +163,7 @@ function* getDistributionInfoAsync() {
 
     const getLatestBlock = web3.eth.getBlock('latest');
 
-    const getCurrentWindow = distributionContract.methods.currentWindow().call();
+    // const getCurrentWindow = distributionContract.methods.currentWindow().call();
     const getTotalWindows = distributionContract.methods.totalWindows().call();
 
     const getStartTimestamp = distributionContract.methods.startTimestamp().call();
@@ -175,23 +175,31 @@ function* getDistributionInfoAsync() {
     const getFirstPeriodSupply = distributionContract.methods.firstPeriodSupply().call();
     const getSecondPeriodSupply = distributionContract.methods.secondPeriodSupply().call();
 
-
     const getTotals = distributionContract.methods.getTotals().call();
+
+    const getDetailsOfWindow = distributionContract.methods.detailsOfWindow().call();
 
 
     const getAllPromises = () =>
-      Promise.all([getLatestBlock, getCurrentWindow, getTotalWindows, getStartTimestamp, getWindowLenght,
-        getFirstPeriodWindows, getSecondPeriodWindows, getFirstPeriodSupply, getSecondPeriodSupply, getTotals]);
+      Promise.all([getLatestBlock, getTotalWindows, getStartTimestamp, getWindowLenght,
+        getFirstPeriodWindows, getSecondPeriodWindows, getFirstPeriodSupply, getSecondPeriodSupply, getTotals, getDetailsOfWindow]);
 
-    const [latestBlock, currentWindow, totalWindows, startTimestamp, windowLenght,
-      firstPeriodWindows, secondPeriodWindows, firstPeriodSupply, secondPeriodSupply, totals] =
+    const [latestBlock, totalWindows, startTimestamp, windowLenght,
+      firstPeriodWindows, secondPeriodWindows, firstPeriodSupply, secondPeriodSupply, totals, detailsOfWindow] =
       yield call(getAllPromises);
 
-    console.log(totals);
+    const {
+      // start,
+      // end,
+      remainingTime,
+      allocation,
+      // totalEth,
+      number,
+    } = detailsOfWindow;
 
     const distributionInfo = {
       timestamp: latestBlock.timestamp,
-      currentWindow,
+      currentWindow: number,
       totalWindows,
       startTimestamp,
       windowLenght,
@@ -200,9 +208,11 @@ function* getDistributionInfoAsync() {
       firstPeriodSupply,
       secondPeriodSupply,
       totals,
+
+      remainingTime,
+      allocation,
     };
 
-    // console.log(totals);
 
     yield put(getDistributionInfoSuccess(distributionInfo));
     yield put(getAddressInfo());

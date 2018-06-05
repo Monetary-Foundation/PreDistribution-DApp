@@ -2,9 +2,9 @@ export const RESTART_ON_REMOUNT = '@@saga-injector/restart-on-remount';
 export const DAEMON = '@@saga-injector/daemon';
 export const ONCE_TILL_UNMOUNT = '@@saga-injector/once-till-unmount';
 
-export const repoName = '/MCoin-PreDistribution-DApp/';
-export const website = 'https://github.com/MonetaryCoin/MCoin-PreDistribution-DApp';
-export const github = 'https://github.com/MonetaryCoin/MCoin-PreDistribution-DApp';
+export const repoName = '/PreDistribution-DApp/';
+export const website = 'https://github.com/Monetary-Foundation/PreDistribution-DApp';
+export const github = 'https://github.com/Monetary-Foundation/PreDistribution-DApp';
 
 // case 1:
 // console.log('This is mainnet')

@@ -27,16 +27,16 @@ export const github = 'https://github.com/MonetaryCoin/MCoin-PreDistribution-DAp
 export const distributionContracts = {
   1: {
     networkName: 'Mainnet',
-    defaultTokenName: 'MUSA',
+    defaultTokenName: 'MERO',
     tokenList:
     [
       {
-        name: 'MUSA',
+        name: 'MERO',
         distributionAddress: '0x023be0e83e2711472179cb8123133f3eaf85a185',
         address: '0x023be0e83e2711472179cb8123133f3eaf85a185',
       },
       {
-        name: 'MERO',
+        name: 'MCHI',
         distributionAddress: '0x023be0e83e2711472179cb8123133f3eaf85a185',
         address: '0x023be0e83e2711472179cb8123133f3eaf85a185',
       },
@@ -44,33 +44,33 @@ export const distributionContracts = {
   },
   3: {
     networkName: 'Ropsten',
-    defaultTokenName: 'MUSA',
+    defaultTokenName: 'MERO',
     tokenList:
     [
       {
-        name: 'MUSA',
-        distributionAddress: '0x73ca2d6418c20db6efb63e9c01cd538f8cc401b9',
-        address: '0x8c18ae193135a53fae8e93b6ab4be3e7df4da11d',
+        name: 'MERO',
+        distributionAddress: '0x0bcb300c55c12d6f183b2a106fee3a8b0bc84403',
+        address: '0xb39fc5e11281012b4d83407a457d409ba344744f',
       },
       {
-        name: 'MERO',
-        distributionAddress: '0x348025b7927e56e19d79a1776dd0928fa5427dbb',
-        address: '0xaace03b8b31c08841094b9f3b784794ef208b8c1',
+        name: 'MCHI',
+        distributionAddress: '0xbeae1acd8a35c7b64463507629a6a6f17170df00',
+        address: '0x8b293fb839a2a0976662fcd787c5134e7920bf5d',
       },
     ],
   },
   default: {
     networkName: 'Local Host',
-    defaultTokenName: 'MUSA',
+    defaultTokenName: 'MERO',
     tokenList:
     [
       {
-        name: 'MUSA',
+        name: 'MERO',
         distributionAddress: '0x84b628dd0d4a55ee1fb676cb747e1436829fb6c0',
         address: '0x42780abe93e3837cf87890a847de69178425d242',
       },
       {
-        name: 'MERO',
+        name: 'MCHI',
         distributionAddress: '0x54dca61511b6133a7a07ea15c9bd07a29166f433',
         address: '0x166892f015b96195cff7a2cdac38038be498fc4d',
       },

@@ -274,6 +274,20 @@ export const erc20Abi = [
 /* eslint-disable */
 export const distributionAbi =  [
   {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_MCoin",
+        "type": "address"
+      }
+    ],
+    "name": "init",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "constant": true,
     "inputs": [
       {
@@ -286,6 +300,39 @@ export const distributionAbi =  [
       {
         "name": "",
         "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "window",
+        "type": "uint256"
+      }
+    ],
+    "name": "withdraw",
+    "outputs": [
+      {
+        "name": "reward",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "decimals",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint8"
       }
     ],
     "payable": false,
@@ -307,13 +354,22 @@ export const distributionAbi =  [
     "type": "function"
   },
   {
+    "constant": false,
+    "inputs": [],
+    "name": "commit",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
     "constant": true,
     "inputs": [],
-    "name": "secondPeriodSupply",
+    "name": "getAllRewards",
     "outputs": [
       {
         "name": "",
-        "type": "uint256"
+        "type": "uint256[]"
       }
     ],
     "payable": false,
@@ -323,7 +379,7 @@ export const distributionAbi =  [
   {
     "constant": true,
     "inputs": [],
-    "name": "foundationReserve",
+    "name": "secondPeriodSupply",
     "outputs": [
       {
         "name": "",
@@ -372,6 +428,53 @@ export const distributionAbi =  [
     "type": "function"
   },
   {
+    "constant": false,
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "from",
+        "type": "address"
+      }
+    ],
+    "name": "getCommitmentsOf",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "window",
+        "type": "uint256"
+      }
+    ],
+    "name": "allocationFor",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "constant": true,
     "inputs": [],
     "name": "windowLength",
@@ -383,6 +486,63 @@ export const distributionAbi =  [
     ],
     "payable": false,
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "detailsOfWindow",
+    "outputs": [
+      {
+        "name": "start",
+        "type": "uint256"
+      },
+      {
+        "name": "end",
+        "type": "uint256"
+      },
+      {
+        "name": "remainingTime",
+        "type": "uint256"
+      },
+      {
+        "name": "allocation",
+        "type": "uint256"
+      },
+      {
+        "name": "totalEth",
+        "type": "uint256"
+      },
+      {
+        "name": "number",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getTotals",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [],
+    "name": "withdrawAll",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -425,6 +585,87 @@ export const distributionAbi =  [
     ],
     "payable": false,
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "currentWindow",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "window",
+        "type": "uint256"
+      }
+    ],
+    "name": "detailsOf",
+    "outputs": [
+      {
+        "name": "start",
+        "type": "uint256"
+      },
+      {
+        "name": "end",
+        "type": "uint256"
+      },
+      {
+        "name": "remainingTime",
+        "type": "uint256"
+      },
+      {
+        "name": "allocation",
+        "type": "uint256"
+      },
+      {
+        "name": "totalEth",
+        "type": "uint256"
+      },
+      {
+        "name": "number",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "window",
+        "type": "uint256"
+      }
+    ],
+    "name": "commitOn",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [],
+    "name": "moveFunds",
+    "outputs": [
+      {
+        "name": "value",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -484,37 +725,52 @@ export const distributionAbi =  [
     "type": "function"
   },
   {
+    "constant": true,
     "inputs": [
       {
-        "name": "_firstPeriodWindows",
+        "name": "timestamp",
+        "type": "uint256"
+      }
+    ],
+    "name": "windowOf",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "firstPeriodWindows",
         "type": "uint256"
       },
       {
-        "name": "_firstPeriodSupply",
+        "name": "firstPeriodSupply",
         "type": "uint256"
       },
       {
-        "name": "_secondPeriodWindows",
+        "name": "secondPeriodWindows",
         "type": "uint256"
       },
       {
-        "name": "_secondPeriodSupply",
+        "name": "secondPeriodSupply",
         "type": "uint256"
       },
       {
-        "name": "_foundationWallet",
+        "name": "foundationWallet",
         "type": "address"
       },
       {
-        "name": "_foundationReserve",
+        "name": "startTime",
         "type": "uint256"
       },
       {
-        "name": "_startTimestamp",
-        "type": "uint256"
-      },
-      {
-        "name": "_windowLength",
+        "name": "windowLength",
         "type": "uint256"
       }
     ],
@@ -590,6 +846,18 @@ export const distributionAbi =  [
         "indexed": true,
         "name": "previousOwner",
         "type": "address"
+      }
+    ],
+    "name": "OwnershipRenounced",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "previousOwner",
+        "type": "address"
       },
       {
         "indexed": true,
@@ -599,184 +867,6 @@ export const distributionAbi =  [
     ],
     "name": "OwnershipTransferred",
     "type": "event"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_MCoin",
-        "type": "address"
-      }
-    ],
-    "name": "init",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "window",
-        "type": "uint256"
-      }
-    ],
-    "name": "allocationFor",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "timestamp",
-        "type": "uint256"
-      }
-    ],
-    "name": "windowOf",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "currentWindow",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "window",
-        "type": "uint256"
-      }
-    ],
-    "name": "commitOn",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [],
-    "name": "commit",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "window",
-        "type": "uint256"
-      }
-    ],
-    "name": "withdraw",
-    "outputs": [
-      {
-        "name": "reward",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [],
-    "name": "withdrawAll",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "getAllRewards",
-    "outputs": [
-      {
-        "name": "rewards",
-        "type": "uint256[365]"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "from",
-        "type": "address"
-      }
-    ],
-    "name": "getCommitmentsOf",
-    "outputs": [
-      {
-        "name": "commitments",
-        "type": "uint256[365]"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "getTotals",
-    "outputs": [
-      {
-        "name": "ethTotals",
-        "type": "uint256[365]"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [],
-    "name": "moveFunds",
-    "outputs": [
-      {
-        "name": "value",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
   }
 ]
 

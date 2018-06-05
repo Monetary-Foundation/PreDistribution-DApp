@@ -23,11 +23,19 @@ function Web3Status(props) {
   } = props;
 
   if (initStatus === 'loading') {
-    return <div> init in progress, check Mist/Metamask is connected to a network ....</div>;
+    return (
+      <Col sm={{ span: 10, offset: 1 }} xs={{ span: 23, offset: 1 }}>
+        <div> init in progress, check Mist/Metamask is connected to a network ....</div>
+      </Col>
+    );
   }
 
   if (initStatus === 'error') {
-    return <div> {web3} </div>;
+    return (
+      <Col sm={{ span: 10, offset: 1 }} xs={{ span: 23, offset: 1 }}>
+        <div> {web3} </div>
+      </Col>
+    );
   }
 
   const provider = web3 && web3.currentProvider && web3.currentProvider.constructor.name;

@@ -178,6 +178,7 @@ function* getDistributionInfoAsync() {
 
     const getTotals = distributionContract.methods.getTotals().call();
 
+
     const getAllPromises = () =>
       Promise.all([getLatestBlock, getCurrentWindow, getTotalWindows, getStartTimestamp, getWindowLenght,
         getFirstPeriodWindows, getSecondPeriodWindows, getFirstPeriodSupply, getSecondPeriodSupply, getTotals]);
@@ -186,6 +187,7 @@ function* getDistributionInfoAsync() {
       firstPeriodWindows, secondPeriodWindows, firstPeriodSupply, secondPeriodSupply, totals] =
       yield call(getAllPromises);
 
+    console.log(totals);
 
     const distributionInfo = {
       timestamp: latestBlock.timestamp,

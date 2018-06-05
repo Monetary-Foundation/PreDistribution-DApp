@@ -161,33 +161,43 @@ function* getDistributionInfoAsync() {
     // TODO:Remove
     yield call(timer, 500);
 
-    const getLatestBlock = web3.eth.getBlock('latest');
+    const allCalls = [];
 
-    // const getCurrentWindow = distributionContract.methods.currentWindow().call();
-    const getTotalWindows = distributionContract.methods.totalWindows().call();
+    allCalls.push(web3.eth.getBlock('latest'));
 
-    const getStartTimestamp = distributionContract.methods.startTimestamp().call();
-    const getWindowLenght = distributionContract.methods.windowLength().call();
+    const getCurrentWindow = distributionContract.methods.currentWindow().call();
+    allCalls.push(distributionContract.methods.totalWindows().call());
 
-    const getFirstPeriodWindows = distributionContract.methods.firstPeriodWindows().call();
-    const getSecondPeriodWindows = distributionContract.methods.secondPeriodWindows().call();
+    allCalls.push(distributionContract.methods.startTimestamp().call());
+    allCalls.push(distributionContract.methods.windowLength().call());
 
-    const getFirstPeriodSupply = distributionContract.methods.firstPeriodSupply().call();
-    const getSecondPeriodSupply = distributionContract.methods.secondPeriodSupply().call();
+    allCalls.push(distributionContract.methods.firstPeriodWindows().call());
+    allCalls.push(distributionContract.methods.secondPeriodWindows().call());
 
-    const getTotals = distributionContract.methods.getTotals().call();
+    allCalls.push(distributionContract.methods.firstPeriodSupply().call());
+    allCalls.push(distributionContract.methods.secondPeriodSupply().call());
 
-    const getDetailsOfWindow = distributionContract.methods.detailsOfWindow().call();
+    allCalls.push(distributionContract.methods.getTotals().call());
 
+    allCalls.push(distributionContract.methods.detailsOfWindow().call());
 
-    const getAllPromises = () =>
-      Promise.all([getLatestBlock, getTotalWindows, getStartTimestamp, getWindowLenght,
-        getFirstPeriodWindows, getSecondPeriodWindows, getFirstPeriodSupply, getSecondPeriodSupply, getTotals, getDetailsOfWindow]);
+    console.log(1);
+    const getAllPromises = () => Promise.all(allCalls);
 
-    const [latestBlock, totalWindows, startTimestamp, windowLenght,
-      firstPeriodWindows, secondPeriodWindows, firstPeriodSupply, secondPeriodSupply, totals, detailsOfWindow] =
-      yield call(getAllPromises);
-
+    console.log(2);
+    const [
+      latestBlock,
+      totalWindows,
+      startTimestamp,
+      windowLenght,
+      firstPeriodWindows,
+      secondPeriodWindows,
+      firstPeriodSupply,
+      secondPeriodSupply,
+      totals,
+      detailsOfWindow,
+    ] = yield call(getAllPromises);
+    console.log(3);
     const {
       // start,
       // end,
@@ -217,6 +227,7 @@ function* getDistributionInfoAsync() {
     yield put(getDistributionInfoSuccess(distributionInfo));
     yield put(getAddressInfo());
   } catch (err) {
+    console.log(err.lineNumber);
     yield put(getDistributionInfoError(err.toString()));
   }
 }

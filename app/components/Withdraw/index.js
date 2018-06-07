@@ -25,7 +25,7 @@ function Withdraw(props) {
 
   return (
     <div>
-      <h2> Withdraw tokens </h2>
+      <h3> Withdraw tokens </h3>
       Window:{' '}
       <InputNumber
         min={0}

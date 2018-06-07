@@ -24,7 +24,7 @@ function Commit(props) {
 
   return (
     <div>
-      <h2> Commit ETH </h2>
+      <h3> Commit ETH </h3>
       Window:{' '}
       <InputNumber
         min={0}

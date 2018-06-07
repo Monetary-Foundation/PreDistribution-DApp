@@ -20,7 +20,8 @@ import { Row } from 'antd';
 import Header from 'components/Header';
 import Web3Status from 'components/Web3Status';
 import DistributionInfo from 'components/DistributionInfo';
-import TotalsHeatmap from 'components/TotalsHeatmap';
+
+import TotalsInfo from 'components/TotalsInfo';
 
 import AddressInfo from 'components/AddressInfo';
 
@@ -146,11 +147,6 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
     };
     const distributionInfoProps = { web3, tokenName, onGetDistributionInfo, getDistributionInfoLoading, getDistributionInfoError, distributionInfo };
 
-    const totalsHeatmapProps = {
-      totals: distributionInfo && distributionInfo.totals,
-      days: 181,
-    };
-
     const addressInfoProps = {};
 
     const addressProps = { getAddressInfoLoading, getAddressInfoError, addressInfo, isWeb3Browser };
@@ -179,6 +175,11 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
 
     Object.assign(addressInfoProps, addressProps, commitProps, withdrawProps);
 
+    const totalsInfoProps = {
+      totals: distributionInfo && distributionInfo.totals,
+      days: 181,
+    };
+
 
     return (
       <div>
@@ -193,7 +194,7 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
             <Web3Status {...initStatusProps} />
             <DistributionInfo {...distributionInfoProps} />
           </Row>
-          <TotalsHeatmap {...totalsHeatmapProps} />
+          <TotalsInfo {...totalsInfoProps} />
           <AddressInfo {...addressInfoProps} />
         </Content>
         <PageFooter />

@@ -8,12 +8,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import CalendarHeatmap from 'react-calendar-heatmap';
-import { Row, Col } from 'antd';
 
 const Div = styled.div`
-  padding-bottom: 5px;
-  padding-top: 25px;
-
   /*
   * react-calendar-heatmap styles
   */
@@ -94,27 +90,16 @@ function TotalsHeatmap(props) {
   // const sampleData = [{ date: getFakeDate(0), count: 0 }, { date: getFakeDate(1), count: 1 }, { date: getFakeDate(2), count: 2 }, { date: getFakeDate(3), count: 3 }, { date: getFakeDate(4), count: 4 }];
   return (
     <Div>
-      <Row>
-        <Col sm={{ span: 9, offset: 1 }} xs={{ span: 22, offset: 1 }}>
-          <h3> Commitment distribution </h3>
-          <CalendarHeatmap
-            showMonthLabels={false}
-            gutterSize={2}
-            startDate={startDate}
-            endDate={endDate}
-            values={normTotals}
-            classForValue={(value) => (value) ? `color-scale-${value.count}` : 'color-empty'}
-          />
-        </Col>
-        <br />
-      </Row>
-
-      <Row>
-        <Col sm={{ span: 22, offset: 1 }} xs={{ span: 22, offset: 1 }}>
-          {totals && JSON.stringify(totals, 0, 2)}
-        </Col>
-        <br />
-      </Row>
+      <h3> Commitment distribution </h3>
+      <CalendarHeatmap
+        showMonthLabels={false}
+        gutterSize={2}
+        startDate={startDate}
+        endDate={endDate}
+        values={normTotals}
+        classForValue={(value) => (value) ? `color-scale-${value.count}` : 'color-empty'}
+      />
+      <br />
     </Div>
   );
 }

@@ -66,13 +66,13 @@ export const distributionContracts = {
     [
       {
         name: 'MERO',
-        distributionAddress: '0x65143a2fc5567b948bb77c119829db5843d67fc9',
-        address: '0x8e47c48fc0e328a3c2a1131d59fa0addcff535b0',
+        distributionAddress: '0x0bcb300c55c12d6f183b2a106fee3a8b0bc84403',
+        address: '0xb39fc5e11281012b4d83407a457d409ba344744f',
       },
       {
         name: 'MCHI',
-        distributionAddress: '0x476eb99251c22007e11afe79603934f606c7cb6d',
-        address: '0x82689ff932ff99fb4903badd5f01f98647931c2e',
+        distributionAddress: '0xbeae1acd8a35c7b64463507629a6a6f17170df00',
+        address: '0x8b293fb839a2a0976662fcd787c5134e7920bf5d',
       },
     ],
   },

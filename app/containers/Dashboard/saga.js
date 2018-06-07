@@ -235,6 +235,10 @@ function* getAddressInfoAsync() {
 
     const address = (yield call(() => web3.eth.getAccounts()))[0];
 
+    if (!address) {
+      throw new Error('Wallet locked');
+    }
+
     const getCommitments = distributionContract.methods.getCommitmentsOf(address).call();
     const getRewards = distributionContract.methods.getAllRewards().call();
 
@@ -242,7 +246,6 @@ function* getAddressInfoAsync() {
       Promise.all([getCommitments, getRewards]);
 
     const [commitments, rewards] = yield call(getAllPromises);
-
     const distributionInfo = {
       address,
       commitments,

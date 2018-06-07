@@ -10,10 +10,10 @@ import styled from 'styled-components';
 import { Row, Col } from 'antd';
 import TotalsHeatmap from 'components/TotalsHeatmap';
 import TotalsInfoDetails from 'components/TotalsInfoDetails';
+import TotalsList from 'components/TotalsList';
 
-const RowS = styled(Row)`
-  padding-bottom: 3em;
-  padding-top: 4em;
+const RowS = styled(Row) `
+  padding-top: 3em;
 `;
 
 function TotalsInfo(props) {
@@ -24,16 +24,15 @@ function TotalsInfo(props) {
         <Col sm={{ span: 9, offset: 1 }} xs={{ span: 22, offset: 1 }}>
           <TotalsInfoDetails />
         </Col>
-        <Col sm={{ span: 9, offset: 2 }} xs={{ span: 22, offset: 1 }}>
+        <Col sm={{ span: 11, offset: 2 }} xs={{ span: 22, offset: 1 }}>
           <TotalsHeatmap {...props} />
         </Col>
       </RowS>
-      <Row>
+      <RowS>
         <Col sm={{ span: 22, offset: 1 }} xs={{ span: 22, offset: 1 }}>
-          {totals && JSON.stringify(totals, 0, 2)}
+          <TotalsList {...props} />
         </Col>
-        <br />
-      </Row>
+      </RowS>
     </div>
   );
 }

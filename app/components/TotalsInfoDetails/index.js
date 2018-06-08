@@ -14,9 +14,10 @@ function TotalsInfoDetails() {
   return (
     <Div>
       <h3> Distribution Explorer </h3>
-      <SmallSpan>Total ETH: <br />
+      {/* <SmallSpan>Total ETH: <br />
         <BigSpan> 55 </BigSpan>
-      </SmallSpan>
+      </SmallSpan> */}
+      TBD
     </Div>
   );
 }

@@ -184,8 +184,8 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
     return (
       <div>
         <Helmet>
-          <title>MCoin-PreDistribution-Dapp - Dashboard</title>
-          <meta name="description" content="MCoin-PreDistribution-Dapp" />
+          <title>MonetaryCoin Pre Distribution DApp</title>
+          <meta name="description" content=">MonetaryCoin Pre Distribution DApp" />
         </Helmet>
 
         <Content>

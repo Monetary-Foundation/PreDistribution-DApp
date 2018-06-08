@@ -20,7 +20,12 @@ function PriceForWindow(props) {
     secondPeriodSupply,
   } = props;
 
-  const BN = web3.utils.BN;
+  const BN = web3.utils && web3.utils.BN;
+
+  if (!BN) {
+    return;
+  }
+
 
   const isFirstPeriod = Number(currentWindow) < Number(firstPeriodWindows);
 

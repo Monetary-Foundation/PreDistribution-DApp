@@ -76,7 +76,12 @@ function* initDashboardAsync(action) {
     } else {
       // throw new Error('No web3 injected (Mist/Metamask...), Aborting');
       console.log('No web3 injected (Mist/Metamask...), Using local fallback');
-      web3js = new Web3(new Web3.providers.WebsocketProvider('wss://ropsten.infura.io/ws'));
+      // web3js = new Web3(new Web3.providers.WebsocketProvider('wss://ropsten.infura.io/ws'));
+      // web3js = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws'));
+      web3js = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/'));
+      // new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws'));
+
+      
       // web3js = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'));
       isWeb3Browser = false;
       // web3js = new Web3(new Web3.providers.WebsocketProvider('wss://ropsten.infura.io/ws'));
@@ -235,9 +240,9 @@ function* getAddressInfoAsync() {
 
     const address = (yield call(() => web3.eth.getAccounts()))[0];
 
-    if (!address) {
-      throw new Error('Wallet locked');
-    }
+    // if (!address) {
+    //   throw new Error('Wallet locked');
+    // }
 
     const getCommitments = distributionContract.methods.getCommitmentsOf(address).call();
     const getRewards = distributionContract.methods.getAllRewards().call();

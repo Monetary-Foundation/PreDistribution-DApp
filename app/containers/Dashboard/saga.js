@@ -81,7 +81,6 @@ function* initDashboardAsync(action) {
       web3js = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/'));
       // new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.infura.io/ws'));
 
-      
       // web3js = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'));
       isWeb3Browser = false;
       // web3js = new Web3(new Web3.providers.WebsocketProvider('wss://ropsten.infura.io/ws'));

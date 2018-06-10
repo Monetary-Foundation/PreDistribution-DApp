@@ -54,7 +54,10 @@ import {
 
   makeSelectGetDistributionInfoLoading,
   makeSelectGetDistributionInfoError,
+
   makeSelectDistributionInfo,
+  makeSelectCurrentWindow,
+  makeSelectTotalWindows,
 
   makeSelectGetAddressInfoLoading,
   makeSelectGetAddressInfoError,
@@ -101,7 +104,10 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       onGetDistributionInfo,
       getDistributionInfoLoading,
       getDistributionInfoError,
+
       distributionInfo,
+      currentWindow,
+      totalWindows,
 
       getAddressInfoLoading,
       getAddressInfoError,
@@ -145,12 +151,23 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       distributionAddress,
       tokenList,
     };
-    const distributionInfoProps = { web3, tokenName, onGetDistributionInfo, getDistributionInfoLoading, getDistributionInfoError, distributionInfo };
+    const distributionInfoProps = {
+      web3,
+      tokenName,
+      onGetDistributionInfo,
+      getDistributionInfoLoading,
+      getDistributionInfoError,
+      distributionInfo,
+    };
 
-    const addressInfoProps = {};
+    const addressInfoProps = { currentWindow, totalWindows };
 
-    const addressProps = { getAddressInfoLoading, getAddressInfoError, addressInfo, isWeb3Browser };
-
+    const addressProps = {
+      getAddressInfoLoading,
+      getAddressInfoError,
+      addressInfo,
+      isWeb3Browser,
+    };
     const commitProps = {
       commitEthSendWindow,
       commitEthSendAmount,
@@ -161,7 +178,6 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       onChangeAmount,
       onCommitEthSend,
     };
-
     const withdrawProps = {
       onChangeWithdrawWindow,
       onWithdrawSend,
@@ -172,7 +188,6 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       withdrawSendTx,
       withdrawMinedRecipt,
     };
-
     Object.assign(addressInfoProps, addressProps, commitProps, withdrawProps);
 
     const totalsInfoProps = {
@@ -221,7 +236,10 @@ Dashboard.propTypes = {
   onGetDistributionInfo: PropTypes.func,
   getDistributionInfoLoading: PropTypes.bool,
   getDistributionInfoError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+
   distributionInfo: PropTypes.object,
+  currentWindow: PropTypes.number,
+  totalWindows: PropTypes.number,
 
   getAddressInfoLoading: PropTypes.bool,
   getAddressInfoError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
@@ -259,7 +277,10 @@ const mapStateToProps = createStructuredSelector({
 
   getDistributionInfoLoading: makeSelectGetDistributionInfoLoading(),
   getDistributionInfoError: makeSelectGetDistributionInfoError(),
+
   distributionInfo: makeSelectDistributionInfo(),
+  currentWindow: makeSelectCurrentWindow(),
+  totalWindows: makeSelectTotalWindows(),
 
   getAddressInfoLoading: makeSelectGetAddressInfoLoading(),
   getAddressInfoError: makeSelectGetAddressInfoError(),

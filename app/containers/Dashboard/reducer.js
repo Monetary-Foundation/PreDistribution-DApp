@@ -111,7 +111,8 @@ function dashboardReducer(state = initialState, action) {
       return state
         .set('getDistributionInfoLoading', false)
         .set('getDistributionInfoError', false)
-        .set('distributionInfo', fromJS(action.distributionInfo));
+        .set('distributionInfo', fromJS(action.distributionInfo))
+        .set('commitEthSendWindow', fromJS(action.distributionInfo.currentWindow));
 
     case GET_ADDRESS_INFO:
       return state

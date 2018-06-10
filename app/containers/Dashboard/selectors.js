@@ -47,10 +47,25 @@ const makeSelectGetDistributionInfoError = () => createSelector(
   selectDashboardDomain,
   (substate) => substate.get('getDistributionInfoError')
 );
+
+/* ------ distributionInfo Related ------------------------------------------------------------------*/
+
 const makeSelectDistributionInfo = () => createSelector(
   selectDashboardDomain,
   (substate) => substate.get('distributionInfo') ? substate.get('distributionInfo').toJS() : null
 );
+
+const makeSelectCurrentWindow = () => createSelector(
+  selectDashboardDomain,
+  (substate) => substate.get('distributionInfo') ? Number(substate.getIn(['distributionInfo', 'currentWindow'])) : 0
+);
+
+const makeSelectTotalWindows = () => createSelector(
+  selectDashboardDomain,
+  (substate) => substate.get('distributionInfo') ? Number(substate.getIn(['distributionInfo', 'totalWindows'])) : 0
+);
+
+/* -------------------------------*/
 
 const makeSelectGetAddressInfoLoading = () => createSelector(
   selectDashboardDomain,
@@ -175,7 +190,10 @@ export {
 
   makeSelectGetDistributionInfoLoading,
   makeSelectGetDistributionInfoError,
+
   makeSelectDistributionInfo,
+  makeSelectCurrentWindow,
+  makeSelectTotalWindows,
 
   makeSelectGetAddressInfoLoading,
   makeSelectGetAddressInfoError,

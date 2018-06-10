@@ -20,6 +20,9 @@ function Commit(props) {
     onChangeWindow,
     onChangeAmount,
     onCommitEthSend,
+
+    currentWindow,
+    totalWindows,
   } = props;
 
   return (
@@ -27,8 +30,8 @@ function Commit(props) {
       <h3> Commit ETH </h3>
       Window:{' '}
       <InputNumber
-        min={0}
-        max={365}
+        min={currentWindow}
+        max={totalWindows - 1}
         step={1}
         value={commitEthSendWindow}
         onChange={(value) => onChangeWindow(value)}
@@ -62,6 +65,8 @@ Commit.propTypes = {
   onChangeAmount: PropTypes.func,
   onCommitEthSend: PropTypes.func,
 
+  currentWindow: PropTypes.number,
+  totalWindows: PropTypes.number,
 };
 
 export default Commit;

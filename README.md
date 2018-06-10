@@ -2,7 +2,7 @@
 
 ### A DAPP for interacting with the MonetaryCoin distribution contract
 
-![eth-hot-wallet ethereum wallet preview](https://github.com/Monetary-Foundation/PreDistribution-DApp/docs/images/MonetaryCoin_distribution.jpg)
+![MonetaryCoin Distribution DAPP](https://github.com/Monetary-Foundation/PreDistribution-DApp/raw/master/docs/images/MonetaryCoin_distribution.jpg)
 
 App Deployed to https://MonetaryCoin.io (blocked for the US)
 
@@ -74,4 +74,4 @@ After build, webpack monitor will generate stats about bundle size:
 
 ## License
 
-This project is licensed under the MIT license, Copyright (c) 2017 Paul Laux For more information see `LICENSE.md`.
+This project is licensed under the MIT license, Copyright (c) 2018 The Monetary Foundation For more information see `LICENSE.md`.

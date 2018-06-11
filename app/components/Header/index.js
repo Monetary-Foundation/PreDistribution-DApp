@@ -57,7 +57,7 @@ function Header(props) {
 
 Header.propTypes = {
   initStatus: PropTypes.string,
-  networkId: PropTypes.Number,
+  networkId: PropTypes.number,
   tokenName: PropTypes.string,
   tokenAddress: PropTypes.string,
   distributionAddress: PropTypes.string,

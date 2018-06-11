@@ -7,20 +7,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // import styled from 'styled-components';
+import { networks } from 'utils/constants';
 
-const explorer = {
-  1: 'https://etherscan.io/address/',
-  3: 'https://ropsten.etherscan.io/address/',
-};
+// const explorer = {
+//   1: 'https://etherscan.io/address/',
+//   3: 'https://ropsten.etherscan.io/address/',
+// };
 
 
 function AddressLink(props) {
   const { address, networkId } = props;
-  console.log(address);
-  console.log(networkId);
-  const explorerUrl = explorer[networkId];
-  console.log(explorerUrl);
-
+  const explorerUrl = networks[networkId] && networks[networkId].explorer;
   if (!explorerUrl) {
     return (
       <span> {address && address.toString()}

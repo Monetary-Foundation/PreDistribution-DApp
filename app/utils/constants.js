@@ -77,3 +77,28 @@ export const distributionContracts = {
     ],
   },
 };
+
+export const networks = {
+  1: {
+    name: 'Mainnet',
+    color: '#23e223',
+    explorer: 'https://etherscan.io/address/',
+  },
+  3: {
+    name: 'Ropsten Test Net',
+    color: 'red',
+    explorer: 'https://ropsten.etherscan.io/address/',
+  },
+  42: {
+    name: 'Kovan Test Net',
+    color: 'purple',
+  },
+  4: {
+    name: 'Rinkeby Test Net',
+    color: 'orange',
+  },
+  default: {
+    name: 'Private Network',
+    color: '#d4d4d4;',
+  },
+};

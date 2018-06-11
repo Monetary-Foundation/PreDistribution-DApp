@@ -8,29 +8,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Icon, Tooltip } from 'antd';
-
-const networks = {
-  1: {
-    name: 'Mainnet',
-    color: '#23e223',
-  },
-  3: {
-    name: 'Ropsten Test Net',
-    color: 'red',
-  },
-  42: {
-    name: 'Kovan Test Net',
-    color: 'purple',
-  },
-  4: {
-    name: 'Rinkeby Test Net',
-    color: 'orange',
-  },
-  default: {
-    name: 'Private Network',
-    color: '#d4d4d4;',
-  },
-};
+import { networks } from 'utils/constants';
 
 const IconS = styled(Icon)`
     margin-right: 10px`;
@@ -60,7 +38,7 @@ function NetworkIndicator(props) {
 }
 
 NetworkIndicator.propTypes = {
-  networkId: PropTypes.Number,
+  networkId: PropTypes.number,
 };
 
 export default NetworkIndicator;

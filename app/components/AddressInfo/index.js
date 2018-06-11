@@ -10,6 +10,8 @@ import styled from 'styled-components';
 import { Row, Col, Spin } from 'antd';
 import CommitLayout from 'components/CommitLayout';
 import WithdrawLayout from 'components/WithdrawLayout';
+import Instructions from 'components/Instructions';
+
 
 const Div = styled.div`
   padding-top: 2%;
@@ -52,7 +54,7 @@ function AddressInfo(props) {
       <Div>
         <br /><hr />
         <Row type="flex" align="left" >
-          <Col sm={{ span: 22, offset: 1 }} xs={{ span: 23, offset: 1 }}>
+          <Col sm={{ span: 22, offset: 1 }} xs={{ span: 22, offset: 1 }}>
             <BigSpan> No web3 browser detected. </BigSpan> <br />
             You can use web3 browser such as Mist, Metamask or Trust wallet to commit Eth and withdraw tokens directly from this page.
           </Col>
@@ -64,8 +66,9 @@ function AddressInfo(props) {
   return (
     <Div>
       <br /><hr />
+      <Instructions />
       <Row type="flex" align="left" >
-        <Col sm={{ span: 10, offset: 1 }} xs={{ span: 23, offset: 1 }} style={{ overflowX: 'hidden' }}>
+        <Col sm={{ span: 10, offset: 1 }} xs={{ span: 22, offset: 1 }} style={{ overflowX: 'hidden' }}>
           <h2> My Account </h2>
           <h4> Address: </h4> <BigSpan> {address && address.toUpperCase()} </BigSpan> <br />
         </Col>

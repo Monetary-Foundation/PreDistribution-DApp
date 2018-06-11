@@ -16,7 +16,7 @@ const RowS = styled(Row)`
 `;
 
 const TimelineS = styled(Timeline)`
-  margin-top:2em;
+  margin-top:2em !important;
 `;
 
 function Instructions() {

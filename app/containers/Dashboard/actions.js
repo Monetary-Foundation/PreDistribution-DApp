@@ -57,11 +57,12 @@ export function initDashboard(tokenName) {
  *
  * @return {object} An action object with a type of INIT_DASHBOARD_SUCCESS
  */
-export function initDashboardSuccess(web3, isWeb3Browser, networkName, tokenName, tokenAddress, distributionAddress, tokenList) {
+export function initDashboardSuccess(web3, isWeb3Browser, networkId, networkName, tokenName, tokenAddress, distributionAddress, tokenList) {
   return {
     type: INIT_DASHBOARD_SUCCESS,
     web3,
     isWeb3Browser,
+    networkId,
     networkName,
     tokenName,
     tokenAddress,

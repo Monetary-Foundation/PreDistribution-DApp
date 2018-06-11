@@ -102,15 +102,15 @@ function* initDashboardAsync(action) {
       // });
     }
 
-    let netId;
+    let networkId;
     try {
-      netId = yield call(web3js.eth.net.getId);
+      networkId = yield call(web3js.eth.net.getId);
     } catch (err) {
       throw new Error(`web3.eth.net.getId error, check connection to RPC endpoint and refresh page. ${err}`);
     }
-    console.log(`netid: ${netId}`);
+    console.log(`netid: ${networkId}`);
 
-    const networkContracts = distributionContracts[netId] || distributionContracts.default;
+    const networkContracts = distributionContracts[networkId] || distributionContracts.default;
 
     const networkName = networkContracts.networkName;
 
@@ -135,7 +135,7 @@ function* initDashboardAsync(action) {
     // );
 
     yield put(
-      initDashboardSuccess(web3js, isWeb3Browser, networkName, token.name, token.address, token.distributionAddress, networkContracts.tokenList)
+      initDashboardSuccess(web3js, isWeb3Browser, networkId, networkName, token.name, token.address, token.distributionAddress, networkContracts.tokenList)
     );
     yield put(getDistributionInfo());
   } catch (err) {

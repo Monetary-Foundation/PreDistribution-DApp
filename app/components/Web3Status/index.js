@@ -7,6 +7,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Col } from 'antd';
+import AddressLink from '../AddressLink';
 const Token = styled.div`
   font-size: 330%;
 `;
@@ -15,6 +16,7 @@ function Web3Status(props) {
   const {
     initStatus,
     web3,
+    networkId,
     // networkName,
     tokenName,
     tokenAddress,
@@ -44,8 +46,11 @@ function Web3Status(props) {
       <Token>
         {tokenName}
       </Token>
-      Distribution Contract: <br /> {distributionAddress} <br /><br />
-      Token Contract: <br /> {tokenAddress} <br /> <br />
+      Distribution Contract: <br />
+      <AddressLink address={distributionAddress} networkId={networkId} /><br /><br />
+      Token Contract: <br />
+      <AddressLink address={tokenAddress} networkId={networkId} />
+      <br /> <br />
       Web3 Provider: <br /> {provider || 'no web3 provider specified'} <br />
     </Col>
   );
@@ -54,11 +59,12 @@ function Web3Status(props) {
 Web3Status.propTypes = {
   initStatus: PropTypes.string,
   web3: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-  networkName: PropTypes.string,
+  networkId: PropTypes.number,
+  // networkName: PropTypes.string,
   tokenName: PropTypes.string,
   tokenAddress: PropTypes.string,
   distributionAddress: PropTypes.string,
-  tokenList: PropTypes.array,
+  // tokenList: PropTypes.array,
 };
 
 export default Web3Status;

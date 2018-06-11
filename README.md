@@ -4,8 +4,7 @@
 
 ![MonetaryCoin Distribution DAPP](https://github.com/Monetary-Foundation/PreDistribution-DApp/raw/master/docs/images/MonetaryCoin_distribution.jpg)
 
-App Deployed to https://MonetaryCoin.io (blocked for the US)
-
+App Deployed to https://MonetaryCoin.io
 ### Additional info
 
 [MonetaryCoin Homepage](https://MonetaryCoin.org)

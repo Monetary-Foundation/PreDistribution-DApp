@@ -3,7 +3,7 @@ export const DAEMON = '@@saga-injector/daemon';
 export const ONCE_TILL_UNMOUNT = '@@saga-injector/once-till-unmount';
 
 export const repoName = '/PreDistribution-DApp/';
-export const website = 'https://github.com/Monetary-Foundation/PreDistribution-DApp';
+export const website = 'https://MonetaryCoin.io';
 export const github = 'https://github.com/Monetary-Foundation/PreDistribution-DApp';
 
 // case 1:

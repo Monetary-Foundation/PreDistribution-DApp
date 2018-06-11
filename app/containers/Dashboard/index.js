@@ -209,7 +209,7 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
 
         <Content>
           <Header {...headerProps} />
-          <Row>
+          <Row type="flex" align="middle">
             <Web3Status {...initStatusProps} />
             <DistributionInfo {...distributionInfoProps} />
           </Row>

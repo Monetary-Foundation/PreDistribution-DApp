@@ -16,7 +16,7 @@ const RowS = styled(Row)`
 `;
 
 const TimelineS = styled(Timeline)`
-  margin-top:2em !important;
+  //margin-top: 2em !important;
 `;
 
 function Instructions() {
@@ -24,6 +24,7 @@ function Instructions() {
     <RowS type="flex" align="left" >
       <Col xs={{ span: 22, offset: 1 }} >
         <h2> Distribution instructions </h2>
+        <br />
         <TimelineS>
           <Item color="grey">Please read
             <a target="_blank" rel="noopener" href="https://monetarycoin.org/distribution"> MonetaryCoin Distribution Details</a></Item>

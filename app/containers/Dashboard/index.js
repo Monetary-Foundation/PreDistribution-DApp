@@ -137,6 +137,7 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
 
     const headerProps = {
       initStatus,
+      networkId,
       networkName,
       tokenName,
       tokenAddress,
@@ -202,8 +203,8 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
     return (
       <div>
         <Helmet>
-          <title>MonetaryCoin Pre Distribution DApp</title>
-          <meta name="description" content=">MonetaryCoin Pre Distribution DApp" />
+          <title>MonetaryCoin Distribution DApp</title>
+          <meta name="description" content=">MonetaryCoin Distribution DApp" />
         </Helmet>
 
         <Content>

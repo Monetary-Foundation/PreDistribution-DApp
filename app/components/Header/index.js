@@ -25,7 +25,8 @@ const HeaderWrapped = styled.header`
 function Header(props) {
   const {
     // initStatus,
-    networkName,
+    // networkName,
+    networkId,
     tokenName,
     // tokenAddress,
     // distributionAddress,
@@ -34,7 +35,7 @@ function Header(props) {
   } = props;
 
 
-  const networkIndicatorProps = { networkName };
+  const networkIndicatorProps = { networkId };
   const contractSelectorProps = { tokenName, tokenList, onInitDashboard };
 
   return (
@@ -56,7 +57,7 @@ function Header(props) {
 
 Header.propTypes = {
   initStatus: PropTypes.string,
-  networkName: PropTypes.string,
+  networkId: PropTypes.Number,
   tokenName: PropTypes.string,
   tokenAddress: PropTypes.string,
   distributionAddress: PropTypes.string,

@@ -8,8 +8,12 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Col } from 'antd';
 import AddressLink from '../AddressLink';
+
 const Token = styled.div`
-  font-size: 330%;
+  font-size: 3em;
+`;
+const Symbol = styled.div`
+  font-size: 2em;
 `;
 
 function Web3Status(props) {
@@ -19,6 +23,7 @@ function Web3Status(props) {
     networkId,
     // networkName,
     tokenName,
+    tokenSymbol,
     tokenAddress,
     distributionAddress,
     // tokenList,
@@ -44,6 +49,8 @@ function Web3Status(props) {
   return (
     <Col sm={{ span: 10, offset: 1 }} xs={{ span: 23, offset: 1 }}>
       <Token>{tokenName}</Token>
+      <Symbol>{`(${tokenSymbol})`}</Symbol>
+      <br />
       Distribution Contract: <br />
       <AddressLink address={distributionAddress} networkId={networkId} /><br /><br />
       Token Contract: <br />
@@ -63,6 +70,7 @@ Web3Status.propTypes = {
   networkId: PropTypes.number,
   // networkName: PropTypes.string,
   tokenName: PropTypes.string,
+  tokenSymbol: PropTypes.string,
   tokenAddress: PropTypes.string,
   distributionAddress: PropTypes.string,
   // tokenList: PropTypes.array,

@@ -45,6 +45,7 @@ const initialState = fromJS({
   networkId: null,
   networkName: null,
   tokenName: null,
+  tokenSymbol: null,
   tokenAddress: null,
   distributionAddress: null,
   tokenList: null,
@@ -97,6 +98,7 @@ function dashboardReducer(state = initialState, action) {
         .set('networkId', action.networkId)
         .set('networkName', action.networkName)
         .set('tokenName', action.tokenName)
+        .set('tokenSymbol', action.tokenSymbol)
         .set('tokenAddress', action.tokenAddress)
         .set('distributionAddress', action.distributionAddress)
         .set('tokenList', fromJS(action.tokenList));

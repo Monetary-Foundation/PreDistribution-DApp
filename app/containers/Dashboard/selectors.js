@@ -30,6 +30,10 @@ const makeSelectTokenName = () => createSelector(
   selectDashboardDomain,
   (substate) => substate.get('tokenName')
 );
+const makeSelectTokenSymbol = () => createSelector(
+  selectDashboardDomain,
+  (substate) => substate.get('tokenSymbol')
+);
 const makeSelectTokenAddress = () => createSelector(
   selectDashboardDomain,
   (substate) => substate.get('tokenAddress')
@@ -189,6 +193,7 @@ export {
   makeSelectNetworkId,
   makeSelectNetworkName,
   makeSelectTokenName,
+  makeSelectTokenSymbol,
   makeSelectTokenAddress,
   makeSelectDistributionAddress,
   makeSelectTokenList,

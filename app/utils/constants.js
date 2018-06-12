@@ -27,16 +27,18 @@ export const github = 'https://github.com/Monetary-Foundation/PreDistribution-DA
 export const distributionContracts = {
   1: {
     networkName: 'Mainnet',
-    defaultTokenName: 'MERO',
+    defaultToken: 'MERO',
     tokenList:
     [
       {
-        name: 'MERO',
+        symbol: 'MERO',
+        name: 'MonetaryCoinERO',
         distributionAddress: '0x928d06fba1226f83aa3df853ecae911e0c0ec499',
         address: '0x227412a7d92bca453b5e2f790fc8282ca2e1a686',
       },
       {
-        name: 'MCHI',
+        symbol: 'MCHI',
+        name: 'MonetaryCoinCHI',
         distributionAddress: '0xcf262897f3aa3ba822b71590ada68b2e72a991b6',
         address: '0x6644fc3e5224d28ba9172bfaa21359d43bbd4190',
       },
@@ -44,16 +46,18 @@ export const distributionContracts = {
   },
   3: {
     networkName: 'Ropsten',
-    defaultTokenName: 'MERO',
+    defaultToken: 'MERO',
     tokenList:
     [
       {
-        name: 'MERO',
+        symbol: 'MERO',
+        name: 'MonetaryCoinERO',
         distributionAddress: '0x0bcb300c55c12d6f183b2a106fee3a8b0bc84403',
         address: '0xb39fc5e11281012b4d83407a457d409ba344744f',
       },
       {
-        name: 'MCHI',
+        symbol: 'MCHI',
+        name: 'MonetaryCoinCHI',
         distributionAddress: '0xbeae1acd8a35c7b64463507629a6a6f17170df00',
         address: '0x8b293fb839a2a0976662fcd787c5134e7920bf5d',
       },
@@ -61,16 +65,18 @@ export const distributionContracts = {
   },
   default: {
     networkName: 'Local Host',
-    defaultTokenName: 'MERO',
+    defaultToken: 'MERO',
     tokenList:
     [
       {
-        name: 'MERO',
+        symbol: 'MERO',
+        name: 'MonetaryCoinERO',
         distributionAddress: '0x0bcb300c55c12d6f183b2a106fee3a8b0bc84403',
         address: '0xb39fc5e11281012b4d83407a457d409ba344744f',
       },
       {
-        name: 'MCHI',
+        symbol: 'MCHI',
+        name: 'MonetaryCoinCHI',
         distributionAddress: '0xbeae1acd8a35c7b64463507629a6a6f17170df00',
         address: '0x8b293fb839a2a0976662fcd787c5134e7920bf5d',
       },

@@ -10,19 +10,19 @@ import PropTypes from 'prop-types';
 import { Div, BigSpan } from 'components/DistributionInfo/common';
 
 function AllocatedForWindow(props) {
-  const { web3, tokenName, allocation } = props;
+  const { web3, tokenSymbol, allocation } = props;
 
   return (
     <Div>
       Allocated for current window<br />
-      <BigSpan> {allocation ? parseInt(web3.utils.fromWei(allocation, 'ether'), 10).toFixed(0) : 0} {tokenName} </BigSpan>
+      <BigSpan> {allocation ? parseInt(web3.utils.fromWei(allocation, 'ether'), 10).toFixed(0) : 0} {tokenSymbol} </BigSpan>
     </Div>
   );
 }
 
 AllocatedForWindow.propTypes = {
   allocation: PropTypes.string,
-  tokenName: PropTypes.string,
+  tokenSymbol: PropTypes.string,
   web3: PropTypes.object,
 };
 

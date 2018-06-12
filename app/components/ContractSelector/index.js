@@ -24,20 +24,20 @@ const StyledMenuItem = styled(MenuItem)`
 `;
 
 function ContractSelector(props) {
-  const { tokenName, tokenList, onInitDashboard } = props;
+  const { tokenName, tokenSymbol, tokenList, onInitDashboard } = props;
 
   let options;
   if (tokenList) {
     options = tokenList.map((token) =>
-      <StyledMenuItem key={token.name}><a tabIndex="0" role="button" onClick={() => onInitDashboard(token.name)}>{token.name}</a></StyledMenuItem>
+      <StyledMenuItem key={token.symbol}><a tabIndex="0" role="button" onClick={() => onInitDashboard(token.symbol)}>{token.symbol}</a></StyledMenuItem>
     );
   }
 
   const menu = (
     <Menu
       forceSubMenuRender
-      defaultSelectedKeys={[tokenName]}
-      selectedKeys={[tokenName]}
+      defaultSelectedKeys={[tokenSymbol]}
+      selectedKeys={[tokenSymbol]}
     >
       <StyledMenuItem disabled key="title">Select contract</StyledMenuItem>
       {options}
@@ -47,7 +47,7 @@ function ContractSelector(props) {
   return (
     <Dropdown overlay={menu}>
       <StyledButton size="large" icon="profile">
-        {tokenName}<Icon type="down" />
+        {tokenSymbol}<Icon type="down" />
       </StyledButton>
     </Dropdown>
   );
@@ -55,6 +55,7 @@ function ContractSelector(props) {
 
 ContractSelector.propTypes = {
   tokenName: PropTypes.string,
+  tokenSymbol: PropTypes.string,
   tokenList: PropTypes.array,
   onInitDashboard: PropTypes.func,
 };

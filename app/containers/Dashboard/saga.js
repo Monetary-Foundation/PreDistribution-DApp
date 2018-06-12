@@ -108,16 +108,15 @@ function* initDashboardAsync(action) {
     } catch (err) {
       throw new Error(`web3.eth.net.getId error, check connection to RPC endpoint and refresh page. ${err}`);
     }
-    console.log(`netid: ${networkId}`);
 
     const networkContracts = distributionContracts[networkId] || distributionContracts.default;
 
     const networkName = networkContracts.networkName;
 
-    const tokenSelect = action.tokenName || networkContracts.defaultTokenName;
+    const tokenSelect = action.tokenSymbol || networkContracts.defaultToken;
 
     const token = networkContracts.tokenList.find(
-      (token_) => token_.name === tokenSelect
+      (token_) => token_.symbol === tokenSelect
     );
 
     yield fork(handleEvents);
@@ -135,7 +134,7 @@ function* initDashboardAsync(action) {
     // );
 
     yield put(
-      initDashboardSuccess(web3js, isWeb3Browser, networkId, networkName, token.name, token.address, token.distributionAddress, networkContracts.tokenList)
+      initDashboardSuccess(web3js, isWeb3Browser, networkId, networkName, token.name, token.symbol, token.address, token.distributionAddress, networkContracts.tokenList)
     );
     yield put(getDistributionInfo());
   } catch (err) {

@@ -17,7 +17,7 @@ const RowS = styled(Row) `
 `;
 
 function TotalsInfo(props) {
-  const { totals, days } = props;  // eslint-disable-line
+  const { totals,totalsMap, days } = props;  // eslint-disable-line
   return (
     <div>
       <RowS>
@@ -40,6 +40,7 @@ function TotalsInfo(props) {
 TotalsInfo.propTypes = {
   days: PropTypes.number,
   totals: PropTypes.arrayOf(PropTypes.string),
+  totalsMap: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default TotalsInfo;

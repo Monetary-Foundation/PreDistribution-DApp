@@ -58,6 +58,7 @@ import {
   makeSelectGetDistributionInfoError,
 
   makeSelectDistributionInfo,
+  makeSelectTotalsMap,
   makeSelectCurrentWindow,
   makeSelectTotalWindows,
 
@@ -110,6 +111,7 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       getDistributionInfoError,
 
       distributionInfo,
+      totalsMap,
       currentWindow,
       totalWindows,
 
@@ -200,6 +202,7 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
     Object.assign(addressInfoProps, addressProps, commitProps, withdrawProps);
 
     const totalsInfoProps = {
+      totalsMap,
       totals: distributionInfo && distributionInfo.totals,
       days: 181,
     };
@@ -249,6 +252,7 @@ Dashboard.propTypes = {
   getDistributionInfoError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 
   distributionInfo: PropTypes.object,
+  totalsMap: PropTypes.array,
   currentWindow: PropTypes.number,
   totalWindows: PropTypes.number,
 
@@ -292,6 +296,7 @@ const mapStateToProps = createStructuredSelector({
   getDistributionInfoError: makeSelectGetDistributionInfoError(),
 
   distributionInfo: makeSelectDistributionInfo(),
+  totalsMap: makeSelectTotalsMap(),
   currentWindow: makeSelectCurrentWindow(),
   totalWindows: makeSelectTotalWindows(),
 

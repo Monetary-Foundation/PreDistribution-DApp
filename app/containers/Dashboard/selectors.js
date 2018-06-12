@@ -63,6 +63,19 @@ const makeSelectDistributionInfo = () => createSelector(
   (substate) => substate.get('distributionInfo') ? substate.get('distributionInfo').toJS() : null
 );
 
+const makeSelectTotalsMap = () => createSelector(
+  selectDashboardDomain,
+  (substate) => substate.get('distributionInfo')
+    ? substate.getIn(['distributionInfo', 'totals']).toJS()
+      .map((value, index) => {
+        const unit = {};
+        unit.window = index;
+        unit.eth_commited = value;
+        return unit;
+      })
+    : null
+);
+
 const makeSelectCurrentWindow = () => createSelector(
   selectDashboardDomain,
   (substate) => substate.get('distributionInfo') ? Number(substate.getIn(['distributionInfo', 'currentWindow'])) : 0
@@ -202,6 +215,7 @@ export {
   makeSelectGetDistributionInfoError,
 
   makeSelectDistributionInfo,
+  makeSelectTotalsMap,
   makeSelectCurrentWindow,
   makeSelectTotalWindows,
 

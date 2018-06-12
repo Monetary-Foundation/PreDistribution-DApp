@@ -20,10 +20,10 @@ function WithdrawLayout(props) {
   return (
     <Div>
       <Row type="flex" align="left" >
-        <Col sm={{ span: 10, offset: 1 }} xs={{ span: 23, offset: 1 }}>
+        <Col sm={{ span: 10, offset: 1 }} xs={{ span: 22, offset: 1 }}>
           <Withdraw {...props} />
         </Col>
-        <Col sm={{ span: 11, offset: 1 }} xs={{ span: 23, offset: 1 }}>
+        <Col sm={{ span: 11, offset: 1 }} xs={{ span: 22, offset: 1 }}>
           <WithdrawDetails {...props} />
         </Col>
       </Row>

@@ -11,6 +11,7 @@ import AddressLink from '../AddressLink';
 
 const Token = styled.div`
   font-size: 3em;
+  overflow-x: hidden;
 `;
 const Symbol = styled.div`
   font-size: 2em;
@@ -47,7 +48,7 @@ function Web3Status(props) {
 
   const provider = web3 && web3.currentProvider && web3.currentProvider.constructor.name;
   return (
-    <Col sm={{ span: 10, offset: 1 }} xs={{ span: 23, offset: 1 }}>
+    <Col sm={{ span: 10, offset: 1 }} xs={{ span: 23, offset: 1 }} style={{ overflowX: 'hidden' }}>
       <Token>{tokenName}</Token>
       <Symbol>{`(${tokenSymbol})`}</Symbol>
       <br />

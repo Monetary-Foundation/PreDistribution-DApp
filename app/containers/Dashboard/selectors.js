@@ -92,7 +92,7 @@ const makeSelectAddressInfo = () => createSelector(
 
 const makeSelectCommitEthSendWindow = () => createSelector(
   selectDashboardDomain,
-  (substate) => substate.get('commitEthSendWindow')
+  (substate) => substate.get('commitEthSendWindow') && Number(substate.get('commitEthSendWindow'))
 );
 
 const makeSelectCommitEthSendAmount = () => createSelector(

@@ -176,8 +176,6 @@ export function getAddressInfoError(error) {
  * @return {object}    An action object with a type of COMMIT_ETH_SEND_CHANGE_WINDOW and window
  */
 export function changeWindow(window) {
-  console.log('changeWindow');
-
   return {
     type: COMMIT_ETH_SEND_CHANGE_WINDOW,
     window,

@@ -51,7 +51,7 @@ function Commit(props) {
       commitEthMinedLoading: {commitEthMinedLoading ? 'true' : 'false'} <br />
       Error: {commitEthError || 'false'} <br />
       sendTx: {commitEthSendTx || 'null'} <br />
-      Recipt: {commitEthMinedRecipt ? [Object] : 'null'} <br />
+      Recipt: {commitEthMinedRecipt ? '[Object]' : 'null'} <br />
       <Button type="primary" loading={commitEthSendLoading} size="large" onClick={() => onCommitEthSend()}>
         Commit ETH
       </Button>

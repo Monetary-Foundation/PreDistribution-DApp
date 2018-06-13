@@ -17,6 +17,10 @@ import {
   WITHDRAW_SEND,
 
   // used for eventChannel
+  COMMIT_ETH_SEND_SUCCESS,
+  COMMIT_ETH_MINED_SUCCESS,
+  COMMIT_ETH_ERROR,
+
   WITHDRAW_SEND_SUCCESS,
   WITHDRAW_MINED_SUCCESS,
   WITHDRAW_ERROR,
@@ -35,6 +39,7 @@ import {
   getAddressInfoError,
 
   commitEthSendSuccess,
+  commitEthMinedSuccess,
   commitEthError,
 
   withdrawSendSuccess,
@@ -289,21 +294,36 @@ function* commitEthSendAsync() {
     console.log(`typeof amount: ${typeof (amount)}`);
 
     const defaultAccount = (yield call(() => web3.eth.getAccounts()))[0];
-    console.log(defaultAccount);
 
-    const sendPromise = () =>
-      distributionContract.methods.commitOn(window).send({
-        from: defaultAccount,
-        gas: (100000).toString(),
-        gasPrice: web3.utils.toWei((10).toString(), 'gwei'),
-        value: web3.utils.toWei(amount.toString(), 'ether'),
+    distributionContract.methods.commitOn(window).send({
+      from: defaultAccount,
+      gas: (100000).toString(),
+      gasPrice: web3.utils.toWei((10).toString(), 'gwei'),
+      value: web3.utils.toWei(amount.toString(), 'ether'),
+    }).once('transactionHash', (tx) => {
+      withdrawChannel.put({
+        type: COMMIT_ETH_SEND_SUCCESS,
+        tx,
       });
+    })
+    .once('receipt', (receipt) => {
+      withdrawChannel.put({
+        type: COMMIT_ETH_MINED_SUCCESS,
+        receipt,
+      });
+    })
+    .on('error', (error) => {
+      withdrawChannel.put({
+        type: COMMIT_ETH_ERROR,
+        error,
+      });
+    });
 
 
-    const receipt = yield call(sendPromise);
-    console.log(receipt);
+    // const receipt = yield call(sendPromise);
+    // console.log(receipt);
 
-    yield put(commitEthSendSuccess('receipt'));
+    // yield put(commitEthSendSuccess('receipt'));
   } catch (err) {
     const errMsg = err.toString();
     const shortErr = errMsg.substring(0, errMsg.indexOf('.') + 1);
@@ -323,7 +343,7 @@ function* withdrawSendAsync() {
     // console.log(`window: ${window}`);
 
     const defaultAccount = (yield call(() => web3.eth.getAccounts()))[0];
-    console.log(defaultAccount);
+    // console.log(defaultAccount);
 
     distributionContract.methods.withdraw(window).send({
       from: defaultAccount,
@@ -370,6 +390,7 @@ function* handleChannelEvents() {
     const eventAction = yield take(withdrawChannel);
     console.log(eventAction);
     switch (eventAction.type) {
+
       case WITHDRAW_SEND_SUCCESS:
         yield put(withdrawSendSuccess(eventAction.tx));
         break;
@@ -379,6 +400,17 @@ function* handleChannelEvents() {
       case WITHDRAW_ERROR:
         yield put(withdrawError(eventAction.error));
         break;
+
+      case COMMIT_ETH_SEND_SUCCESS:
+        yield put(commitEthSendSuccess(eventAction.tx));
+        break;
+      case COMMIT_ETH_MINED_SUCCESS:
+        yield put(commitEthMinedSuccess(eventAction.receipt));
+        break;
+      case COMMIT_ETH_ERROR:
+        yield put(commitEthError(eventAction.error));
+        break;
+
       case STOP_CHANNEL_FORK:
         if (secondStop) {
           console.log('going to return');

@@ -31,14 +31,16 @@ function PageFooter() {
       <Row>
         <Col sm={{ span: 11, offset: 1 }} xs={24}>
           <a href={github} target="_blank" rel="noopener">
-          MonetaryCoin Pre-Distribution DApp source (Github)
+            MonetaryCoin Pre-Distribution DApp source (Github)
           </a><br />
           Created using: web3@1.0, React.js, Ant design...
         </Col>
 
         <Span>
           <Col sm={12} xs={24}>
-            The Monetary Foundation ©2018 <br />
+            <a target="_blank" rel="noopener" href="https://monetarycoin.org">MonetaryCoin Homepage</a><br />
+            The Monetary Foundation ©2018
+
           </Col>
         </Span>
 

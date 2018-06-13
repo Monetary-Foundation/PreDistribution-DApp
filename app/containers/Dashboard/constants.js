@@ -29,6 +29,7 @@ export const COMMIT_ETH_MINED_SUCCESS = 'app/Dashboard/COMMIT_ETH_MINED_SUCCESS'
 export const COMMIT_ETH_MINED_ERROR = 'app/Dashboard/COMMIT_ETH_MINED_ERROR';
 
 export const WITHDRAW_CHANGE_WINDOW = 'app/Dashboard/WITHDRAW_CHANGE_WINDOW';
+
 export const WITHDRAW_SEND = 'app/Dashboard/WITHDRAW_SEND';
 export const WITHDRAW_SEND_SUCCESS = 'app/Dashboard/WITHDRAW_SEND_SUCCESS';
 export const WITHDRAW_MINED_SUCCESS = 'app/Dashboard/WITHDRAW_MINED_SUCCESS';

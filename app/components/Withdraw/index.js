@@ -36,9 +36,9 @@ function Withdraw(props) {
       <br />
       WithdrawSendLoading: {withdrawSendLoading ? 'true' : 'false'} <br />
       WithdrawMinedLoading: {withdrawMinedLoading ? 'true' : 'false'} <br />
-      Error: {withdrawError || 'false'} <br />
+      Error: {withdrawError ? withdrawError.toString() : 'false'} <br />
       SendTx: {withdrawSendTx || 'null'} <br />
-      MinedRecipt: {(withdrawMinedRecipt && JSON.stringify(withdrawMinedRecipt, 0, 2)) || 'null'} <br />
+      MinedRecipt: {withdrawMinedRecipt ? '[object] ' : 'null'} <br />
       <Button type="primary" loading={withdrawMinedLoading} size="large" onClick={() => onWithdrawSend()}>
         Withdraw Tokens
       </Button>

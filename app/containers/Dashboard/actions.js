@@ -303,7 +303,7 @@ export function withdrawError(error) {
   console.log(error);
   return {
     type: WITHDRAW_ERROR,
-    error,
+    error: error.toString(),
   };
 }
 

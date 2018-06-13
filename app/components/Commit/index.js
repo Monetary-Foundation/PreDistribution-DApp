@@ -49,7 +49,7 @@ function Commit(props) {
       Error: {commitEthSendError || 'false'} <br />
       sendTx: {commitEthSendTx || 'null'} <br />
       <Button type="primary" loading={commitEthSendLoading} size="large" onClick={() => onCommitEthSend()}>
-        Commmit ETH
+        Commit ETH
       </Button>
     </div>
   );

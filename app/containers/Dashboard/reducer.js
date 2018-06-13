@@ -172,7 +172,7 @@ function dashboardReducer(state = initialState, action) {
         .set('withdrawError', action.error);
     case WITHDRAW_SEND_SUCCESS:
       return state
-        .set('withdrawMinedLoading', false)
+        .set('withdrawSendLoading', false)
         .set('withdrawError', false)
         .set('withdrawSendTx', action.withdrawSendTx);
     case WITHDRAW_MINED_SUCCESS:

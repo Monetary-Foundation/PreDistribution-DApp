@@ -56,7 +56,7 @@ function AddressInfo(props) {
         <Row type="flex" align="left" >
           <Col sm={{ span: 22, offset: 1 }} xs={{ span: 22, offset: 1 }}>
             <BigSpan> No web3 browser detected. </BigSpan> <br />
-            You can use web3 browser such as Mist, Metamask or Trust wallet to commit Eth and withdraw tokens directly from this page.
+            You can use web3 browser such as Mist, Metamask or Trust wallet to commit Eth and withdraw tokens <b>directly from this page.</b>
           </Col>
         </Row>
       </Div>

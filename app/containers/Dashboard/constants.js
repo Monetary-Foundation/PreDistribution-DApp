@@ -20,13 +20,11 @@ export const GET_ADDRESS_INFO_ERROR = 'app/Dashboard/GET_ADDRESS_INFO_ERROR';
 
 export const COMMIT_ETH_SEND_CHANGE_WINDOW = 'app/Dashboard/COMMIT_ETH_SEND_CHANGE_WINDOW';
 export const COMMIT_ETH_SEND_CHANGE_AMOUNT = 'app/Dashboard/COMMIT_ETH_SEND_CHANGE_AMOUNT';
+
 export const COMMIT_ETH_SEND = 'app/Dashboard/COMMIT_ETH_SEND';
 export const COMMIT_ETH_SEND_SUCCESS = 'app/Dashboard/COMMIT_ETH_SEND_SUCCESS';
-export const COMMIT_ETH_SEND_ERROR = 'app/Dashboard/COMMIT_ETH_SEND_ERROR';
-
-export const COMMIT_ETH_MINED = 'app/Dashboard/COMMIT_ETH_MINED';
 export const COMMIT_ETH_MINED_SUCCESS = 'app/Dashboard/COMMIT_ETH_MINED_SUCCESS';
-export const COMMIT_ETH_MINED_ERROR = 'app/Dashboard/COMMIT_ETH_MINED_ERROR';
+export const COMMIT_ETH_ERROR = 'app/Dashboard/COMMIT_ETH_ERROR';
 
 export const WITHDRAW_CHANGE_WINDOW = 'app/Dashboard/WITHDRAW_CHANGE_WINDOW';
 

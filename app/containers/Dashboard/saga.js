@@ -41,7 +41,7 @@ import {
   withdrawMinedSuccess,
   withdrawError,
 
-  addNewEvent,
+  // addNewEvent,
 
 } from './actions';
 
@@ -58,7 +58,7 @@ import {
 export const timer = (ms) =>
   new Promise((resolve) => setTimeout(() => resolve('timer end'), ms));
 
-// const eventChannel = channel();
+const withdrawChannel = channel();
 const STOP_CHANNEL_FORK = 'app/Dashboard/STOP_CHANNEL_FORK';
 
 let distributionContract;
@@ -311,8 +311,6 @@ function* commitEthSendAsync() {
   }
 }
 
-
-const withdrawChannel = channel();
 /**
  * withdrawSendAsync
  */

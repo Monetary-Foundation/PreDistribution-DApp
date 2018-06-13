@@ -21,7 +21,7 @@ import {
   COMMIT_ETH_SEND_CHANGE_AMOUNT,
   COMMIT_ETH_SEND,
   COMMIT_ETH_SEND_SUCCESS,
-  COMMIT_ETH_SEND_ERROR,
+  COMMIT_ETH_ERROR,
 
   WITHDRAW_CHANGE_WINDOW,
   WITHDRAW_SEND,
@@ -225,12 +225,12 @@ export function commitEthSendSuccess(commitEthSendTx) {
  *
  * @param  {string} error
  *
- * @return {object} An action object with a type of COMMIT_ETH_SEND_ERROR and error string
+ * @return {object} An action object with a type of COMMIT_ETH_ERROR and error string
  */
 export function commitEthSendError(error) {
   console.log(error);
   return {
-    type: COMMIT_ETH_SEND_ERROR,
+    type: COMMIT_ETH_ERROR,
     error,
   };
 }

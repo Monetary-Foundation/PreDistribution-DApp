@@ -20,9 +20,11 @@ import {
 
   COMMIT_ETH_SEND_CHANGE_WINDOW,
   COMMIT_ETH_SEND_CHANGE_AMOUNT,
+
   COMMIT_ETH_SEND,
   COMMIT_ETH_SEND_SUCCESS,
-  COMMIT_ETH_SEND_ERROR,
+  COMMIT_ETH_MINED_SUCCESS,
+  COMMIT_ETH_ERROR,
 
   WITHDRAW_CHANGE_WINDOW,
   WITHDRAW_SEND,
@@ -62,10 +64,13 @@ const initialState = fromJS({
   commitEthSendAmount: 0.01,
 
   commitEthSendLoading: null,
+  commitEthMinedLoading: null,
   commitEthSendError: null,
   commitEthSendTx: null,
+  commitEthMinedRecipt: null,
 
   withdrawWindow: 0,
+
   withdrawSendLoading: false,
   withdrawMinedLoading: false,
   withdrawError: false,
@@ -143,7 +148,7 @@ function dashboardReducer(state = initialState, action) {
         .set('commitEthSendLoading', true)
         .set('commitEthSendError', false)
         .set('commitEthSendTx', null);
-    case COMMIT_ETH_SEND_ERROR:
+    case COMMIT_ETH_ERROR:
       return state
         .set('commitEthSendLoading', false)
         .set('commitEthSendError', action.error);
@@ -152,7 +157,9 @@ function dashboardReducer(state = initialState, action) {
         .set('commitEthSendLoading', false)
         .set('commitEthSendError', false)
         .set('commitEthSendTx', action.commitEthSendTx);
-
+    case COMMIT_ETH_MINED_SUCCESS:
+      return state
+      ;
 
     case WITHDRAW_CHANGE_WINDOW:
       return state

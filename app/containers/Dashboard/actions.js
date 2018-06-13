@@ -227,7 +227,7 @@ export function commitEthSendSuccess(commitEthSendTx) {
  *
  * @return {object} An action object with a type of COMMIT_ETH_ERROR and error string
  */
-export function commitEthSendError(error) {
+export function commitEthError(error) {
   console.log(error);
   return {
     type: COMMIT_ETH_ERROR,

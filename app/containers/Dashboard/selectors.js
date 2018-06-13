@@ -118,9 +118,9 @@ const makeSelectCommitEthSendLoading = () => createSelector(
   (substate) => substate.get('commitEthSendLoading')
 );
 
-const makeSelectCommitEthSendError = () => createSelector(
+const makeSelectCommitEthError = () => createSelector(
   selectDashboardDomain,
-  (substate) => substate.get('commitEthSendError')
+  (substate) => substate.get('commitEthError')
 );
 
 const makeSelectCommitEthSendTx = () => createSelector(
@@ -226,7 +226,7 @@ export {
   makeSelectCommitEthSendWindow,
   makeSelectCommitEthSendAmount,
   makeSelectCommitEthSendLoading,
-  makeSelectCommitEthSendError,
+  makeSelectCommitEthError,
   makeSelectCommitEthSendTx,
 
   makeSelectWithdrawWindow,

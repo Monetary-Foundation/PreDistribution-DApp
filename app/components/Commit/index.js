@@ -15,7 +15,7 @@ function Commit(props) {
     commitEthSendWindow,
     commitEthSendAmount,
     commitEthSendLoading,
-    commitEthSendError,
+    commitEthError,
     commitEthSendTx,
     onChangeWindow,
     onChangeAmount,
@@ -46,7 +46,7 @@ function Commit(props) {
       />
       <br />
       Loading: {commitEthSendLoading ? 'true' : 'false'} <br />
-      Error: {commitEthSendError || 'false'} <br />
+      Error: {commitEthError || 'false'} <br />
       sendTx: {commitEthSendTx || 'null'} <br />
       <Button type="primary" loading={commitEthSendLoading} size="large" onClick={() => onCommitEthSend()}>
         Commit ETH
@@ -59,7 +59,7 @@ Commit.propTypes = {
   commitEthSendWindow: PropTypes.number,
   commitEthSendAmount: PropTypes.number,
   commitEthSendLoading: PropTypes.bool,
-  commitEthSendError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  commitEthError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   commitEthSendTx: PropTypes.string,
   onChangeWindow: PropTypes.func,
   onChangeAmount: PropTypes.func,

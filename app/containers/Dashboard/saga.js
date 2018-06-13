@@ -35,7 +35,7 @@ import {
   getAddressInfoError,
 
   commitEthSendSuccess,
-  commitEthSendError,
+  commitEthError,
 
   withdrawSendSuccess,
   withdrawMinedSuccess,
@@ -307,7 +307,7 @@ function* commitEthSendAsync() {
   } catch (err) {
     const errMsg = err.toString();
     const shortErr = errMsg.substring(0, errMsg.indexOf('.') + 1);
-    yield put(commitEthSendError(shortErr));
+    yield put(commitEthError(shortErr));
   }
 }
 

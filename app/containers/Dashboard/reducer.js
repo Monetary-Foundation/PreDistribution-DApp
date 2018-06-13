@@ -65,7 +65,7 @@ const initialState = fromJS({
 
   commitEthSendLoading: null,
   commitEthMinedLoading: null,
-  commitEthSendError: null,
+  commitEthError: null,
   commitEthSendTx: null,
   commitEthMinedRecipt: null,
 
@@ -146,16 +146,16 @@ function dashboardReducer(state = initialState, action) {
     case COMMIT_ETH_SEND:
       return state
         .set('commitEthSendLoading', true)
-        .set('commitEthSendError', false)
+        .set('commitEthError', false)
         .set('commitEthSendTx', null);
     case COMMIT_ETH_ERROR:
       return state
         .set('commitEthSendLoading', false)
-        .set('commitEthSendError', action.error);
+        .set('commitEthError', action.error);
     case COMMIT_ETH_SEND_SUCCESS:
       return state
         .set('commitEthSendLoading', false)
-        .set('commitEthSendError', false)
+        .set('commitEthError', false)
         .set('commitEthSendTx', action.commitEthSendTx);
     case COMMIT_ETH_MINED_SUCCESS:
       return state

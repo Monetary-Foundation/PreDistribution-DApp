@@ -68,9 +68,12 @@ import {
 
   makeSelectCommitEthSendWindow,
   makeSelectCommitEthSendAmount,
+
   makeSelectCommitEthSendLoading,
-  makeSelectCommitEthError,
+  makeSelectCommitEthMinedLoading,
   makeSelectCommitEthSendTx,
+  makeSelectCommitEthError,
+  makeSelectCommitEthMinedRecipt,
 
   makeSelectWithdrawWindow,
   makeSelectWithdrawSendLoading,
@@ -121,9 +124,12 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
 
       commitEthSendWindow,
       commitEthSendAmount,
+
       commitEthSendLoading,
       commitEthError,
       commitEthSendTx,
+      commitEthMinedLoading,
+      commitEthMinedRecipt,
       onChangeWindow,
       onChangeAmount,
       onCommitEthSend,
@@ -185,6 +191,8 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       commitEthSendLoading,
       commitEthError,
       commitEthSendTx,
+      commitEthMinedLoading,
+      commitEthMinedRecipt,
       onChangeWindow,
       onChangeAmount,
       onCommitEthSend,
@@ -262,9 +270,13 @@ Dashboard.propTypes = {
 
   commitEthSendWindow: PropTypes.number,
   commitEthSendAmount: PropTypes.number,
+
   commitEthSendLoading: PropTypes.bool,
   commitEthError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   commitEthSendTx: PropTypes.string,
+  commitEthMinedLoading: PropTypes.bool,
+  commitEthMinedRecipt: PropTypes.object,
+
   onChangeWindow: PropTypes.func,
   onChangeAmount: PropTypes.func,
   onCommitEthSend: PropTypes.func,
@@ -306,9 +318,12 @@ const mapStateToProps = createStructuredSelector({
 
   commitEthSendWindow: makeSelectCommitEthSendWindow(),
   commitEthSendAmount: makeSelectCommitEthSendAmount(),
+
   commitEthSendLoading: makeSelectCommitEthSendLoading(),
+  commitEthMinedLoading: makeSelectCommitEthMinedLoading(),
   commitEthError: makeSelectCommitEthError(),
   commitEthSendTx: makeSelectCommitEthSendTx(),
+  commitEthMinedRecipt: makeSelectCommitEthMinedRecipt(),
 
   withdrawWindow: makeSelectWithdrawWindow(),
   withdrawSendLoading: makeSelectWithdrawSendLoading(),

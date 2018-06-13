@@ -118,6 +118,11 @@ const makeSelectCommitEthSendLoading = () => createSelector(
   (substate) => substate.get('commitEthSendLoading')
 );
 
+const makeSelectCommitEthMinedLoading = () => createSelector(
+  selectDashboardDomain,
+  (substate) => substate.get('commitEthMinedLoading')
+);
+
 const makeSelectCommitEthError = () => createSelector(
   selectDashboardDomain,
   (substate) => substate.get('commitEthError')
@@ -127,6 +132,12 @@ const makeSelectCommitEthSendTx = () => createSelector(
   selectDashboardDomain,
   (substate) => substate.get('commitEthSendTx')
 );
+
+const makeSelectCommitEthMinedRecipt = () => createSelector(
+  selectDashboardDomain,
+  (substate) => substate.get('commitEthMinedRecipt')
+);
+
 
 /* Withdraw */
 
@@ -225,9 +236,12 @@ export {
 
   makeSelectCommitEthSendWindow,
   makeSelectCommitEthSendAmount,
+
   makeSelectCommitEthSendLoading,
-  makeSelectCommitEthError,
+  makeSelectCommitEthMinedLoading,
   makeSelectCommitEthSendTx,
+  makeSelectCommitEthError,
+  makeSelectCommitEthMinedRecipt,
 
   makeSelectWithdrawWindow,
   makeSelectWithdrawSendLoading,

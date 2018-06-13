@@ -143,14 +143,17 @@ function dashboardReducer(state = initialState, action) {
     case COMMIT_ETH_SEND_CHANGE_AMOUNT:
       return state
         .set('commitEthSendAmount', action.amount);
+
     case COMMIT_ETH_SEND:
       return state
         .set('commitEthSendLoading', true)
+        .set('commitEthMinedLoading', true)
         .set('commitEthError', false)
         .set('commitEthSendTx', null);
     case COMMIT_ETH_ERROR:
       return state
         .set('commitEthSendLoading', false)
+        .set('commitEthMinedLoading', false)
         .set('commitEthError', action.error);
     case COMMIT_ETH_SEND_SUCCESS:
       return state
@@ -159,7 +162,9 @@ function dashboardReducer(state = initialState, action) {
         .set('commitEthSendTx', action.commitEthSendTx);
     case COMMIT_ETH_MINED_SUCCESS:
       return state
-      ;
+      .set('commitEthMinedLoading', false)
+      .set('commitEthError', false)
+      .set('commitEthMinedRecipt', action.commitEthMinedRecipt);
 
     case WITHDRAW_CHANGE_WINDOW:
       return state

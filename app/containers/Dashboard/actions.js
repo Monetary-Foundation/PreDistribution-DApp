@@ -19,8 +19,10 @@ import {
 
   COMMIT_ETH_SEND_CHANGE_WINDOW,
   COMMIT_ETH_SEND_CHANGE_AMOUNT,
+
   COMMIT_ETH_SEND,
   COMMIT_ETH_SEND_SUCCESS,
+  COMMIT_ETH_MINED_SUCCESS,
   COMMIT_ETH_ERROR,
 
   WITHDRAW_CHANGE_WINDOW,
@@ -217,6 +219,20 @@ export function commitEthSendSuccess(commitEthSendTx) {
   return {
     type: COMMIT_ETH_SEND_SUCCESS,
     commitEthSendTx,
+  };
+}
+
+/**
+ * withdraw transaction were sent successfully
+ *
+ * @param  {string} withdrawMinedRecipt recipt
+ *
+ * @return {object} An action object with a type of WITHDRAW_SEND_SUCCESS and tx
+ */
+export function commitEthMinedSuccess(commitEthMinedRecipt) {
+  return {
+    type: COMMIT_ETH_MINED_SUCCESS,
+    commitEthMinedRecipt,
   };
 }
 

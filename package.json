@@ -1,5 +1,5 @@
 {
-  "name": "mcoin-predistribution-dapp",
+  "name": "monetarycoin-distribution-dapp",
   "private": true,
   "version": "0.1.0",
   "description": "a DApp for interacting with MonetaryCoin Distribution contract",
@@ -7,12 +7,21 @@
     "type": "git",
     "url": "https://github.com/Monetary-Foundation/PreDistribution-DApp.git"
   },
+  "author": "Paul Laux <lauxpaul@protonmail.com>",
+  "license": "MIT",
+  "keywords": [
+    "solidity",
+    "ethereum",
+    "smart",
+    "contracts",
+    "Oracle",
+    "MCoin",
+    "MonetaryCoin"
+  ],
   "engines": {
     "npm": ">=5",
     "node": ">=7"
   },
-  "author": "Paul Laux",
-  "license": "MIT",
   "scripts": {
     "analyze:clean": "rimraf stats.json",
     "preanalyze": "npm run analyze:clean",

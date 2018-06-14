@@ -33,7 +33,7 @@ function Web3Status(props) {
   if (initStatus === 'loading') {
     return (
       <Col sm={{ span: 10, offset: 1 }} xs={{ span: 23, offset: 1 }}>
-        <div> init in progress, check Mist/Metamask is connected to Ropsten / mainnet and unlocked ....</div>
+        <div> init in progress, check Mist/Metamask is <b>connected</b> to Ropsten / mainnet <b>and unlocked</b> ....</div>
       </Col>
     );
   }

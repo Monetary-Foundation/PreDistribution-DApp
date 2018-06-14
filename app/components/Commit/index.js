@@ -8,13 +8,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 // import BlueButton from 'components/BlueButton';
-import { Button, InputNumber } from 'antd';
-import SendLoadingIndicator from 'components/SendLoadingIndicator';
 
+import TxDisplay from 'components/TxDisplay';
+import SendLoadingIndicator from 'components/SendLoadingIndicator';
+import { Button, InputNumber } from 'antd';
 
 const DivS = styled.div`
   margin-top: 35px;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 `;
 
 function Commit(props) {
@@ -29,6 +30,8 @@ function Commit(props) {
     onChangeWindow,
     onChangeAmount,
     onCommitEthSend,
+
+    networkId,
 
     currentWindow,
     totalWindows,
@@ -65,6 +68,7 @@ function Commit(props) {
           tx={commitEthSendTx}
         />
       </DivS>
+      <TxDisplay tx={commitEthSendTx} networkId={networkId} />
 
       commitEthSendLoading: {commitEthSendLoading ? 'true' : 'false'} <br />
       commitEthMinedLoading: {commitEthMinedLoading ? 'true' : 'false'} <br />
@@ -86,6 +90,8 @@ Commit.propTypes = {
   onChangeWindow: PropTypes.func,
   onChangeAmount: PropTypes.func,
   onCommitEthSend: PropTypes.func,
+
+  networkId: PropTypes.number,
 
   currentWindow: PropTypes.number,
   totalWindows: PropTypes.number,

@@ -7,10 +7,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Icon } from 'antd';
+import { Icon, Tooltip } from 'antd';
 
 const SpanS = styled.span`
-  margin: 40px;
+  margin: 20px;
+  position: relative;
+  /* Adjust these values accordingly */
+  top: 5px;
+  left: 5px;
+}
 `;
 
 function SendLoadingIndicator(props) {
@@ -26,7 +31,9 @@ function SendLoadingIndicator(props) {
   if (loading) {
     return (
       <SpanS>
-        <Icon type="loading" style={{ fontSize: 30, color: '#08c' }} />
+        <Tooltip placement="bottom" title="Please approve/decline using Metamask/web3 browser">
+          <Icon type="loading" style={{ fontSize: 30, color: '#08c' }} />
+        </Tooltip>
       </SpanS>
     );
   }
@@ -34,7 +41,9 @@ function SendLoadingIndicator(props) {
   if (tx) {
     return (
       <SpanS>
-        <b><Icon type="check" style={{ fontSize: 25, color: '#57e013' }} /></b>
+        <Tooltip placement="bottom" title="Transcation sent successfully">
+          <b><Icon type="check" style={{ fontSize: 25, color: '#57e013' }} /></b>
+        </Tooltip>
       </SpanS>
     );
   }

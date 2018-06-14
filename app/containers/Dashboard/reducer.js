@@ -149,7 +149,8 @@ function dashboardReducer(state = initialState, action) {
         .set('commitEthSendLoading', true)
         .set('commitEthMinedLoading', true)
         .set('commitEthError', false)
-        .set('commitEthSendTx', null);
+        .set('commitEthSendTx', null)
+        .set('commitEthMinedRecipt', null);
     case COMMIT_ETH_ERROR:
       return state
         .set('commitEthSendLoading', false)

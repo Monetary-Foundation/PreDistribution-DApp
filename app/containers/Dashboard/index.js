@@ -184,6 +184,7 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       getAddressInfoError,
       addressInfo,
       isWeb3Browser,
+      networkId,
     };
     const commitProps = {
       commitEthSendWindow,

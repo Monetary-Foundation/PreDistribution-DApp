@@ -234,7 +234,6 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
           <AddressInfo {...addressInfoProps} />
         </Content>
         <PageFooter />
-
       </div>
     );
   }

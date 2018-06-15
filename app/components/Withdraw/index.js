@@ -24,6 +24,7 @@ const DivS2 = styled.div`
 function Withdraw(props) {
   const {
     networkId,
+    currentWindow,
     onChangeWithdrawWindow,
     onWithdrawSend,
     withdrawWindow,
@@ -36,6 +37,8 @@ function Withdraw(props) {
 
   const conditionalSpace = (!withdrawSendTx && !withdrawError) ? <br /> : null;
 
+  const noClosedWindows = (currentWindow === 0);
+
   return (
     <div>
       <h3> Withdraw tokens </h3>
@@ -43,12 +46,18 @@ function Withdraw(props) {
         Window:{' '}
         <InputNumber
           min={0}
+          max={(currentWindow > 0) ? (currentWindow - 1) : 0}
           step={1}
           value={withdrawWindow}
           onChange={(value) => onChangeWithdrawWindow(value)}
         />
         <br /><br /><br />
-        <Button type="primary" size="large" onClick={() => onWithdrawSend()}>
+        <Button
+          type="primary"
+          size="large"
+          onClick={() => onWithdrawSend()}
+          disabled={noClosedWindows}
+        >
           Withdraw Tokens
         </Button>
         <SendLoadingIndicator
@@ -60,6 +69,7 @@ function Withdraw(props) {
       </DivS>
       <DivS2>
         {conditionalSpace}
+        {noClosedWindows ? 'Withdraw is possible once the first window is closed.' : null}
         <TxDisplay tx={withdrawSendTx} networkId={networkId} />
         <ErrorDisplay error={withdrawError} />
         <br />
@@ -75,6 +85,7 @@ function Withdraw(props) {
 
 Withdraw.propTypes = {
   networkId: PropTypes.number,
+  currentWindow: PropTypes.number,
   onChangeWithdrawWindow: PropTypes.func,
   onWithdrawSend: PropTypes.func,
   withdrawWindow: PropTypes.number,

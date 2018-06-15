@@ -19,7 +19,7 @@ const SpanS = styled.span`
 `;
 
 function SendLoadingIndicator(props) {
-  const { loading, error, tx } = props;
+  const { loading, error, tx, minedRecipt } = props;
   if (error) {
     return (
       <SpanS>
@@ -33,6 +33,19 @@ function SendLoadingIndicator(props) {
       <SpanS>
         <Tooltip placement="bottom" title="Please approve/decline using Metamask/web3 browser">
           <Icon type="loading" style={{ fontSize: 30, color: '#08c' }} />
+        </Tooltip>
+      </SpanS>
+    );
+  }
+
+  if (minedRecipt) {
+    const title = minedRecipt && minedRecipt.blockNumber
+    ? `Transcation mined successfully on block ${minedRecipt.blockNumber}`
+    : 'Transcation mined successfully';
+    return (
+      <SpanS>
+        <Tooltip placement="bottom" title={title}>
+          <b><Icon type="check" style={{ fontSize: 25, color: '#5871f5' }} /></b>
         </Tooltip>
       </SpanS>
     );
@@ -54,6 +67,7 @@ SendLoadingIndicator.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   tx: PropTypes.string,
+  minedRecipt: PropTypes.object,
 };
 
 export default SendLoadingIndicator;

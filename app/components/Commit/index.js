@@ -9,9 +9,10 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 // import BlueButton from 'components/BlueButton';
 
-import TxDisplay from 'components/TxDisplay';
 import SendLoadingIndicator from 'components/SendLoadingIndicator';
 import { Button, InputNumber } from 'antd';
+import ErrorDisplay from 'components/ErrorDisplay';
+import TxDisplay from 'components/TxDisplay';
 
 const DivS = styled.div`
   margin-top: 35px;
@@ -37,6 +38,7 @@ function Commit(props) {
     totalWindows,
   } = props;
 
+  const conditionalSpace = (!commitEthSendTx && !commitEthError) ? <br /> : null;
 
   return (
     <div>
@@ -66,10 +68,13 @@ function Commit(props) {
           loading={commitEthSendLoading}
           error={commitEthError}
           tx={commitEthSendTx}
+          minedRecipt={commitEthMinedRecipt}
         />
       </DivS>
+      {conditionalSpace}
       <TxDisplay tx={commitEthSendTx} networkId={networkId} />
-
+      <ErrorDisplay error={commitEthError} />
+      <br />
       commitEthSendLoading: {commitEthSendLoading ? 'true' : 'false'} <br />
       commitEthMinedLoading: {commitEthMinedLoading ? 'true' : 'false'} <br />
       Error: {commitEthError ? commitEthError.toString() : 'false'} <br />

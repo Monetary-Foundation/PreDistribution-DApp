@@ -18,11 +18,7 @@ function TxDisplay(props) {
       </div>
     );
   }
-  return (
-    <div>
-      <br />
-    </div>
-  );
+  return null;
 }
 
 TxDisplay.propTypes = {

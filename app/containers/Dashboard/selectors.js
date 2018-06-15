@@ -123,9 +123,12 @@ const makeSelectCommitEthMinedLoading = () => createSelector(
   (substate) => substate.get('commitEthMinedLoading')
 );
 
+// Remove all occurrences of string 'error:' and 'Returned'
 const makeSelectCommitEthError = () => createSelector(
   selectDashboardDomain,
   (substate) => substate.get('commitEthError')
+  ? substate.get('commitEthError').toString().replace(new RegExp('(error:|Returned)', 'ig'), '')
+  : null
 );
 
 const makeSelectCommitEthSendTx = () => createSelector(

@@ -26,7 +26,7 @@ function ErrorDisplay(props) {
 
 
 ErrorDisplay.propTypes = {
-  error: PropTypes.string,
+  error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 };
 
 export default ErrorDisplay;

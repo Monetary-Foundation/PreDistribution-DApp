@@ -71,15 +71,15 @@ const initialState = fromJS({
 
   withdrawWindow: 0,
 
-  withdrawSendLoading: false,
-  withdrawMinedLoading: false,
-  withdrawError: false,
+  withdrawSendLoading: null,
+  withdrawMinedLoading: null,
+  withdrawError: null,
   withdrawSendTx: null,
   withdrawMinedRecipt: null,
 
-  withdrawAllSendLoading: false,
-  withdrawAllMinedLoading: false,
-  withdrawAllError: false,
+  withdrawAllSendLoading: null,
+  withdrawAllMinedLoading: null,
+  withdrawAllError: null,
   withdrawAllSendTx: null,
   withdrawAllMinedRecipt: null,
 

@@ -123,13 +123,12 @@ function* initDashboardAsync(action) {
 
     const networkContracts = distributionContracts[networkId] || distributionContracts.default;
 
-    const networkName = networkContracts.networkName;
+    const { networkName } = networkContracts;
 
     const tokenSelect = action.tokenSymbol || networkContracts.defaultToken;
 
-    const token = networkContracts.tokenList.find(
-      (token_) => token_.symbol === tokenSelect
-    );
+    const token = networkContracts.tokenList.find((token_) =>
+      token_.symbol === tokenSelect);
 
     // kill previous fork in nesecary
     withdrawChannel.put({ type: STOP_CHANNEL_FORK });
@@ -148,9 +147,17 @@ function* initDashboardAsync(action) {
     //   }
     // );
 
-    yield put(
-      initDashboardSuccess(web3js, isWeb3Browser, networkId, networkName, token.name, token.symbol, token.address, token.distributionAddress, networkContracts.tokenList)
-    );
+    yield put(initDashboardSuccess(
+      web3js,
+      isWeb3Browser,
+      networkId,
+      networkName,
+      token.name,
+      token.symbol,
+      token.address,
+      token.distributionAddress,
+      networkContracts.tokenList
+    ));
     yield put(getDistributionInfo());
   } catch (err) {
     yield put(initDashboardError(err.toString()));
@@ -304,18 +311,18 @@ function* commitEthSendAsync() {
         tx,
       });
     })
-    .once('receipt', (receipt) => {
-      withdrawChannel.put({
-        type: COMMIT_ETH_MINED_SUCCESS,
-        receipt,
+      .once('receipt', (receipt) => {
+        withdrawChannel.put({
+          type: COMMIT_ETH_MINED_SUCCESS,
+          receipt,
+        });
+      })
+      .on('error', (error) => {
+        withdrawChannel.put({
+          type: COMMIT_ETH_ERROR,
+          error,
+        });
       });
-    })
-    .on('error', (error) => {
-      withdrawChannel.put({
-        type: COMMIT_ETH_ERROR,
-        error,
-      });
-    });
 
 
     // const receipt = yield call(sendPromise);
@@ -388,11 +395,12 @@ function* handleChannelEvents() {
     const eventAction = yield take(withdrawChannel);
     console.log(eventAction);
     switch (eventAction.type) {
-
       case WITHDRAW_SEND_SUCCESS:
         yield put(withdrawSendSuccess(eventAction.tx));
         break;
       case WITHDRAW_MINED_SUCCESS:
+        yield put(getDistributionInfo());
+        // yield put(getAddressInfo());
         yield put(withdrawMinedSuccess(eventAction.receipt));
         break;
       case WITHDRAW_ERROR:
@@ -403,6 +411,8 @@ function* handleChannelEvents() {
         yield put(commitEthSendSuccess(eventAction.tx));
         break;
       case COMMIT_ETH_MINED_SUCCESS:
+        yield put(getDistributionInfo());
+        // yield put(getAddressInfo());
         yield put(commitEthMinedSuccess(eventAction.receipt));
         break;
       case COMMIT_ETH_ERROR:

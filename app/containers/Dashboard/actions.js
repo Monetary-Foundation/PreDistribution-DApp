@@ -3,7 +3,7 @@
  * Dashboard actions
  *
  */
-
+import { message } from 'antd';
 import {
   INIT_DASHBOARD,
   INIT_DASHBOARD_SUCCESS,
@@ -19,9 +19,11 @@ import {
 
   COMMIT_ETH_SEND_CHANGE_WINDOW,
   COMMIT_ETH_SEND_CHANGE_AMOUNT,
+
   COMMIT_ETH_SEND,
   COMMIT_ETH_SEND_SUCCESS,
-  COMMIT_ETH_SEND_ERROR,
+  COMMIT_ETH_MINED_SUCCESS,
+  COMMIT_ETH_ERROR,
 
   WITHDRAW_CHANGE_WINDOW,
   WITHDRAW_SEND,
@@ -221,16 +223,38 @@ export function commitEthSendSuccess(commitEthSendTx) {
 }
 
 /**
+ * withdraw transaction were sent successfully
+ *
+ * @param  {string} withdrawMinedRecipt recipt
+ *
+ * @return {object} An action object with a type of WITHDRAW_SEND_SUCCESS and tx
+ */
+export function commitEthMinedSuccess(commitEthMinedRecipt) {
+  try {
+    const msg =
+    `Commit transaction ${commitEthMinedRecipt.transactionHash.substring(0, 8)}
+     mined succesfully on block ${commitEthMinedRecipt.blockNumber}`;
+    message.info(msg, 8);
+  } catch (err) {
+    console.log(err);
+  }
+  return {
+    type: COMMIT_ETH_MINED_SUCCESS,
+    commitEthMinedRecipt,
+  };
+}
+
+/**
  * error while sending commit transaction
  *
  * @param  {string} error
  *
- * @return {object} An action object with a type of COMMIT_ETH_SEND_ERROR and error string
+ * @return {object} An action object with a type of COMMIT_ETH_ERROR and error string
  */
-export function commitEthSendError(error) {
+export function commitEthError(error) {
   console.log(error);
   return {
-    type: COMMIT_ETH_SEND_ERROR,
+    type: COMMIT_ETH_ERROR,
     error,
   };
 }
@@ -286,6 +310,14 @@ export function withdrawSendSuccess(withdrawSendTx) {
  * @return {object} An action object with a type of WITHDRAW_SEND_SUCCESS and tx
  */
 export function withdrawMinedSuccess(withdrawMinedRecipt) {
+  try {
+    const msg =
+    `Withdraw transaction ${withdrawMinedRecipt.transactionHash.substring(0, 8)}
+     mined succesfully on block ${withdrawMinedRecipt.blockNumber}`;
+    message.info(msg, 8);
+  } catch (err) {
+    console.log(err);
+  }
   return {
     type: WITHDRAW_MINED_SUCCESS,
     withdrawMinedRecipt,
@@ -303,7 +335,7 @@ export function withdrawError(error) {
   console.log(error);
   return {
     type: WITHDRAW_ERROR,
-    error,
+    error: error.toString(),
   };
 }
 

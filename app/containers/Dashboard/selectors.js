@@ -118,15 +118,29 @@ const makeSelectCommitEthSendLoading = () => createSelector(
   (substate) => substate.get('commitEthSendLoading')
 );
 
-const makeSelectCommitEthSendError = () => createSelector(
+const makeSelectCommitEthMinedLoading = () => createSelector(
   selectDashboardDomain,
-  (substate) => substate.get('commitEthSendError')
+  (substate) => substate.get('commitEthMinedLoading')
+);
+
+// Remove all occurrences of string 'error:' and 'Returned'
+const makeSelectCommitEthError = () => createSelector(
+  selectDashboardDomain,
+  (substate) => substate.get('commitEthError')
+  ? substate.get('commitEthError').toString().replace(new RegExp('(error:|Returned)', 'ig'), '')
+  : null
 );
 
 const makeSelectCommitEthSendTx = () => createSelector(
   selectDashboardDomain,
   (substate) => substate.get('commitEthSendTx')
 );
+
+const makeSelectCommitEthMinedRecipt = () => createSelector(
+  selectDashboardDomain,
+  (substate) => substate.get('commitEthMinedRecipt')
+);
+
 
 /* Withdraw */
 
@@ -225,9 +239,12 @@ export {
 
   makeSelectCommitEthSendWindow,
   makeSelectCommitEthSendAmount,
+
   makeSelectCommitEthSendLoading,
-  makeSelectCommitEthSendError,
+  makeSelectCommitEthMinedLoading,
   makeSelectCommitEthSendTx,
+  makeSelectCommitEthError,
+  makeSelectCommitEthMinedRecipt,
 
   makeSelectWithdrawWindow,
   makeSelectWithdrawSendLoading,

@@ -13,7 +13,17 @@ import {
   GET_DISTRIBUTION_INFO,
   GET_ADDRESS_INFO,
   COMMIT_ETH_SEND,
+
   WITHDRAW_SEND,
+
+  // used for eventChannel
+  COMMIT_ETH_SEND_SUCCESS,
+  COMMIT_ETH_MINED_SUCCESS,
+  COMMIT_ETH_ERROR,
+
+  WITHDRAW_SEND_SUCCESS,
+  WITHDRAW_MINED_SUCCESS,
+  WITHDRAW_ERROR,
 } from './constants';
 
 import {
@@ -29,13 +39,14 @@ import {
   getAddressInfoError,
 
   commitEthSendSuccess,
-  commitEthSendError,
+  commitEthMinedSuccess,
+  commitEthError,
 
-  // withdrawSendSuccess,
+  withdrawSendSuccess,
   withdrawMinedSuccess,
   withdrawError,
 
-  addNewEvent,
+  // addNewEvent,
 
 } from './actions';
 
@@ -52,7 +63,8 @@ import {
 export const timer = (ms) =>
   new Promise((resolve) => setTimeout(() => resolve('timer end'), ms));
 
-const eventChannel = channel();
+const withdrawChannel = channel();
+const STOP_CHANNEL_FORK = 'app/Dashboard/STOP_CHANNEL_FORK';
 
 let distributionContract;
 
@@ -111,15 +123,17 @@ function* initDashboardAsync(action) {
 
     const networkContracts = distributionContracts[networkId] || distributionContracts.default;
 
-    const networkName = networkContracts.networkName;
+    const { networkName } = networkContracts;
 
     const tokenSelect = action.tokenSymbol || networkContracts.defaultToken;
 
-    const token = networkContracts.tokenList.find(
-      (token_) => token_.symbol === tokenSelect
-    );
+    const token = networkContracts.tokenList.find((token_) =>
+      token_.symbol === tokenSelect);
 
-    yield fork(handleEvents);
+    // kill previous fork in nesecary
+    withdrawChannel.put({ type: STOP_CHANNEL_FORK });
+    // fork to handle channel
+    yield fork(handleChannelEvents);
 
     // send every Set() event into eventChannel
     // simpleStorageInstance.contract.Set(
@@ -133,24 +147,32 @@ function* initDashboardAsync(action) {
     //   }
     // );
 
-    yield put(
-      initDashboardSuccess(web3js, isWeb3Browser, networkId, networkName, token.name, token.symbol, token.address, token.distributionAddress, networkContracts.tokenList)
-    );
+    yield put(initDashboardSuccess(
+      web3js,
+      isWeb3Browser,
+      networkId,
+      networkName,
+      token.name,
+      token.symbol,
+      token.address,
+      token.distributionAddress,
+      networkContracts.tokenList
+    ));
     yield put(getDistributionInfo());
   } catch (err) {
     yield put(initDashboardError(err.toString()));
   }
 }
 
-/*
- * catch all events from channel and create an action
- */
-function* handleEvents() {
-  while (true) {
-    const eventAction = yield take(eventChannel);
-    yield put(addNewEvent(eventAction));
-  }
-}
+// /*
+//  * catch all events from channel and create an action
+//  */
+// function* handleEvents() {
+//   while (true) {
+//     const eventAction = yield take(eventChannel);
+//     yield put(addNewEvent(eventAction));
+//   }
+// }
 
 /**
  * getDistributionInfo
@@ -238,8 +260,10 @@ function* getAddressInfoAsync() {
 
     const address = (yield call(() => web3.eth.getAccounts()))[0];
 
+    console.log(`user address: ${address}`);
+
     // if (!address) {
-    //   throw new Error('Wallet locked');
+    //   throw new Error('Wallet locked, unlock wallet to use Dapp');
     // }
 
     const getCommitments = distributionContract.methods.getCommitmentsOf(address).call();
@@ -274,30 +298,41 @@ function* commitEthSendAsync() {
     const window = yield select(makeSelectCommitEthSendWindow());
     const amount = (yield select(makeSelectCommitEthSendAmount()));
 
-    console.log(`window: ${window}`);
-    console.log(`amount: ${amount}`);
-    console.log(`typeof amount: ${typeof (amount)}`);
-
     const defaultAccount = (yield call(() => web3.eth.getAccounts()))[0];
-    console.log(defaultAccount);
 
-    const sendPromise = () =>
-      distributionContract.methods.commitOn(window).send({
-        from: defaultAccount,
-        gas: (100000).toString(),
-        gasPrice: web3.utils.toWei((10).toString(), 'gwei'),
-        value: web3.utils.toWei(amount.toString(), 'ether'),
+    distributionContract.methods.commitOn(window).send({
+      from: defaultAccount,
+      gas: (100000).toString(),
+      gasPrice: web3.utils.toWei((10).toString(), 'gwei'),
+      value: web3.utils.toWei(amount.toString(), 'ether'),
+    }).once('transactionHash', (tx) => {
+      withdrawChannel.put({
+        type: COMMIT_ETH_SEND_SUCCESS,
+        tx,
+      });
+    })
+      .once('receipt', (receipt) => {
+        withdrawChannel.put({
+          type: COMMIT_ETH_MINED_SUCCESS,
+          receipt,
+        });
+      })
+      .on('error', (error) => {
+        withdrawChannel.put({
+          type: COMMIT_ETH_ERROR,
+          error,
+        });
       });
 
 
-    const receipt = yield call(sendPromise);
-    console.log(receipt);
+    // const receipt = yield call(sendPromise);
+    // console.log(receipt);
 
-    yield put(commitEthSendSuccess('receipt'));
+    // yield put(commitEthSendSuccess('receipt'));
   } catch (err) {
     const errMsg = err.toString();
     const shortErr = errMsg.substring(0, errMsg.indexOf('.') + 1);
-    yield put(commitEthSendError(shortErr));
+    yield put(commitEthError(shortErr));
   }
 }
 
@@ -309,31 +344,93 @@ function* withdrawSendAsync() {
     const web3 = yield select(makeSelectWeb3());
     const window = yield select(makeSelectWithdrawWindow());
 
-    console.log('withdrawSendAsync');
-    console.log(`window: ${window}`);
+    // console.log('withdrawSendAsync');
+    // console.log(`window: ${window}`);
 
     const defaultAccount = (yield call(() => web3.eth.getAccounts()))[0];
-    console.log(defaultAccount);
+    // console.log(defaultAccount);
 
-    const sendPromise = () =>
-      distributionContract.methods.withdraw(window).send({
-        from: defaultAccount,
-        gas: (100000).toString(),
-        gasPrice: web3.utils.toWei((10).toString(), 'gwei'),
-        value: 0,
+    distributionContract.methods.withdraw(window).send({
+      from: defaultAccount,
+      gas: (100000).toString(),
+      gasPrice: web3.utils.toWei((10).toString(), 'gwei'),
+      value: 0,
+    })
+      .once('transactionHash', (tx) => {
+        withdrawChannel.put({
+          type: WITHDRAW_SEND_SUCCESS,
+          tx,
+        });
+      })
+      .once('receipt', (receipt) => {
+        withdrawChannel.put({
+          type: WITHDRAW_MINED_SUCCESS,
+          receipt,
+        });
+      })
+      .on('error', (error) => {
+        withdrawChannel.put({
+          type: WITHDRAW_ERROR,
+          error,
+        });
       });
 
 
-    const receipt = yield call(sendPromise);
-    console.log(receipt);
-
-    yield put(withdrawMinedSuccess({ recipt: 'withdraw receipt' }));
+    // yield put(withdrawMinedSuccess({ recipt: 'withdraw receipt' }));
   } catch (err) {
     const errMsg = err.toString();
     const shortErr = errMsg.substring(0, errMsg.indexOf('.') + 1);
     yield put(withdrawError(shortErr));
   }
 }
+
+/*
+ * catch all events from channel and create an action
+ */
+function* handleChannelEvents() {
+  console.log('handleChannelEvents forked');
+  // prevent return on first stop
+  let secondStop = false;
+  while (true) {
+    const eventAction = yield take(withdrawChannel);
+    console.log(eventAction);
+    switch (eventAction.type) {
+      case WITHDRAW_SEND_SUCCESS:
+        yield put(withdrawSendSuccess(eventAction.tx));
+        break;
+      case WITHDRAW_MINED_SUCCESS:
+        yield put(getDistributionInfo());
+        // yield put(getAddressInfo());
+        yield put(withdrawMinedSuccess(eventAction.receipt));
+        break;
+      case WITHDRAW_ERROR:
+        yield put(withdrawError(eventAction.error));
+        break;
+
+      case COMMIT_ETH_SEND_SUCCESS:
+        yield put(commitEthSendSuccess(eventAction.tx));
+        break;
+      case COMMIT_ETH_MINED_SUCCESS:
+        yield put(getDistributionInfo());
+        // yield put(getAddressInfo());
+        yield put(commitEthMinedSuccess(eventAction.receipt));
+        break;
+      case COMMIT_ETH_ERROR:
+        yield put(commitEthError(eventAction.error));
+        break;
+
+      case STOP_CHANNEL_FORK:
+        if (secondStop) {
+          console.log('going to return');
+          return;
+        }
+        secondStop = true;
+        break;
+      default:
+    }
+  }
+}
+
 
 // Individual exports for testing
 export default function* defaultSaga() {

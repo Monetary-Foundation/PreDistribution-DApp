@@ -15,12 +15,17 @@ import Instructions from 'components/Instructions';
 
 const Div = styled.div`
   padding-top: 2%;
-  padding-bottom: 1%;
+  padding-bottom: 3%;
 `;
 
 const BigSpan = styled.span`
   color: #8e8e8e;
-  font-size: 150%;
+  font-size: 1.5em;
+`;
+
+const H2s = styled.h2`
+  color: red;
+  font-size: 1em;
 `;
 
 function AddressInfo(props) {
@@ -41,10 +46,6 @@ function AddressInfo(props) {
     );
   }
 
-  if (getAddressInfoError) {
-    return <div> {getAddressInfoError} </div>;
-  }
-
   const address = addressInfo && addressInfo.address;
   const commitments = addressInfo && addressInfo.commitments;
   const rewards = addressInfo && addressInfo.rewards;
@@ -56,12 +57,33 @@ function AddressInfo(props) {
         <Row type="flex" align="left" >
           <Col sm={{ span: 22, offset: 1 }} xs={{ span: 22, offset: 1 }}>
             <BigSpan> No web3 browser detected. </BigSpan> <br />
-            You can use web3 browser such as Mist, Metamask or Trust wallet to commit Eth and withdraw tokens directly from this page.
+            You can use web3 browser such as Mist, Metamask or Trust wallet to commit Eth and withdraw tokens <b>directly from this page.</b>
           </Col>
         </Row>
       </Div>
     );
   }
+
+  if (getAddressInfoError) {
+    // return <div> {getAddressInfoError} </div>;
+    return (
+      <Div>
+        <br /><hr />
+        <Row type="flex" align="left" >
+          <Col sm={{ span: 22, offset: 1 }} xs={{ span: 22, offset: 1 }}>
+            <BigSpan> Web3 browser detected. </BigSpan> <br />
+            You can use web3 browser such as Mist, Metamask or Trust wallet to commit Eth and withdraw tokens <b>directly from this page.</b>
+            <br /><br />
+            <b> {getAddressInfoError} </b> <br />
+          </Col>
+        </Row>
+      </Div>
+    );
+  }
+
+  const addressComp = address
+    ? address.toUpperCase()
+    : <H2s> Please unlock wallet and refresh page </H2s>;
 
   return (
     <Div>
@@ -70,7 +92,7 @@ function AddressInfo(props) {
       <Row type="flex" align="left" >
         <Col sm={{ span: 10, offset: 1 }} xs={{ span: 22, offset: 1 }} style={{ overflowX: 'hidden' }}>
           <h2> My Account </h2>
-          <h4> Address: </h4> <BigSpan> {address && address.toUpperCase()} </BigSpan> <br />
+          <h4> Address: </h4> <BigSpan> {addressComp} </BigSpan> <br />
         </Col>
       </Row>
       <CommitLayout {...rest} commitments={commitments} />

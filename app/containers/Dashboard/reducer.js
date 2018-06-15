@@ -20,9 +20,11 @@ import {
 
   COMMIT_ETH_SEND_CHANGE_WINDOW,
   COMMIT_ETH_SEND_CHANGE_AMOUNT,
+
   COMMIT_ETH_SEND,
   COMMIT_ETH_SEND_SUCCESS,
-  COMMIT_ETH_SEND_ERROR,
+  COMMIT_ETH_MINED_SUCCESS,
+  COMMIT_ETH_ERROR,
 
   WITHDRAW_CHANGE_WINDOW,
   WITHDRAW_SEND,
@@ -62,19 +64,22 @@ const initialState = fromJS({
   commitEthSendAmount: 0.01,
 
   commitEthSendLoading: null,
-  commitEthSendError: null,
+  commitEthMinedLoading: null,
+  commitEthError: null,
   commitEthSendTx: null,
+  commitEthMinedRecipt: null,
 
   withdrawWindow: 0,
-  withdrawSendLoading: false,
-  withdrawMinedLoading: false,
-  withdrawError: false,
+
+  withdrawSendLoading: null,
+  withdrawMinedLoading: null,
+  withdrawError: null,
   withdrawSendTx: null,
   withdrawMinedRecipt: null,
 
-  withdrawAllSendLoading: false,
-  withdrawAllMinedLoading: false,
-  withdrawAllError: false,
+  withdrawAllSendLoading: null,
+  withdrawAllMinedLoading: null,
+  withdrawAllError: null,
   withdrawAllSendTx: null,
   withdrawAllMinedRecipt: null,
 
@@ -138,21 +143,29 @@ function dashboardReducer(state = initialState, action) {
     case COMMIT_ETH_SEND_CHANGE_AMOUNT:
       return state
         .set('commitEthSendAmount', action.amount);
+
     case COMMIT_ETH_SEND:
       return state
         .set('commitEthSendLoading', true)
-        .set('commitEthSendError', false)
-        .set('commitEthSendTx', null);
-    case COMMIT_ETH_SEND_ERROR:
+        .set('commitEthMinedLoading', true)
+        .set('commitEthError', false)
+        .set('commitEthSendTx', null)
+        .set('commitEthMinedRecipt', null);
+    case COMMIT_ETH_ERROR:
       return state
         .set('commitEthSendLoading', false)
-        .set('commitEthSendError', action.error);
+        .set('commitEthMinedLoading', false)
+        .set('commitEthError', action.error);
     case COMMIT_ETH_SEND_SUCCESS:
       return state
         .set('commitEthSendLoading', false)
-        .set('commitEthSendError', false)
+        .set('commitEthError', false)
         .set('commitEthSendTx', action.commitEthSendTx);
-
+    case COMMIT_ETH_MINED_SUCCESS:
+      return state
+      .set('commitEthMinedLoading', false)
+      .set('commitEthError', false)
+      .set('commitEthMinedRecipt', action.commitEthMinedRecipt);
 
     case WITHDRAW_CHANGE_WINDOW:
       return state
@@ -172,7 +185,7 @@ function dashboardReducer(state = initialState, action) {
         .set('withdrawError', action.error);
     case WITHDRAW_SEND_SUCCESS:
       return state
-        .set('withdrawMinedLoading', false)
+        .set('withdrawSendLoading', false)
         .set('withdrawError', false)
         .set('withdrawSendTx', action.withdrawSendTx);
     case WITHDRAW_MINED_SUCCESS:

@@ -33,7 +33,7 @@ function Web3Status(props) {
   if (initStatus === 'loading') {
     return (
       <Col sm={{ span: 10, offset: 1 }} xs={{ span: 23, offset: 1 }}>
-        <div> init in progress, check Mist/Metamask is connected to Ropsten / mainnet and unlocked ....</div>
+        <div> init in progress, check Mist/Metamask is <b>connected</b> to Ropsten / mainnet <b>and unlocked</b> ....</div>
       </Col>
     );
   }
@@ -57,7 +57,7 @@ function Web3Status(props) {
       Token Contract: <br />
       <AddressLink address={tokenAddress} networkId={networkId} />
       <br /> <br />
-      Web3 Provider: <br /> {provider || 'no web3 provider specified'} <br /><br />
+      Web3 Provider: {provider || 'no web3 provider specified'} <br /><br />
       <b><a target="_blank" rel="noopener" href="https://monetarycoin.org/distribution">Distribution Details</a></b><br />
       <a target="_blank" rel="noopener" href="https://monetarycoin.org">MonetaryCoin Homepage</a><br />
       <a target="_blank" rel="noopener" href="https://github.com/Monetary-Foundation/MonetaryCoin">MonetaryCoin source code</a><br /><br />

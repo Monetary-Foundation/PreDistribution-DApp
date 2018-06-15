@@ -89,11 +89,13 @@ export const networks = {
     name: 'Mainnet',
     color: '#23e223',
     explorer: 'https://etherscan.io/address/',
+    txExplorer: 'https://etherscan.io/tx/',
   },
   3: {
     name: 'Ropsten Test Net',
     color: 'red',
     explorer: 'https://ropsten.etherscan.io/address/',
+    txExplorer: 'https://ropsten.etherscan.io/tx/',
   },
   42: {
     name: 'Kovan Test Net',

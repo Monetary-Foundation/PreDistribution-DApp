@@ -15,7 +15,7 @@ import Instructions from 'components/Instructions';
 
 const Div = styled.div`
   padding-top: 2%;
-  padding-bottom: 1%;
+  padding-bottom: 3%;
 `;
 
 const BigSpan = styled.span`
@@ -41,10 +41,6 @@ function AddressInfo(props) {
     );
   }
 
-  if (getAddressInfoError) {
-    return <div> {getAddressInfoError} </div>;
-  }
-
   const address = addressInfo && addressInfo.address;
   const commitments = addressInfo && addressInfo.commitments;
   const rewards = addressInfo && addressInfo.rewards;
@@ -62,6 +58,23 @@ function AddressInfo(props) {
       </Div>
     );
   }
+
+  if (getAddressInfoError) {
+    // return <div> {getAddressInfoError} </div>;
+    return (
+      <Div>
+        <br /><hr />
+        <Row type="flex" align="left" >
+          <Col sm={{ span: 22, offset: 1 }} xs={{ span: 22, offset: 1 }}>
+            <BigSpan> Web3 browser detected. </BigSpan> <br />
+            <b> {getAddressInfoError} </b> <br />
+            You can use web3 browser such as Mist, Metamask or Trust wallet to commit Eth and withdraw tokens <b>directly from this page.</b>
+          </Col>
+        </Row>
+      </Div>
+    );
+  }
+
 
   return (
     <Div>

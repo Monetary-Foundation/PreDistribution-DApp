@@ -253,8 +253,10 @@ function* getAddressInfoAsync() {
 
     const address = (yield call(() => web3.eth.getAccounts()))[0];
 
+    console.log(`user address: ${address}`);
+
     // if (!address) {
-    //   throw new Error('Wallet locked');
+    //   throw new Error('Wallet locked, unlock wallet to use Dapp');
     // }
 
     const getCommitments = distributionContract.methods.getCommitmentsOf(address).call();
@@ -288,10 +290,6 @@ function* commitEthSendAsync() {
     const web3 = yield select(makeSelectWeb3());
     const window = yield select(makeSelectCommitEthSendWindow());
     const amount = (yield select(makeSelectCommitEthSendAmount()));
-
-    console.log(`window: ${window}`);
-    console.log(`amount: ${amount}`);
-    console.log(`typeof amount: ${typeof (amount)}`);
 
     const defaultAccount = (yield call(() => web3.eth.getAccounts()))[0];
 

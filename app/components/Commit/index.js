@@ -19,6 +19,10 @@ const DivS = styled.div`
   margin-bottom: 15px;
 `;
 
+const DivS2 = styled.div`
+  overflow-x: hidden;
+`;
+
 function Commit(props) {
   const {
     commitEthSendWindow,
@@ -71,15 +75,17 @@ function Commit(props) {
           minedRecipt={commitEthMinedRecipt}
         />
       </DivS>
-      {conditionalSpace}
-      <TxDisplay tx={commitEthSendTx} networkId={networkId} />
-      <ErrorDisplay error={commitEthError} />
-      <br />
-      commitEthSendLoading: {commitEthSendLoading ? 'true' : 'false'} <br />
+      <DivS2>
+        {conditionalSpace}
+        <TxDisplay tx={commitEthSendTx} networkId={networkId} />
+        <ErrorDisplay error={commitEthError} />
+        <br />
+      </DivS2>
+      {/* commitEthSendLoading: {commitEthSendLoading ? 'true' : 'false'} <br />
       commitEthMinedLoading: {commitEthMinedLoading ? 'true' : 'false'} <br />
       Error: {commitEthError ? commitEthError.toString() : 'false'} <br />
       sendTx: {commitEthSendTx || 'null'} <br />
-      Recipt: {commitEthMinedRecipt ? '[Object]' : 'null'} <br />
+      Recipt: {commitEthMinedRecipt ? '[Object]' : 'null'} <br /> */}
     </div>
   );
 }

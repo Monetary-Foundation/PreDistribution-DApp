@@ -3,7 +3,7 @@
  * Dashboard actions
  *
  */
-
+import { message } from 'antd';
 import {
   INIT_DASHBOARD,
   INIT_DASHBOARD_SUCCESS,
@@ -230,6 +230,14 @@ export function commitEthSendSuccess(commitEthSendTx) {
  * @return {object} An action object with a type of WITHDRAW_SEND_SUCCESS and tx
  */
 export function commitEthMinedSuccess(commitEthMinedRecipt) {
+  try {
+    const msg =
+    `Commit transaction ${commitEthMinedRecipt.transactionHash.substring(0, 8)}
+     mined succesfully on block ${commitEthMinedRecipt.blockNumber}`;
+    message.info(msg, 8);
+  } catch (err) {
+    console.log(err);
+  }
   return {
     type: COMMIT_ETH_MINED_SUCCESS,
     commitEthMinedRecipt,
@@ -302,6 +310,14 @@ export function withdrawSendSuccess(withdrawSendTx) {
  * @return {object} An action object with a type of WITHDRAW_SEND_SUCCESS and tx
  */
 export function withdrawMinedSuccess(withdrawMinedRecipt) {
+  try {
+    const msg =
+    `Withdraw transaction ${withdrawMinedRecipt.transactionHash.substring(0, 8)}
+     mined succesfully on block ${withdrawMinedRecipt.blockNumber}`;
+    message.info(msg, 8);
+  } catch (err) {
+    console.log(err);
+  }
   return {
     type: WITHDRAW_MINED_SUCCESS,
     withdrawMinedRecipt,

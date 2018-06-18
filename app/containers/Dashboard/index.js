@@ -65,6 +65,8 @@ import {
   makeSelectGetAddressInfoLoading,
   makeSelectGetAddressInfoError,
   makeSelectAddressInfo,
+  makeSelectCommitmentsMap,
+  makeSelectRewardsMap,
 
   makeSelectCommitEthSendWindow,
   makeSelectCommitEthSendAmount,
@@ -121,6 +123,8 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       getAddressInfoLoading,
       getAddressInfoError,
       addressInfo,
+      commitmentsMap,
+      rewardsMap,
 
       commitEthSendWindow,
       commitEthSendAmount,
@@ -187,6 +191,7 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       networkId,
     };
     const commitProps = {
+      commitmentsMap,
       commitEthSendWindow,
       commitEthSendAmount,
       commitEthSendLoading,
@@ -199,6 +204,7 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       onCommitEthSend,
     };
     const withdrawProps = {
+      rewardsMap,
       onChangeWithdrawWindow,
       onWithdrawSend,
       withdrawWindow,
@@ -267,6 +273,8 @@ Dashboard.propTypes = {
   getAddressInfoLoading: PropTypes.bool,
   getAddressInfoError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   addressInfo: PropTypes.object,
+  commitmentsMap: PropTypes.array,
+  rewardsMap: PropTypes.array,
 
   commitEthSendWindow: PropTypes.number,
   commitEthSendAmount: PropTypes.number,
@@ -315,6 +323,8 @@ const mapStateToProps = createStructuredSelector({
   getAddressInfoLoading: makeSelectGetAddressInfoLoading(),
   getAddressInfoError: makeSelectGetAddressInfoError(),
   addressInfo: makeSelectAddressInfo(),
+  commitmentsMap: makeSelectCommitmentsMap(),
+  rewardsMap: makeSelectRewardsMap(),
 
   commitEthSendWindow: makeSelectCommitEthSendWindow(),
   commitEthSendAmount: makeSelectCommitEthSendAmount(),

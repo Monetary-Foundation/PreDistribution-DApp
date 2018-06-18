@@ -47,8 +47,8 @@ function AddressInfo(props) {
   }
 
   const address = addressInfo && addressInfo.address;
-  const commitments = addressInfo && addressInfo.commitments;
-  const rewards = addressInfo && addressInfo.rewards;
+  // const commitments = addressInfo && addressInfo.commitments;
+  // const rewards = addressInfo && addressInfo.rewards;
 
   if (!isWeb3Browser) {
     return (
@@ -95,8 +95,8 @@ function AddressInfo(props) {
           <h4> Address: </h4> <BigSpan> {addressComp} </BigSpan> <br />
         </Col>
       </Row>
-      <CommitLayout {...rest} commitments={commitments} />
-      <WithdrawLayout {...rest} rewards={rewards} />
+      <CommitLayout {...rest} />
+      <WithdrawLayout {...rest} />
     </Div>
   );
 }

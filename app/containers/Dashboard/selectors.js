@@ -66,15 +66,19 @@ const makeSelectDistributionInfo = () => createSelector(
 
 const makeSelectTotalsMap = () => createSelector(
   selectDashboardDomain,
-  (substate) => substate.get('distributionInfo')
-    ? substate.getIn(['distributionInfo', 'totals']).toJS()
-      .map((value, index) => {
-        const unit = {};
-        unit.window = index;
-        unit.eth_commited = value;
-        return unit;
-      })
-    : null
+  (substate) => {
+    if (substate.get('distributionInfo') && substate.get('web3')) {
+      const web3 = substate.get('web3');
+      return substate.getIn(['distributionInfo', 'totals']).toJS()
+        .map((value, index) => {
+          const unit = {};
+          unit.window = index;
+          unit.eth_commited = web3.utils.fromWei(value);
+          return unit;
+        });
+    }
+    return null;
+  }
 );
 
 const makeSelectCurrentWindow = () => createSelector(

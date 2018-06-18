@@ -40,7 +40,7 @@ import {
   ADD_NEW_SET_EVENT,
 } from './constants';
 
-const initialState = fromJS({
+export const initialState = fromJS({
   initStatus: null,
   web3: null,
   isWeb3Browser: null,
@@ -163,9 +163,9 @@ function dashboardReducer(state = initialState, action) {
         .set('commitEthSendTx', action.commitEthSendTx);
     case COMMIT_ETH_MINED_SUCCESS:
       return state
-      .set('commitEthMinedLoading', false)
-      .set('commitEthError', false)
-      .set('commitEthMinedRecipt', action.commitEthMinedRecipt);
+        .set('commitEthMinedLoading', false)
+        .set('commitEthError', false)
+        .set('commitEthMinedRecipt', action.commitEthMinedRecipt);
 
     case WITHDRAW_CHANGE_WINDOW:
       return state

@@ -1,9 +1,10 @@
 import { createSelector } from 'reselect';
-
+import { initialState } from './reducer';
 /**
  * Direct selector to the dashboard state domain
+ * Added temporary fix for reselect and devtools: https://github.com/reduxjs/reselect/issues/341
  */
-const selectDashboardDomain = (state) => state.get('dashboard');
+const selectDashboardDomain = (state) => state.get('dashboard', initialState);
 
 const makeSelectInitStatus = () => createSelector(
   selectDashboardDomain,
@@ -127,8 +128,8 @@ const makeSelectCommitEthMinedLoading = () => createSelector(
 const makeSelectCommitEthError = () => createSelector(
   selectDashboardDomain,
   (substate) => substate.get('commitEthError')
-  ? substate.get('commitEthError').toString().replace(new RegExp('(error:|Returned)', 'ig'), '')
-  : null
+    ? substate.get('commitEthError').toString().replace(new RegExp('(error:|Returned)', 'ig'), '')
+    : null
 );
 
 const makeSelectCommitEthSendTx = () => createSelector(

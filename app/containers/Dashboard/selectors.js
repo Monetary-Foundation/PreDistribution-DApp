@@ -67,7 +67,7 @@ const makeSelectDistributionInfo = () => createSelector(
 const makeSelectTotalsMap = () => createSelector(
   selectDashboardDomain,
   (substate) => {
-    if (substate.get('distributionInfo') && substate.get('web3')) {
+    if (substate.getIn(['distributionInfo', 'totals']) && substate.get('web3')) {
       const web3 = substate.get('web3');
       return substate.getIn(['distributionInfo', 'totals']).toJS()
         .map((value, index) => {
@@ -91,7 +91,7 @@ const makeSelectTotalWindows = () => createSelector(
   (substate) => substate.get('distributionInfo') ? Number(substate.getIn(['distributionInfo', 'totalWindows'])) : 0
 );
 
-/* -------------------------------*/
+/* -----------AddressInfo-------------------------------------------------------------------------*/
 
 const makeSelectGetAddressInfoLoading = () => createSelector(
   selectDashboardDomain,
@@ -104,6 +104,41 @@ const makeSelectGetAddressInfoError = () => createSelector(
 const makeSelectAddressInfo = () => createSelector(
   selectDashboardDomain,
   (substate) => substate.get('addressInfo') ? substate.get('addressInfo').toJS() : null
+);
+
+const makeSelectCommitmentsMap = () => createSelector(
+  selectDashboardDomain,
+  (substate) => {
+    if (substate.getIn(['addressInfo', 'commitments']) && substate.get('web3')) {
+      const web3 = substate.get('web3');
+      return substate.getIn(['addressInfo', 'commitments']).toJS()
+        .map((value, index) => {
+          const unit = {};
+          unit.window = index;
+          unit.eth_commited = web3.utils.fromWei(value);
+          return unit;
+        })
+        .filter((window) => window.eth_commited !== '0');
+    }
+    return [];
+  }
+);
+const makeSelectRewardsMap = () => createSelector(
+  selectDashboardDomain,
+  (substate) => {
+    if (substate.getIn(['addressInfo', 'rewards']) && substate.get('web3')) {
+      const web3 = substate.get('web3');
+      return substate.getIn(['addressInfo', 'rewards']).toJS()
+        .map((value, index) => {
+          const unit = {};
+          unit.window = index;
+          unit.tokens_reward = Number(web3.utils.fromWei(value)).toFixed(2);
+          return unit;
+        })
+        .filter((window) => window.tokens_reward !== '0.00');
+    }
+    return [];
+  }
 );
 
 /* CommitEth */
@@ -128,7 +163,7 @@ const makeSelectCommitEthMinedLoading = () => createSelector(
   (substate) => substate.get('commitEthMinedLoading')
 );
 
-// Remove all occurrences of string 'error:' and 'Returned'
+// Remove all occurrences of strings 'error:' and 'Returned'
 const makeSelectCommitEthError = () => createSelector(
   selectDashboardDomain,
   (substate) => substate.get('commitEthError')
@@ -241,6 +276,8 @@ export {
   makeSelectGetAddressInfoLoading,
   makeSelectGetAddressInfoError,
   makeSelectAddressInfo,
+  makeSelectCommitmentsMap,
+  makeSelectRewardsMap,
 
   makeSelectCommitEthSendWindow,
   makeSelectCommitEthSendAmount,

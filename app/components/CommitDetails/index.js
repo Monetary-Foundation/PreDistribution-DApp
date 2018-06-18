@@ -6,20 +6,34 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-// import styled from 'styled-components';
-import { Collapse } from 'antd';
-const Panel = Collapse.Panel;
-
+import styled from 'styled-components';
+import { Collapse, List } from 'antd';
+const { Panel } = Collapse;
 const customPanelStyle = {};
 
+const Span = styled.span`
+  font-weight: 700;
+  margin-left: 15px;
+  margin-right: 15px;
+`;
+
 function CommitDetails(props) {
-  const { commitments } = props;
+  const { commitmentsMap } = props;
   return (
     <div>
-      <h3> All Commitments for address</h3>
+      <h3> Commitment list</h3>
       <Collapse>
-        <Panel header="Commitments list" key="1" style={customPanelStyle}>
-          {commitments && JSON.stringify(commitments, 0, 2)} <br />
+        <Panel header="Toggle List" key="1" style={customPanelStyle}>
+          {/* commitmentsMap && JSON.stringify(commitmentsMap, 0, 2)} <br /> */}
+          <List
+            size="large"
+            bordered
+            dataSource={commitmentsMap}
+            renderItem={(item) => (
+              <List.Item>
+                Window: <Span>{item.window}</Span> Amount: <Span>{item.eth_commited} Ether</Span>
+              </List.Item>)}
+          />
         </Panel>
       </Collapse>
       <br />
@@ -28,7 +42,7 @@ function CommitDetails(props) {
 }
 
 CommitDetails.propTypes = {
-  commitments: PropTypes.array,
+  commitmentsMap: PropTypes.array,
 };
 
 export default CommitDetails;

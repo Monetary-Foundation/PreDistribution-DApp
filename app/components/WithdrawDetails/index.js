@@ -6,20 +6,36 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-// import styled from 'styled-components';
-import { Collapse } from 'antd';
-const Panel = Collapse.Panel;
+import styled from 'styled-components';
+import { Collapse, List } from 'antd';
+const { Panel } = Collapse;
 
 const customPanelStyle = {};
 
+const Span = styled.span`
+  font-weight: 700;
+  margin-left: 15px;
+  margin-right: 15px;
+`;
+
+
 function WithdrawDetails(props) {
-  const { rewards } = props;
+  const { rewardsMap, tokenSymbol } = props;
   return (
     <div>
-      <h3> Rewards list for account </h3>
+      <h3> Reward List </h3>
       <Collapse>
-        <Panel header="Rewards list" key="1" style={customPanelStyle}>
-          {rewards && JSON.stringify(rewards, 0, 2)} <br />
+        <Panel header="Toggle list" key="1" style={customPanelStyle}>
+          {/* rewardsMap && JSON.stringify(rewardsMap, 0, 2)} <br /> */}
+          <List
+            size="large"
+            bordered
+            dataSource={rewardsMap}
+            renderItem={(item) => (
+              <List.Item>
+                Window: <Span>{item.window}</Span> Amount: <Span>{item.tokens_reward} {tokenSymbol}</Span>
+              </List.Item>)}
+          />
         </Panel>
       </Collapse>
     </div>
@@ -27,7 +43,8 @@ function WithdrawDetails(props) {
 }
 
 WithdrawDetails.propTypes = {
-  rewards: PropTypes.array,
+  rewardsMap: PropTypes.array,
+  tokenSymbol: PropTypes.string,
 };
 
 export default WithdrawDetails;

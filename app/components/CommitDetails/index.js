@@ -18,7 +18,7 @@ const Span = styled.span`
 `;
 
 function CommitDetails(props) {
-  const { commitmentsMap } = props;
+  const { commitmentsMap, commitmentsTotal } = props;
   return (
     <div>
       <h3> Commitment list</h3>
@@ -26,6 +26,7 @@ function CommitDetails(props) {
         <Panel header="Toggle List" key="1" style={customPanelStyle}>
           {/* commitmentsMap && JSON.stringify(commitmentsMap, 0, 2)} <br /> */}
           <List
+            footer={<div>Total commited: {commitmentsTotal} Ether</div>}
             size="large"
             bordered
             dataSource={commitmentsMap}
@@ -43,6 +44,7 @@ function CommitDetails(props) {
 
 CommitDetails.propTypes = {
   commitmentsMap: PropTypes.array,
+  commitmentsTotal: PropTypes.number,
 };
 
 export default CommitDetails;

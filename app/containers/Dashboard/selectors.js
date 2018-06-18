@@ -123,6 +123,37 @@ const makeSelectCommitmentsMap = () => createSelector(
     return [];
   }
 );
+
+const makeSelectCommitmentsTotal = () => createSelector(
+  selectDashboardDomain,
+  (substate) => {
+    if (substate.getIn(['addressInfo', 'commitments']) && substate.get('web3')) {
+      const web3 = substate.get('web3');
+      const BN = web3.utils && web3.utils.BN;
+      const weiSum = substate.getIn(['addressInfo', 'commitments']).toJS()
+        .reduce((prev, curr) => {
+          if (curr !== '0') {
+            const prevBn = new BN(prev);
+            const currBn = new BN(curr);
+            /*
+            console.log('prevBn');
+            console.log(prevBn);
+            console.log('currBn');
+            console.log(currBn);
+            console.log(prevBn.add(currBn).toString(10));
+            */
+
+            return prevBn.add(currBn).toString(10);
+          }
+          // if curr is '0' return prev
+          return prev;
+        }, '0');
+      return Number(web3.utils.fromWei(weiSum)).toFixed(2);
+    }
+    return '0';
+  }
+);
+
 const makeSelectRewardsMap = () => createSelector(
   selectDashboardDomain,
   (substate) => {
@@ -138,6 +169,13 @@ const makeSelectRewardsMap = () => createSelector(
         .filter((window) => window.tokens_reward !== '0.00');
     }
     return [];
+  }
+);
+
+const makeSelectRewardsTotal = () => createSelector(
+  selectDashboardDomain,
+  (substate) => {
+    return '0';
   }
 );
 
@@ -272,6 +310,8 @@ export {
   makeSelectTotalsMap,
   makeSelectCurrentWindow,
   makeSelectTotalWindows,
+  makeSelectCommitmentsTotal,
+  makeSelectRewardsTotal,
 
   makeSelectGetAddressInfoLoading,
   makeSelectGetAddressInfoError,

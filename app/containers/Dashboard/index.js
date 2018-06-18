@@ -61,6 +61,8 @@ import {
   makeSelectTotalsMap,
   makeSelectCurrentWindow,
   makeSelectTotalWindows,
+  makeSelectCommitmentsTotal,
+  makeSelectRewardsTotal,
 
   makeSelectGetAddressInfoLoading,
   makeSelectGetAddressInfoError,
@@ -125,6 +127,8 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       addressInfo,
       commitmentsMap,
       rewardsMap,
+      rewardsTotal,
+      commitmentsTotal,
 
       commitEthSendWindow,
       commitEthSendAmount,
@@ -192,6 +196,7 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
     };
     const commitProps = {
       commitmentsMap,
+      commitmentsTotal,
       commitEthSendWindow,
       commitEthSendAmount,
       commitEthSendLoading,
@@ -205,6 +210,7 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
     };
     const withdrawProps = {
       rewardsMap,
+      rewardsTotal,
       tokenSymbol,
       onChangeWithdrawWindow,
       onWithdrawSend,
@@ -276,6 +282,8 @@ Dashboard.propTypes = {
   addressInfo: PropTypes.object,
   commitmentsMap: PropTypes.array,
   rewardsMap: PropTypes.array,
+  commitmentsTotal: PropTypes.string,
+  rewardsTotal: PropTypes.string,
 
   commitEthSendWindow: PropTypes.number,
   commitEthSendAmount: PropTypes.number,
@@ -326,6 +334,8 @@ const mapStateToProps = createStructuredSelector({
   addressInfo: makeSelectAddressInfo(),
   commitmentsMap: makeSelectCommitmentsMap(),
   rewardsMap: makeSelectRewardsMap(),
+  commitmentsTotal: makeSelectCommitmentsTotal(),
+  rewardsTotal: makeSelectRewardsTotal(),
 
   commitEthSendWindow: makeSelectCommitEthSendWindow(),
   commitEthSendAmount: makeSelectCommitEthSendAmount(),

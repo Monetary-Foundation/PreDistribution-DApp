@@ -1,6 +1,5 @@
 {
   "name": "monetarycoin-distribution-dapp",
-  "private": true,
   "version": "0.1.0",
   "description": "a DApp for interacting with MonetaryCoin Distribution contract",
   "repository": {

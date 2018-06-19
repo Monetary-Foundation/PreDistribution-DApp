@@ -82,6 +82,39 @@ const makeSelectTotalsList = () => createSelector(
   }
 );
 
+/**
+ * calculate sum of all members and convert to Ether
+ * @param {Object} immutableList Immutable array which members are strings of amounts in Wei
+ * @param {Object} web3 web3 instanse
+ * @returns {string} sum of all members converted to Ether
+ */
+const immutableSumReducer = (immutableList, web3) => {
+  const BN = web3.utils && web3.utils.BN;
+  const weiSum = immutableList.toJS()
+    .reduce((prev, curr) => {
+      if (curr !== '0') {
+        const prevBn = new BN(prev);
+        const currBn = new BN(curr);
+        return prevBn.add(currBn).toString(10);
+      }
+      // if curr is '0' return prev
+      return prev;
+    }, '0');
+  return Number(web3.utils.fromWei(weiSum)).toFixed(2);
+};
+
+const makeSelectTotalsSum = () => createSelector(
+  selectDashboardDomain,
+  (substate) => {
+    const sumList = substate.getIn(['distributionInfo', 'totals']);
+    if (sumList && substate.get('web3')) {
+      return immutableSumReducer(sumList, substate.get('web3'));
+    }
+    return '0';
+  }
+);
+
+
 const makeSelectCurrentWindow = () => createSelector(
   selectDashboardDomain,
   (substate) => substate.get('distributionInfo') ? Number(substate.getIn(['distributionInfo', 'currentWindow'])) : 0
@@ -128,20 +161,9 @@ const makeSelectCommitmentsList = () => createSelector(
 const makeSelectCommitmentsTotal = () => createSelector(
   selectDashboardDomain,
   (substate) => {
-    if (substate.getIn(['addressInfo', 'commitments']) && substate.get('web3')) {
-      const web3 = substate.get('web3');
-      const BN = web3.utils && web3.utils.BN;
-      const weiSum = substate.getIn(['addressInfo', 'commitments']).toJS()
-        .reduce((prev, curr) => {
-          if (curr !== '0') {
-            const prevBn = new BN(prev);
-            const currBn = new BN(curr);
-            return prevBn.add(currBn).toString(10);
-          }
-          // if curr is '0' return prev
-          return prev;
-        }, '0');
-      return Number(web3.utils.fromWei(weiSum)).toFixed(2);
+    const sumList = substate.getIn(['addressInfo', 'commitments']);
+    if (sumList && substate.get('web3')) {
+      return immutableSumReducer(sumList, substate.get('web3'));
     }
     return '0';
   }
@@ -165,23 +187,13 @@ const makeSelectRewardsList = () => createSelector(
   }
 );
 
+
 const makeSelectRewardsTotal = () => createSelector(
   selectDashboardDomain,
   (substate) => {
-    if (substate.getIn(['addressInfo', 'rewards']) && substate.get('web3')) {
-      const web3 = substate.get('web3');
-      const BN = web3.utils && web3.utils.BN;
-      const weiSum = substate.getIn(['addressInfo', 'rewards']).toJS()
-        .reduce((prev, curr) => {
-          if (curr !== '0') {
-            const prevBn = new BN(prev);
-            const currBn = new BN(curr);
-            return prevBn.add(currBn).toString(10);
-          }
-          // if curr is '0' return prev
-          return prev;
-        }, '0');
-      return Number(web3.utils.fromWei(weiSum)).toFixed(2);
+    const sumList = substate.getIn(['addressInfo', 'rewards']);
+    if (sumList && substate.get('web3')) {
+      return immutableSumReducer(sumList, substate.get('web3'));
     }
     return '0';
   }
@@ -316,6 +328,8 @@ export {
 
   makeSelectDistributionInfo,
   makeSelectTotalsList,
+  makeSelectTotalsSum,
+
   makeSelectCurrentWindow,
   makeSelectTotalWindows,
   makeSelectCommitmentsTotal,

@@ -59,6 +59,7 @@ import {
 
   makeSelectDistributionInfo,
   makeSelectTotalsList,
+  makeSelectTotalsSum,
   makeSelectCurrentWindow,
   makeSelectTotalWindows,
   makeSelectCommitmentsTotal,
@@ -119,6 +120,7 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
 
       distributionInfo,
       totalsList,
+      totalsSum,
       currentWindow,
       totalWindows,
 
@@ -225,6 +227,7 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
 
     const totalsInfoProps = {
       totalsList,
+      totalsSum,
       totals: distributionInfo && distributionInfo.totals,
       days: 181,
     };
@@ -274,6 +277,7 @@ Dashboard.propTypes = {
 
   distributionInfo: PropTypes.object,
   totalsList: PropTypes.array,
+  totalsSum: PropTypes.string,
   currentWindow: PropTypes.number,
   totalWindows: PropTypes.number,
 
@@ -326,6 +330,7 @@ const mapStateToProps = createStructuredSelector({
 
   distributionInfo: makeSelectDistributionInfo(),
   totalsList: makeSelectTotalsList(),
+  totalsSum: makeSelectTotalsSum(),
   currentWindow: makeSelectCurrentWindow(),
   totalWindows: makeSelectTotalWindows(),
 

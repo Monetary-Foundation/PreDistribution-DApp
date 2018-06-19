@@ -9,7 +9,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Collapse, List } from 'antd';
 const { Panel } = Collapse;
+const { Item } = List;
 const customPanelStyle = {};
+
 
 const Span = styled.span`
   font-weight: 700;
@@ -47,9 +49,9 @@ function CommitDetails(props) {
             bordered
             dataSource={commitmentsList}
             renderItem={(item) => (
-              <List.Item>
+              <Item>
                 Window: <Span>{item.window}</Span> Amount: <Span>{item.eth_commited} Ether</Span>
-              </List.Item>)}
+              </Item>)}
           />
         </Panel>
       </Collapse>

@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Collapse, List } from 'antd';
 const { Panel } = Collapse;
+const { Item } = List;
 
 const customPanelStyle = {};
 
@@ -37,9 +38,9 @@ function WithdrawDetails(props) {
             bordered
             dataSource={rewardsList}
             renderItem={(item) => (
-              <List.Item>
+              <Item>
                 Window: <Span>{item.window}</Span> Amount: <Span>{item.tokens_reward} {tokenSymbol}</Span>
-              </List.Item>)}
+              </Item>)}
           />
         </Panel>
       </Collapse>

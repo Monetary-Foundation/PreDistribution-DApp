@@ -64,7 +64,7 @@ const makeSelectDistributionInfo = () => createSelector(
   (substate) => substate.get('distributionInfo') ? substate.get('distributionInfo').toJS() : null
 );
 
-const makeSelectTotalsMap = () => createSelector(
+const makeSelectTotalsList = () => createSelector(
   selectDashboardDomain,
   (substate) => {
     if (substate.getIn(['distributionInfo', 'totals']) && substate.get('web3')) {
@@ -75,7 +75,8 @@ const makeSelectTotalsMap = () => createSelector(
           unit.window = index;
           unit.eth_commited = web3.utils.fromWei(value);
           return unit;
-        });
+        })
+        .filter((value) => value.eth_commited !== '0');
     }
     return null;
   }
@@ -314,7 +315,7 @@ export {
   makeSelectGetDistributionInfoError,
 
   makeSelectDistributionInfo,
-  makeSelectTotalsMap,
+  makeSelectTotalsList,
   makeSelectCurrentWindow,
   makeSelectTotalWindows,
   makeSelectCommitmentsTotal,

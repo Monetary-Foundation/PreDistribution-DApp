@@ -16,8 +16,7 @@ App Deployed to https://MonetaryCoin.io
 
 ### Core components
 
-- [ ] [LightWallet V3](https://github.com/ConsenSys/eth-lightwallet) 
-- [ ] [Web3.js](https://github.com/ethereum/web3.js/) Ethereum JavaScript API V1.0
+- [ ] [Web3.js](https://github.com/ethereum/web3.js/) Ethereum JavaScript API V1.0 (beta)
 - [ ] [React-boilerplate](https://github.com/react-boilerplate/react-boilerplate) as a wrapper of React JS, Redux, Saga, Reselect, ImmutableJS and more
 - [ ] [Ant Design](https://github.com/ant-design/ant-design) React js components
 - [ ] [Webpack 3](https://github.com/webpack/webpack) - A bundler for javascript and friends.

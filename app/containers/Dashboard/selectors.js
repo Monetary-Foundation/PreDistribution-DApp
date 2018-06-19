@@ -106,7 +106,7 @@ const makeSelectAddressInfo = () => createSelector(
   (substate) => substate.get('addressInfo') ? substate.get('addressInfo').toJS() : null
 );
 
-const makeSelectCommitmentsMap = () => createSelector(
+const makeSelectCommitmentsList = () => createSelector(
   selectDashboardDomain,
   (substate) => {
     if (substate.getIn(['addressInfo', 'commitments']) && substate.get('web3')) {
@@ -146,7 +146,7 @@ const makeSelectCommitmentsTotal = () => createSelector(
   }
 );
 
-const makeSelectRewardsMap = () => createSelector(
+const makeSelectRewardsList = () => createSelector(
   selectDashboardDomain,
   (substate) => {
     if (substate.getIn(['addressInfo', 'rewards']) && substate.get('web3')) {
@@ -323,8 +323,8 @@ export {
   makeSelectGetAddressInfoLoading,
   makeSelectGetAddressInfoError,
   makeSelectAddressInfo,
-  makeSelectCommitmentsMap,
-  makeSelectRewardsMap,
+  makeSelectCommitmentsList,
+  makeSelectRewardsList,
 
   makeSelectCommitEthSendWindow,
   makeSelectCommitEthSendAmount,

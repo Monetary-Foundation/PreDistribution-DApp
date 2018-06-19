@@ -67,8 +67,8 @@ import {
   makeSelectGetAddressInfoLoading,
   makeSelectGetAddressInfoError,
   makeSelectAddressInfo,
-  makeSelectCommitmentsMap,
-  makeSelectRewardsMap,
+  makeSelectCommitmentsList,
+  makeSelectRewardsList,
 
   makeSelectCommitEthSendWindow,
   makeSelectCommitEthSendAmount,
@@ -125,8 +125,8 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       getAddressInfoLoading,
       getAddressInfoError,
       addressInfo,
-      commitmentsMap,
-      rewardsMap,
+      commitmentsList,
+      rewardsList,
       rewardsTotal,
       commitmentsTotal,
 
@@ -195,7 +195,7 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       networkId,
     };
     const commitProps = {
-      commitmentsMap,
+      commitmentsList,
       commitmentsTotal,
       commitEthSendWindow,
       commitEthSendAmount,
@@ -209,7 +209,7 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       onCommitEthSend,
     };
     const withdrawProps = {
-      rewardsMap,
+      rewardsList,
       rewardsTotal,
       tokenSymbol,
       onChangeWithdrawWindow,
@@ -280,8 +280,8 @@ Dashboard.propTypes = {
   getAddressInfoLoading: PropTypes.bool,
   getAddressInfoError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   addressInfo: PropTypes.object,
-  commitmentsMap: PropTypes.array,
-  rewardsMap: PropTypes.array,
+  commitmentsList: PropTypes.array,
+  rewardsList: PropTypes.array,
   commitmentsTotal: PropTypes.string,
   rewardsTotal: PropTypes.string,
 
@@ -332,8 +332,8 @@ const mapStateToProps = createStructuredSelector({
   getAddressInfoLoading: makeSelectGetAddressInfoLoading(),
   getAddressInfoError: makeSelectGetAddressInfoError(),
   addressInfo: makeSelectAddressInfo(),
-  commitmentsMap: makeSelectCommitmentsMap(),
-  rewardsMap: makeSelectRewardsMap(),
+  commitmentsList: makeSelectCommitmentsList(),
+  rewardsList: makeSelectRewardsList(),
   commitmentsTotal: makeSelectCommitmentsTotal(),
   rewardsTotal: makeSelectRewardsTotal(),
 

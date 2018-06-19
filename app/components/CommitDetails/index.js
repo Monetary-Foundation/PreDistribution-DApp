@@ -29,23 +29,23 @@ ConditionalFooter.propTypes = {
 
 
 function CommitDetails(props) {
-  const { commitmentsMap, commitmentsTotal } = props;
-  // const conditionalFooterProps = { commitmentsMap, commitmentsTotal };
+  const { commitmentsList, commitmentsTotal } = props;
+  // const conditionalFooterProps = { commitmentsList, commitmentsTotal };
   return (
     <div>
       <h3> Commitment list</h3>
       <Collapse>
         <Panel header="Toggle List" key="1" style={customPanelStyle}>
-          {/* commitmentsMap && JSON.stringify(commitmentsMap, 0, 2)} <br /> */}
+          {/* commitmentsList && JSON.stringify(commitmentsList, 0, 2)} <br /> */}
           <List
             footer={
-              commitmentsMap.length >= 2
+              commitmentsList.length >= 2
                 ? <div>Total commited: <Span>{commitmentsTotal} Ether</Span></div>
                 : null
             }
             size="large"
             bordered
-            dataSource={commitmentsMap}
+            dataSource={commitmentsList}
             renderItem={(item) => (
               <List.Item>
                 Window: <Span>{item.window}</Span> Amount: <Span>{item.eth_commited} Ether</Span>
@@ -59,7 +59,7 @@ function CommitDetails(props) {
 }
 
 CommitDetails.propTypes = {
-  commitmentsMap: PropTypes.array,
+  commitmentsList: PropTypes.array,
   commitmentsTotal: PropTypes.string,
 };
 

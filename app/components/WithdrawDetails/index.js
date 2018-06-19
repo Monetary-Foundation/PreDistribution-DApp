@@ -20,22 +20,22 @@ const Span = styled.span`
 
 
 function WithdrawDetails(props) {
-  const { rewardsMap, rewardsTotal, tokenSymbol } = props;
+  const { rewardsList, rewardsTotal, tokenSymbol } = props;
   return (
     <div>
       <h3> Reward List </h3>
       <Collapse>
         <Panel header="Toggle list" key="1" style={customPanelStyle}>
-          {/* rewardsMap && JSON.stringify(rewardsMap, 0, 2)} <br /> */}
+          {/* rewardsList && JSON.stringify(rewardsList, 0, 2)} <br /> */}
           <List
             size="large"
             footer={
-              rewardsMap.length >= 2
+              rewardsList.length >= 2
                 ? <div>Total reward: <Span>{rewardsTotal} {tokenSymbol}</Span></div>
                 : null
             }
             bordered
-            dataSource={rewardsMap}
+            dataSource={rewardsList}
             renderItem={(item) => (
               <List.Item>
                 Window: <Span>{item.window}</Span> Amount: <Span>{item.tokens_reward} {tokenSymbol}</Span>
@@ -48,7 +48,7 @@ function WithdrawDetails(props) {
 }
 
 WithdrawDetails.propTypes = {
-  rewardsMap: PropTypes.array,
+  rewardsList: PropTypes.array,
   rewardsTotal: PropTypes.string,
   tokenSymbol: PropTypes.string,
 };

@@ -58,13 +58,18 @@ import {
   makeSelectGetDistributionInfoError,
 
   makeSelectDistributionInfo,
-  makeSelectTotalsMap,
+  makeSelectTotalsList,
+  makeSelectTotalsSum,
   makeSelectCurrentWindow,
   makeSelectTotalWindows,
+  makeSelectCommitmentsTotal,
+  makeSelectRewardsTotal,
 
   makeSelectGetAddressInfoLoading,
   makeSelectGetAddressInfoError,
   makeSelectAddressInfo,
+  makeSelectCommitmentsList,
+  makeSelectRewardsList,
 
   makeSelectCommitEthSendWindow,
   makeSelectCommitEthSendAmount,
@@ -114,13 +119,18 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       getDistributionInfoError,
 
       distributionInfo,
-      totalsMap,
+      totalsList,
+      totalsSum,
       currentWindow,
       totalWindows,
 
       getAddressInfoLoading,
       getAddressInfoError,
       addressInfo,
+      commitmentsList,
+      rewardsList,
+      rewardsTotal,
+      commitmentsTotal,
 
       commitEthSendWindow,
       commitEthSendAmount,
@@ -187,6 +197,8 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       networkId,
     };
     const commitProps = {
+      commitmentsList,
+      commitmentsTotal,
       commitEthSendWindow,
       commitEthSendAmount,
       commitEthSendLoading,
@@ -199,6 +211,9 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       onCommitEthSend,
     };
     const withdrawProps = {
+      rewardsList,
+      rewardsTotal,
+      tokenSymbol,
       onChangeWithdrawWindow,
       onWithdrawSend,
       withdrawWindow,
@@ -211,7 +226,8 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
     Object.assign(addressInfoProps, addressProps, commitProps, withdrawProps);
 
     const totalsInfoProps = {
-      totalsMap,
+      totalsList,
+      totalsSum,
       totals: distributionInfo && distributionInfo.totals,
       days: 181,
     };
@@ -260,13 +276,18 @@ Dashboard.propTypes = {
   getDistributionInfoError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 
   distributionInfo: PropTypes.object,
-  totalsMap: PropTypes.array,
+  totalsList: PropTypes.array,
+  totalsSum: PropTypes.string,
   currentWindow: PropTypes.number,
   totalWindows: PropTypes.number,
 
   getAddressInfoLoading: PropTypes.bool,
   getAddressInfoError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   addressInfo: PropTypes.object,
+  commitmentsList: PropTypes.array,
+  rewardsList: PropTypes.array,
+  commitmentsTotal: PropTypes.string,
+  rewardsTotal: PropTypes.string,
 
   commitEthSendWindow: PropTypes.number,
   commitEthSendAmount: PropTypes.number,
@@ -308,13 +329,18 @@ const mapStateToProps = createStructuredSelector({
   getDistributionInfoError: makeSelectGetDistributionInfoError(),
 
   distributionInfo: makeSelectDistributionInfo(),
-  totalsMap: makeSelectTotalsMap(),
+  totalsList: makeSelectTotalsList(),
+  totalsSum: makeSelectTotalsSum(),
   currentWindow: makeSelectCurrentWindow(),
   totalWindows: makeSelectTotalWindows(),
 
   getAddressInfoLoading: makeSelectGetAddressInfoLoading(),
   getAddressInfoError: makeSelectGetAddressInfoError(),
   addressInfo: makeSelectAddressInfo(),
+  commitmentsList: makeSelectCommitmentsList(),
+  rewardsList: makeSelectRewardsList(),
+  commitmentsTotal: makeSelectCommitmentsTotal(),
+  rewardsTotal: makeSelectRewardsTotal(),
 
   commitEthSendWindow: makeSelectCommitEthSendWindow(),
   commitEthSendAmount: makeSelectCommitEthSendAmount(),

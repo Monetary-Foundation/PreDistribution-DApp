@@ -29,26 +29,30 @@ const H2s = styled.h2`
 `;
 
 function AddressInfo(props) {
-  const { isWeb3Browser, getAddressInfoLoading, getAddressInfoError, addressInfo, ...rest } = props;
+  const {
+    isWeb3Browser, getAddressInfoLoading, getAddressInfoError, addressInfo, ...rest
+  } = props;
 
   if (getAddressInfoLoading) {
     return (
-      <Spin
-        spinning={getAddressInfoLoading}
-        style={{ position: 'static' }}
-        size="large"
-        tip="Loading account info..."
-      >
-        <br />
-        <br />
-        <br />
-      </Spin>
+      <Div>
+        <Spin
+          spinning={getAddressInfoLoading}
+          style={{ position: 'static' }}
+          size="large"
+          tip="Loading account info..."
+        >
+          <br />
+          <br />
+          <br />
+        </Spin>\
+      </Div>
     );
   }
 
   const address = addressInfo && addressInfo.address;
-  const commitments = addressInfo && addressInfo.commitments;
-  const rewards = addressInfo && addressInfo.rewards;
+  // const commitments = addressInfo && addressInfo.commitments;
+  // const rewards = addressInfo && addressInfo.rewards;
 
   if (!isWeb3Browser) {
     return (
@@ -95,8 +99,8 @@ function AddressInfo(props) {
           <h4> Address: </h4> <BigSpan> {addressComp} </BigSpan> <br />
         </Col>
       </Row>
-      <CommitLayout {...rest} commitments={commitments} />
-      <WithdrawLayout {...rest} rewards={rewards} />
+      <CommitLayout {...rest} />
+      <WithdrawLayout {...rest} />
     </Div>
   );
 }

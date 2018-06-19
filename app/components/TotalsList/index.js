@@ -6,29 +6,54 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-// import styled from 'styled-components';
-import { Collapse } from 'antd';
-const Panel = Collapse.Panel;
+import styled from 'styled-components';
+import { Collapse, List } from 'antd';
+const { Panel } = Collapse;
+const { Item } = List;
 
 const customPanelStyle = {};
 
+const Span = styled.span`
+  font-weight: 700;
+  margin-left: 15px;
+  margin-right: 15px;
+`;
+
 function TotalsList(props) {
-  const { totals, totalsMap } = props;
+  const { totalsList, totalsSum } = props;
   return (
     <Collapse>
+      {/*
       <Panel header="Totals list" key="1" style={customPanelStyle}>
         {totals && JSON.stringify(totals, 0, 2)}
       </Panel>
       <Panel header="Totals mapped list" key="2" style={customPanelStyle}>
-        {totalsMap && JSON.stringify(totalsMap, 0, 2)}
+        {totalsList && JSON.stringify(totalsList, 0, 2)}
+      </Panel>
+      */}
+      <Panel header="Toggle commitments list" key="3" style={customPanelStyle}>
+        <List
+          size="large"
+          header={
+            <div>Total commited: <Span>{totalsSum} Ether</Span></div>
+
+          }
+          bordered
+          dataSource={totalsList}
+          renderItem={(item) => (
+            <Item>
+              Window: <Span>{item.window}</Span> Amount: <Span>{item.eth_commited} Ethr</Span>
+            </Item>)}
+        />
       </Panel>
     </Collapse>
   );
 }
 
 TotalsList.propTypes = {
-  totals: PropTypes.arrayOf(PropTypes.string),
-  totalsMap: PropTypes.arrayOf(PropTypes.object),
+  // totals: PropTypes.arrayOf(PropTypes.string),
+  totalsList: PropTypes.arrayOf(PropTypes.object),
+  totalsSum: PropTypes.string,
 };
 
 export default TotalsList;

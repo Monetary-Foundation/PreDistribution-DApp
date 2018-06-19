@@ -1,9 +1,10 @@
 import { createSelector } from 'reselect';
-
+import { initialState } from './reducer';
 /**
  * Direct selector to the dashboard state domain
+ * Added temporary fix for reselect and devtools: https://github.com/reduxjs/reselect/issues/341
  */
-const selectDashboardDomain = (state) => state.get('dashboard');
+const selectDashboardDomain = (state) => state.get('dashboard', initialState);
 
 const makeSelectInitStatus = () => createSelector(
   selectDashboardDomain,
@@ -63,18 +64,56 @@ const makeSelectDistributionInfo = () => createSelector(
   (substate) => substate.get('distributionInfo') ? substate.get('distributionInfo').toJS() : null
 );
 
-const makeSelectTotalsMap = () => createSelector(
+const makeSelectTotalsList = () => createSelector(
   selectDashboardDomain,
-  (substate) => substate.get('distributionInfo')
-    ? substate.getIn(['distributionInfo', 'totals']).toJS()
-      .map((value, index) => {
-        const unit = {};
-        unit.window = index;
-        unit.eth_commited = value;
-        return unit;
-      })
-    : null
+  (substate) => {
+    if (substate.getIn(['distributionInfo', 'totals']) && substate.get('web3')) {
+      const web3 = substate.get('web3');
+      return substate.getIn(['distributionInfo', 'totals']).toJS()
+        .map((value, index) => {
+          const unit = {};
+          unit.window = index;
+          unit.eth_commited = web3.utils.fromWei(value);
+          return unit;
+        })
+        .filter((value) => value.eth_commited !== '0');
+    }
+    return null;
+  }
 );
+
+/**
+ * calculate sum of all members and convert to Ether
+ * @param {Object} immutableList Immutable array which members are strings of amounts in Wei
+ * @param {Object} web3 web3 instanse
+ * @returns {string} sum of all members converted to Ether
+ */
+const immutableSumReducer = (immutableList, web3) => {
+  const BN = web3.utils && web3.utils.BN;
+  const weiSum = immutableList.toJS()
+    .reduce((prev, curr) => {
+      if (curr !== '0') {
+        const prevBn = new BN(prev);
+        const currBn = new BN(curr);
+        return prevBn.add(currBn).toString(10);
+      }
+      // if curr is '0' return prev
+      return prev;
+    }, '0');
+  return Number(web3.utils.fromWei(weiSum)).toFixed(2);
+};
+
+const makeSelectTotalsSum = () => createSelector(
+  selectDashboardDomain,
+  (substate) => {
+    const sumList = substate.getIn(['distributionInfo', 'totals']);
+    if (sumList && substate.get('web3')) {
+      return immutableSumReducer(sumList, substate.get('web3'));
+    }
+    return '0';
+  }
+);
+
 
 const makeSelectCurrentWindow = () => createSelector(
   selectDashboardDomain,
@@ -86,7 +125,7 @@ const makeSelectTotalWindows = () => createSelector(
   (substate) => substate.get('distributionInfo') ? Number(substate.getIn(['distributionInfo', 'totalWindows'])) : 0
 );
 
-/* -------------------------------*/
+/* -----------AddressInfo-------------------------------------------------------------------------*/
 
 const makeSelectGetAddressInfoLoading = () => createSelector(
   selectDashboardDomain,
@@ -99,6 +138,65 @@ const makeSelectGetAddressInfoError = () => createSelector(
 const makeSelectAddressInfo = () => createSelector(
   selectDashboardDomain,
   (substate) => substate.get('addressInfo') ? substate.get('addressInfo').toJS() : null
+);
+
+const makeSelectCommitmentsList = () => createSelector(
+  selectDashboardDomain,
+  (substate) => {
+    if (substate.getIn(['addressInfo', 'commitments']) && substate.get('web3')) {
+      const web3 = substate.get('web3');
+      return substate.getIn(['addressInfo', 'commitments']).toJS()
+        .map((value, index) => {
+          const unit = {};
+          unit.window = index;
+          unit.eth_commited = web3.utils.fromWei(value);
+          return unit;
+        })
+        .filter((window) => window.eth_commited !== '0');
+    }
+    return [];
+  }
+);
+
+const makeSelectCommitmentsTotal = () => createSelector(
+  selectDashboardDomain,
+  (substate) => {
+    const sumList = substate.getIn(['addressInfo', 'commitments']);
+    if (sumList && substate.get('web3')) {
+      return immutableSumReducer(sumList, substate.get('web3'));
+    }
+    return '0';
+  }
+);
+
+const makeSelectRewardsList = () => createSelector(
+  selectDashboardDomain,
+  (substate) => {
+    if (substate.getIn(['addressInfo', 'rewards']) && substate.get('web3')) {
+      const web3 = substate.get('web3');
+      return substate.getIn(['addressInfo', 'rewards']).toJS()
+        .map((value, index) => {
+          const unit = {};
+          unit.window = index;
+          unit.tokens_reward = Number(web3.utils.fromWei(value)).toFixed(2);
+          return unit;
+        })
+        .filter((window) => window.tokens_reward !== '0.00');
+    }
+    return [];
+  }
+);
+
+
+const makeSelectRewardsTotal = () => createSelector(
+  selectDashboardDomain,
+  (substate) => {
+    const sumList = substate.getIn(['addressInfo', 'rewards']);
+    if (sumList && substate.get('web3')) {
+      return immutableSumReducer(sumList, substate.get('web3'));
+    }
+    return '0';
+  }
 );
 
 /* CommitEth */
@@ -123,12 +221,12 @@ const makeSelectCommitEthMinedLoading = () => createSelector(
   (substate) => substate.get('commitEthMinedLoading')
 );
 
-// Remove all occurrences of string 'error:' and 'Returned'
+// Remove all occurrences of strings 'error:' and 'Returned'
 const makeSelectCommitEthError = () => createSelector(
   selectDashboardDomain,
   (substate) => substate.get('commitEthError')
-  ? substate.get('commitEthError').toString().replace(new RegExp('(error:|Returned)', 'ig'), '')
-  : null
+    ? substate.get('commitEthError').toString().replace(new RegExp('(error:|Returned)', 'ig'), '')
+    : null
 );
 
 const makeSelectCommitEthSendTx = () => createSelector(
@@ -229,13 +327,19 @@ export {
   makeSelectGetDistributionInfoError,
 
   makeSelectDistributionInfo,
-  makeSelectTotalsMap,
+  makeSelectTotalsList,
+  makeSelectTotalsSum,
+
   makeSelectCurrentWindow,
   makeSelectTotalWindows,
+  makeSelectCommitmentsTotal,
+  makeSelectRewardsTotal,
 
   makeSelectGetAddressInfoLoading,
   makeSelectGetAddressInfoError,
   makeSelectAddressInfo,
+  makeSelectCommitmentsList,
+  makeSelectRewardsList,
 
   makeSelectCommitEthSendWindow,
   makeSelectCommitEthSendAmount,

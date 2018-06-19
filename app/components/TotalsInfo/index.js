@@ -5,19 +5,19 @@
 */
 
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Row, Col } from 'antd';
 import TotalsHeatmap from 'components/TotalsHeatmap';
 import TotalsInfoDetails from 'components/TotalsInfoDetails';
 import TotalsList from 'components/TotalsList';
 
-const RowS = styled(Row) `
+const RowS = styled(Row)`
   padding-top: 3em;
 `;
 
 function TotalsInfo(props) {
-  const { totals,totalsMap, days } = props;  // eslint-disable-line
+  // const { totals,totalsList, days } = props;  // eslint-disable-line
   return (
     <div>
       <RowS>
@@ -38,9 +38,9 @@ function TotalsInfo(props) {
 }
 
 TotalsInfo.propTypes = {
-  days: PropTypes.number,
-  totals: PropTypes.arrayOf(PropTypes.string),
-  totalsMap: PropTypes.arrayOf(PropTypes.object),
+  // days: PropTypes.number,
+  // totals: PropTypes.arrayOf(PropTypes.string),
+  // totalsList: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default TotalsInfo;

@@ -1,4 +1,4 @@
-# MCoin-PreDistribution-DApp
+# MonetaryCoin-PreDistribution-DApp
 
 Thank you for contributing! 
 

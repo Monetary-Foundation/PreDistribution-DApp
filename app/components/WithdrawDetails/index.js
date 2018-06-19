@@ -20,7 +20,7 @@ const Span = styled.span`
 
 
 function WithdrawDetails(props) {
-  const { rewardsMap, tokenSymbol } = props;
+  const { rewardsMap, rewardsTotal, tokenSymbol } = props;
   return (
     <div>
       <h3> Reward List </h3>
@@ -29,6 +29,11 @@ function WithdrawDetails(props) {
           {/* rewardsMap && JSON.stringify(rewardsMap, 0, 2)} <br /> */}
           <List
             size="large"
+            footer={
+              rewardsMap.length >= 2
+                ? <div>Total reward: <Span>{rewardsTotal} {tokenSymbol}</Span></div>
+                : null
+            }
             bordered
             dataSource={rewardsMap}
             renderItem={(item) => (
@@ -44,6 +49,7 @@ function WithdrawDetails(props) {
 
 WithdrawDetails.propTypes = {
   rewardsMap: PropTypes.array,
+  rewardsTotal: PropTypes.string,
   tokenSymbol: PropTypes.string,
 };
 

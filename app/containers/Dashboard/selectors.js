@@ -135,14 +135,6 @@ const makeSelectCommitmentsTotal = () => createSelector(
           if (curr !== '0') {
             const prevBn = new BN(prev);
             const currBn = new BN(curr);
-            /*
-            console.log('prevBn');
-            console.log(prevBn);
-            console.log('currBn');
-            console.log(currBn);
-            console.log(prevBn.add(currBn).toString(10));
-            */
-
             return prevBn.add(currBn).toString(10);
           }
           // if curr is '0' return prev
@@ -175,6 +167,21 @@ const makeSelectRewardsMap = () => createSelector(
 const makeSelectRewardsTotal = () => createSelector(
   selectDashboardDomain,
   (substate) => {
+    if (substate.getIn(['addressInfo', 'rewards']) && substate.get('web3')) {
+      const web3 = substate.get('web3');
+      const BN = web3.utils && web3.utils.BN;
+      const weiSum = substate.getIn(['addressInfo', 'rewards']).toJS()
+        .reduce((prev, curr) => {
+          if (curr !== '0') {
+            const prevBn = new BN(prev);
+            const currBn = new BN(curr);
+            return prevBn.add(currBn).toString(10);
+          }
+          // if curr is '0' return prev
+          return prev;
+        }, '0');
+      return Number(web3.utils.fromWei(weiSum)).toFixed(2);
+    }
     return '0';
   }
 );

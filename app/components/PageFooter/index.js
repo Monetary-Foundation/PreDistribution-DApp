@@ -11,6 +11,9 @@ import styled from 'styled-components';
 
 import { StickyFooter } from './sticky';
 
+// import { version } from '../../../package.json';
+
+const version = '0.2.0';
 
 const Footer = StickyFooter.extend`
   textAlign: center;
@@ -32,7 +35,7 @@ function PageFooter() {
         <Col sm={{ span: 11, offset: 1 }} xs={24}>
           <a href={github} target="_blank" rel="noopener">
             MonetaryCoin Pre-Distribution DApp source (Github)
-          </a><br />
+          </a> v{version}<br />
           Created using: web3@1.0, React.js, Ant design...
         </Col>
 
@@ -40,7 +43,6 @@ function PageFooter() {
           <Col sm={12} xs={24}>
             <a target="_blank" rel="noopener" href="https://monetarycoin.org">MonetaryCoin Homepage</a><br />
             The Monetary Foundation ©2018
-
           </Col>
         </Span>
 

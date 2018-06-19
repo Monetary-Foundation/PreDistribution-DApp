@@ -22,10 +22,13 @@ const Span = styled.span`
 
 function WithdrawDetails(props) {
   const { rewardsList, rewardsTotal, tokenSymbol } = props;
+  // auto open pannel if there are rewards waiting
+  const activeKeyArray = rewardsList.length >= 1 ? ['1'] : [];
+
   return (
     <div>
       <h3> Reward List </h3>
-      <Collapse>
+      <Collapse defaultActiveKey={activeKeyArray}>
         <Panel header="Toggle list" key="1" style={customPanelStyle}>
           {/* rewardsList && JSON.stringify(rewardsList, 0, 2)} <br /> */}
           <List

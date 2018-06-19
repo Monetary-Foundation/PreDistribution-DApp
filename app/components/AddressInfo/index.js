@@ -29,20 +29,24 @@ const H2s = styled.h2`
 `;
 
 function AddressInfo(props) {
-  const { isWeb3Browser, getAddressInfoLoading, getAddressInfoError, addressInfo, ...rest } = props;
+  const {
+    isWeb3Browser, getAddressInfoLoading, getAddressInfoError, addressInfo, ...rest
+  } = props;
 
   if (getAddressInfoLoading) {
     return (
-      <Spin
-        spinning={getAddressInfoLoading}
-        style={{ position: 'static' }}
-        size="large"
-        tip="Loading account info..."
-      >
-        <br />
-        <br />
-        <br />
-      </Spin>
+      <Div>
+        <Spin
+          spinning={getAddressInfoLoading}
+          style={{ position: 'static' }}
+          size="large"
+          tip="Loading account info..."
+        >
+          <br />
+          <br />
+          <br />
+        </Spin>\
+      </Div>
     );
   }
 

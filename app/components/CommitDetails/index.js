@@ -17,8 +17,20 @@ const Span = styled.span`
   margin-right: 15px;
 `;
 
+const ConditionalFooter = (props) => {
+  const { commitmentsTotal } = props;
+  return (
+    <div>Total commited: <Span>{commitmentsTotal} Ether</Span></div>
+  );
+};
+ConditionalFooter.propTypes = {
+  commitmentsTotal: PropTypes.string,
+};
+
+
 function CommitDetails(props) {
   const { commitmentsMap, commitmentsTotal } = props;
+  const conditionalFooterProps = { commitmentsMap, commitmentsTotal };
   return (
     <div>
       <h3> Commitment list</h3>
@@ -26,7 +38,7 @@ function CommitDetails(props) {
         <Panel header="Toggle List" key="1" style={customPanelStyle}>
           {/* commitmentsMap && JSON.stringify(commitmentsMap, 0, 2)} <br /> */}
           <List
-            footer={<div>Total commited: {commitmentsTotal} Ether</div>}
+            footer={commitmentsMap.length >= 2 ? <ConditionalFooter {...conditionalFooterProps} /> : null}
             size="large"
             bordered
             dataSource={commitmentsMap}
@@ -44,7 +56,7 @@ function CommitDetails(props) {
 
 CommitDetails.propTypes = {
   commitmentsMap: PropTypes.array,
-  commitmentsTotal: PropTypes.number,
+  commitmentsTotal: PropTypes.string,
 };
 
 export default CommitDetails;

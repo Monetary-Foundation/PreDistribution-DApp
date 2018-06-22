@@ -13,7 +13,7 @@ import { StickyFooter } from './sticky';
 
 // import { version } from '../../../package.json';
 
-const version = '0.3.0';
+const version = '0.2.0';
 
 const Footer = StickyFooter.extend`
   textAlign: center;

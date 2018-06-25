@@ -42,7 +42,7 @@ function TotalsList(props) {
           dataSource={totalsList}
           renderItem={(item) => (
             <Item>
-              Window: <Span>{item.window}</Span> Amount: <Span>{item.eth_commited} Ethr</Span>
+              Window: <Span>{item.window}</Span> Amount: <Span>{item.eth_commited} Ether</Span>
             </Item>)}
         />
       </Panel>

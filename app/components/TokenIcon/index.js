@@ -23,6 +23,10 @@ const Img = styled.img`
 function TokenIcon(props) {
   const { symbol } = props;
 
+  if (!symbol) {
+    return null;
+  }
+
   const size = 100;
 
   const iconPath = `token-icons/${symbol}.png`;

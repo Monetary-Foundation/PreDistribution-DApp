@@ -7,15 +7,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Col } from 'antd';
-import AddressLink from '../AddressLink';
+import TokenIcon from 'components/TokenIcon';
+import AddressLink from 'components/AddressLink';
+
 
 const Token = styled.div`
   font-size: 3em;
   overflow-x: hidden;
 `;
-const Symbol = styled.div`
-  font-size: 2em;
-`;
+// const Symbol = styled.div`font-size: 2em;`;
 
 function Web3Status(props) {
   const {
@@ -50,7 +50,8 @@ function Web3Status(props) {
   return (
     <Col sm={{ span: 10, offset: 1 }} xs={{ span: 23, offset: 1 }} style={{ overflowX: 'hidden' }}>
       <Token>{tokenName}</Token>
-      <Symbol>{`(${tokenSymbol})`}</Symbol>
+      <TokenIcon symbol={tokenSymbol} />
+      {/* <Symbol>{`(${tokenSymbol})`}</Symbol> */}
       <br />
       Distribution Contract: <br />
       <AddressLink address={distributionAddress} networkId={networkId} /><br /><br />

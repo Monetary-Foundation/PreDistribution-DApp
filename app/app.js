@@ -40,6 +40,9 @@ import 'file-loader?name=[name].[ext]!./.htaccess';
 
 import '!file-loader?name=[name]!./vendor/Github/CNAME'; // for github - domain connection
 
+import '!file-loader?name=token-icons/[name].[ext]!./images/token-icons/MERO.png';
+import '!file-loader?name=token-icons/[name].[ext]!./images/token-icons/MCHI.png';
+
 /* eslint-enable import/no-unresolved, import/extensions */
 
 

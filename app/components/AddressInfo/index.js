@@ -61,7 +61,9 @@ function AddressInfo(props) {
         <Row type="flex" align="left" >
           <Col sm={{ span: 22, offset: 1 }} xs={{ span: 22, offset: 1 }}>
             <BigSpan> No web3 browser detected. </BigSpan> <br />
-            You can use web3 browser such as Mist, Metamask or Trust wallet to commit Eth and withdraw tokens <b>directly from this page.</b>
+            You can use Ethereum web3 browser such as Mist,
+            <a target="_blank" rel="noopener" href="https://metamask.io/"><b> MetaMask </b></a>
+            or Trust wallet to commit Eth and withdraw tokens <b>directly from this page.</b>
           </Col>
         </Row>
       </Div>
@@ -75,8 +77,10 @@ function AddressInfo(props) {
         <br /><hr />
         <Row type="flex" align="left" >
           <Col sm={{ span: 22, offset: 1 }} xs={{ span: 22, offset: 1 }}>
-            <BigSpan> Web3 browser detected. </BigSpan> <br />
-            You can use web3 browser such as Mist, Metamask or Trust wallet to commit Eth and withdraw tokens <b>directly from this page.</b>
+            <BigSpan> No web3 browser detected. </BigSpan> <br />
+            You can use Ethereum web3 browser such as Mist,
+            <a target="_blank" rel="noopener" href="https://metamask.io/"><b> MetaMask </b></a>
+            or Trust wallet to commit Eth and withdraw tokens <b>directly from this page.</b>
             <br /><br />
             <b> {getAddressInfoError} </b> <br />
           </Col>

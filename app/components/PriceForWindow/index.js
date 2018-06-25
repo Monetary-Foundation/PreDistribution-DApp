@@ -44,7 +44,7 @@ function PriceForWindow(props) {
   return (
     <Div>
       Price Per Token <br />
-      <BigSpan> {price && price.toFixed(10)} ETH </BigSpan> <SmallSpan> ({inversePrice.toString()} tokens per ETH) </SmallSpan><br />
+      <BigSpan> {price && price.toFixed(11)} ETH </BigSpan> <SmallSpan> ({inversePrice.toString()} tokens per ETH) </SmallSpan><br />
       <SmallerSpan> *Price might increase until end of window </SmallerSpan> <br />
     </Div>
   );

@@ -58,7 +58,9 @@ function Web3Status(props) {
       Token Contract: <br />
       <AddressLink address={tokenAddress} networkId={networkId} />
       <br /> <br />
-      Web3 Provider: {provider || 'no web3 provider specified'} <br /><br />
+      Web3 Provider: {provider || 'no web3 provider specified'} <br />
+      Minimum commitment: <b> 0.01 Ether </b>
+      <br /><br />
       <b><a target="_blank" rel="noopener" href="https://medium.com/monetary-protocol/monetarycoin-distribution-how-it-works-how-to-use-the-app-2f55afc79427">How it works? How to use?</a></b><br />
       <b><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=t-xkKHQ4204">Video Guide</a></b><br />
       <a target="_blank" rel="noopener" href="https://monetarycoin.org/distribution">Distribution Details</a><br />

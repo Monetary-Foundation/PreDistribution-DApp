@@ -13,6 +13,7 @@ const Img = styled.img`
     color: #dbd9ff;
     font: 20px Impact;
     text-transform: uppercase;
+    height: 130px;
 
     //margin-left: 60px;
     margin-top: 15px;

@@ -19,7 +19,7 @@ const Div = styled.div`
 `;
 
 const BigSpan = styled.span`
-  color: #ff0000;
+  color: #8e8e8e;
   font-size: 1.5em;
 `;
 

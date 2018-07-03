@@ -23,6 +23,11 @@ const BigSpan = styled.span`
   font-size: 1.5em;
 `;
 
+const BigSpanRed = styled.span`
+  color: red;
+  font-size: 1.5em;
+`;
+
 const H2s = styled.h2`
   color: red;
   font-size: 1em;
@@ -60,7 +65,7 @@ function AddressInfo(props) {
         <br /><hr />
         <Row type="flex" align="left" >
           <Col sm={{ span: 22, offset: 1 }} xs={{ span: 22, offset: 1 }}>
-            <BigSpan> No web3 browser detected. </BigSpan> <br />
+            <BigSpanRed> No web3 browser detected. </BigSpanRed> <br />
             You can use Ethereum web3 browser such as Mist,
             <a target="_blank" rel="noopener" href="https://metamask.io/"><b> MetaMask </b></a>
             or Trust wallet to commit Eth and withdraw tokens <b>directly from this page.</b>
@@ -77,7 +82,7 @@ function AddressInfo(props) {
         <br /><hr />
         <Row type="flex" align="left" >
           <Col sm={{ span: 22, offset: 1 }} xs={{ span: 22, offset: 1 }}>
-            <BigSpan> No web3 browser detected. </BigSpan> <br />
+            <BigSpanRed> No web3 browser detected. </BigSpanRed> <br />
             You can use Ethereum web3 browser such as Mist,
             <a target="_blank" rel="noopener" href="https://metamask.io/"><b> MetaMask </b></a>
             or Trust wallet to commit Eth and withdraw tokens <b>directly from this page.</b>

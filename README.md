@@ -36,35 +36,6 @@ App Deployed to https://MonetaryCoin.io
 - [ ] Live Update from the blockchain
 
 
-#### MonetaryCoin Distribution ABI
-[MonetaryCoin Distribution ABI](https://github.com/Monetary-Foundation/PreDistribution-DApp/blob/master/app/utils/contracts/abi.js)
-
-To initiate the contract we use
-```javascript
-web3.eth.contract(distributionAbi)
-```
-
-
-Like all other network communication in the app, calls to erc20 contracts are done inside `app/containers/Dashboard/saga.js`.
-ERC20 Abi can be imported using 
-```javascript
-import { distributionAbi } from 'utils/contracts/abi';
-```
-
-
-
-#### npm scripts for MonetaryCoin PreDistribution-DApp:
-
-`npm run build:dll` to build webpack DLL required for development.
-
-`npm run start` to start development mode. Go to http://localhost:3002 - changes will be reflected in realtime using hot module reloading.
-
-`npm run build` to create bundle for publishing
-
-`npm run generate` to create new components / containers using the generator.
-
-For more documentation regarding the react setup see [react-boiledplate docs](https://eth-hot-wallet.com/docs/react-boilerplate/) or the official repo.
-
 After build, webpack monitor will generate stats about bundle size:
 
 

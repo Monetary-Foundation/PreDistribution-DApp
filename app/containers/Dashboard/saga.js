@@ -3,10 +3,10 @@ import { take, call, put, select, takeLatest, fork } from 'redux-saga/effects';
 
 import Web3 from 'web3';
 
-import { distributionContracts } from 'utils/constants';
+import { distributionContracts, amlProvider } from 'utils/constants';
 
 import { distributionAbi } from 'utils/contracts/abi';
-
+import request from 'utils/request';
 import {
   INIT_DASHBOARD,
   // ADD_NEW_SET_EVENT,
@@ -246,6 +246,7 @@ function* getDistributionInfoAsync() {
     yield put(getDistributionInfoError(err.toString()));
   }
 }
+
 /**
  * getAddressInfoAsync
  */
@@ -262,6 +263,13 @@ function* getAddressInfoAsync() {
 
     console.log(`user address: ${address}`);
 
+    const requestURL = `${amlProvider}address=${address}`;
+    // const requestURL = `${amlProvider}address=${address}&code=0`;
+    console.log(`Request: ${requestURL}`);
+
+    const amlReply = yield call(request, requestURL);
+    // console.log(amlReply);
+
     // if (!address) {
     //   throw new Error('Wallet locked, unlock wallet to use Dapp');
     // }
@@ -273,17 +281,18 @@ function* getAddressInfoAsync() {
       Promise.all([getCommitments, getRewards]);
 
     const [commitments, rewards] = yield call(getAllPromises);
-    const distributionInfo = {
+
+    const amlStatus = (amlReply && amlReply.message && amlReply.message.status) ? amlReply.message.status : 'ERROR';
+    console.log(amlStatus);
+
+    const addressInfo = {
       address,
       commitments,
       rewards,
+      amlStatus,
     };
 
-    // const getRewards = () => distributionContract.methods.getAllRewards().call();
-    // const rewards = yield call(getRewards);
-
-
-    yield put(getAddressInfoSuccess(distributionInfo));
+    yield put(getAddressInfoSuccess(addressInfo));
   } catch (err) {
     yield put(getAddressInfoError(err.toString()));
   }

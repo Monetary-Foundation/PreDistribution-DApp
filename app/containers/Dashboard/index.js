@@ -70,6 +70,8 @@ import {
   makeSelectAddressInfo,
   makeSelectCommitmentsList,
   makeSelectRewardsList,
+  makeSelectAmlStatus,
+  makeSelectCanParticipate,
 
   makeSelectCommitEthSendWindow,
   makeSelectCommitEthSendAmount,
@@ -131,6 +133,8 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       rewardsList,
       rewardsTotal,
       commitmentsTotal,
+      amlStatus,
+      canParticipate,
 
       commitEthSendWindow,
       commitEthSendAmount,
@@ -195,6 +199,8 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       addressInfo,
       isWeb3Browser,
       networkId,
+      amlStatus,
+      canParticipate,
     };
     const commitProps = {
       commitmentsList,
@@ -288,6 +294,8 @@ Dashboard.propTypes = {
   rewardsList: PropTypes.array,
   commitmentsTotal: PropTypes.string,
   rewardsTotal: PropTypes.string,
+  amlStatus: PropTypes.string,
+  canParticipate: PropTypes.bool,
 
   commitEthSendWindow: PropTypes.number,
   commitEthSendAmount: PropTypes.number,
@@ -341,6 +349,8 @@ const mapStateToProps = createStructuredSelector({
   rewardsList: makeSelectRewardsList(),
   commitmentsTotal: makeSelectCommitmentsTotal(),
   rewardsTotal: makeSelectRewardsTotal(),
+  amlStatus: makeSelectAmlStatus(),
+  canParticipate: makeSelectCanParticipate(),
 
   commitEthSendWindow: makeSelectCommitEthSendWindow(),
   commitEthSendAmount: makeSelectCommitEthSendAmount(),

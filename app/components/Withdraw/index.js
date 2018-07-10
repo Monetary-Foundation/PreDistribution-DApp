@@ -33,11 +33,14 @@ function Withdraw(props) {
     withdrawError,
     withdrawSendTx,
     withdrawMinedRecipt,
+    canParticipate,
   } = props;
 
   const conditionalSpace = (!withdrawSendTx && !withdrawError) ? <br /> : null;
 
   const noClosedWindows = (currentWindow === 0);
+
+  const withdrawDisabled = noClosedWindows || !canParticipate;
 
   return (
     <div>
@@ -56,7 +59,7 @@ function Withdraw(props) {
           type="primary"
           size="large"
           onClick={() => onWithdrawSend()}
-          disabled={noClosedWindows}
+          disabled={withdrawDisabled}
         >
           Withdraw Tokens
         </Button>
@@ -94,6 +97,7 @@ Withdraw.propTypes = {
   withdrawError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   withdrawSendTx: PropTypes.string,
   withdrawMinedRecipt: PropTypes.object,
+  canParticipate: PropTypes.bool,
 };
 
 export default Withdraw;

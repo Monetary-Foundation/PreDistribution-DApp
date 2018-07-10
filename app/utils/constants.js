@@ -5,7 +5,8 @@ export const ONCE_TILL_UNMOUNT = '@@saga-injector/once-till-unmount';
 export const repoName = '/PreDistribution-DApp/';
 export const website = 'https://MonetaryCoin.io';
 export const github = 'https://github.com/Monetary-Foundation/PreDistribution-DApp';
-
+// export const amlProvider = 'http://localhost:3000/ask?';
+export const amlProvider = 'https://l8moi7x8vf.execute-api.eu-west-1.amazonaws.com/dev/ask?';
 // case 1:
 // console.log('This is mainnet')
 // break

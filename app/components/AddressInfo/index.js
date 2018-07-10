@@ -11,6 +11,7 @@ import { Row, Col, Spin } from 'antd';
 import CommitLayout from 'components/CommitLayout';
 import WithdrawLayout from 'components/WithdrawLayout';
 import Instructions from 'components/Instructions';
+import AmlStatus from 'components/AmlStatus';
 
 
 const Div = styled.div`
@@ -35,7 +36,7 @@ const H2s = styled.h2`
 
 function AddressInfo(props) {
   const {
-    isWeb3Browser, getAddressInfoLoading, getAddressInfoError, addressInfo, ...rest
+    isWeb3Browser, getAddressInfoLoading, getAddressInfoError, addressInfo, amlStatus, ...rest
   } = props;
 
   if (getAddressInfoLoading) {
@@ -50,7 +51,7 @@ function AddressInfo(props) {
           <br />
           <br />
           <br />
-        </Spin>\
+        </Spin>
       </Div>
     );
   }
@@ -105,7 +106,8 @@ function AddressInfo(props) {
       <Row type="flex" align="left" >
         <Col sm={{ span: 10, offset: 1 }} xs={{ span: 22, offset: 1 }} style={{ overflowX: 'hidden' }}>
           <h2> My Account </h2>
-          <h4> Address: </h4> <BigSpan> {addressComp} </BigSpan> <br />
+          <h4> Address: </h4> <BigSpan> {addressComp} </BigSpan> <br /><br />
+          <AmlStatus address={address} amlStatus={amlStatus} />
         </Col>
       </Row>
       <CommitLayout {...rest} />
@@ -119,6 +121,7 @@ AddressInfo.propTypes = {
   getAddressInfoLoading: PropTypes.bool,
   getAddressInfoError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   addressInfo: PropTypes.object,
+  amlStatus: PropTypes.string,
 };
 
 export default AddressInfo;

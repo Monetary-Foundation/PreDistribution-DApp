@@ -40,6 +40,7 @@ function Commit(props) {
 
     currentWindow,
     totalWindows,
+    canParticipate,
   } = props;
 
   const conditionalSpace = (!commitEthSendTx && !commitEthError) ? <br /> : null;
@@ -65,7 +66,12 @@ function Commit(props) {
           onChange={(value) => onChangeAmount(value)}
         />
         <br /><br /><br />
-        <Button type="primary" size="large" onClick={() => onCommitEthSend()}>
+        <Button
+          type="primary"
+          size="large"
+          onClick={() => onCommitEthSend()}
+          disabled={!canParticipate}
+        >
           Commit Ether
         </Button>
         <SendLoadingIndicator
@@ -106,6 +112,7 @@ Commit.propTypes = {
 
   currentWindow: PropTypes.number,
   totalWindows: PropTypes.number,
+  canParticipate: PropTypes.bool,
 };
 
 export default Commit;

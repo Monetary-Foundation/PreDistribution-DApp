@@ -264,11 +264,7 @@ function* getAddressInfoAsync() {
     console.log(`user address: ${address}`);
 
     const requestURL = `${amlProvider}address=${address}`;
-    // const requestURL = `${amlProvider}address=${address}&code=0`;
-    console.log(`Request: ${requestURL}`);
-
     const amlReply = yield call(request, requestURL);
-    // console.log(amlReply);
 
     // if (!address) {
     //   throw new Error('Wallet locked, unlock wallet to use Dapp');
@@ -283,7 +279,6 @@ function* getAddressInfoAsync() {
     const [commitments, rewards] = yield call(getAllPromises);
 
     const amlStatus = (amlReply && amlReply.message && amlReply.message.status) ? amlReply.message.status : 'ERROR';
-    console.log(amlStatus);
 
     const addressInfo = {
       address,

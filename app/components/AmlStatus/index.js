@@ -8,6 +8,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Icon } from 'antd';
+import { applicationForm } from 'utils/constants';
 
 const BigSpan = styled.span`
   color: #8e8e8e;
@@ -17,7 +18,8 @@ const BigSpan = styled.span`
 // ['NOT_REGISTRED', 'IN_PROGRESS', 'VERIFIED', 'DENIED','ERROR'];
 
 function AmlStatus(props) {
-  const { amlStatus } = props;
+  const { address, amlStatus } = props;
+  const formUrl = address ? `${applicationForm}?eth_address=${address}` : applicationForm;
 
   if (amlStatus === 'NOT_REGISTRED') {
     return (
@@ -25,7 +27,14 @@ function AmlStatus(props) {
         <h4> Verification status: </h4>
         <Icon type="close-circle-o" style={{ fontSize: '1.5em', color: 'red' }} />
         <BigSpan> Address not registrated for Mainnet usage</BigSpan>
-        <br />Use this form to register your address. <br />
+        <br />Use this
+        <a
+          href={formUrl}
+          title="Token Purchase Application"
+          target="_blank"
+        >
+          <b>{' '}Form </b>
+        </a> to register your address by preforming a short AML/KYC procedure.<br />
       </span>
     );
   }
@@ -71,6 +80,7 @@ function AmlStatus(props) {
 
 AmlStatus.propTypes = {
   amlStatus: PropTypes.string,
+  address: PropTypes.string,
 };
 
 export default AmlStatus;

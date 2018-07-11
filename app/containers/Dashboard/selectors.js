@@ -207,20 +207,12 @@ const makeSelectAmlStatus = () => createSelector(
 const makeSelectCanParticipate = () => createSelector(
   selectDashboardDomain,
   (substate) => {
-    console.log('aml_status');
-
     if (substate && substate.get('networkId') !== 1) {
-      console.log(`(networkId) !== 1`);
-
       return true;
     }
     if (substate && substate.getIn(['addressInfo', 'amlStatus']) === 'VERIFIED') {
-      console.log(`substate.getIn(['addressInfo', 'amlStatus']) === 'VERIFIED'`);
-
       return true;
     }
-    console.log('false');
-
     return false;
   }
 );

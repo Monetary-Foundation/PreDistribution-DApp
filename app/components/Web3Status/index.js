@@ -10,6 +10,7 @@ import { Col, Icon } from 'antd';
 import TokenIcon from 'components/TokenIcon';
 import AddressLink from 'components/AddressLink';
 import { applicationForm } from 'utils/constants';
+import KycFormLink from 'components/KycFormLink';
 
 const Token = styled.div`
   font-size: 3em;
@@ -65,14 +66,8 @@ function Web3Status(props) {
       <b><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=t-xkKHQ4204">Video Guide</a></b><br />
       <a target="_blank" rel="noopener" href="https://monetarycoin.org/distribution">Distribution Details</a><br />
       <a target="_blank" rel="noopener" href="https://github.com/Monetary-Foundation/MonetaryCoin">MonetaryCoin source code</a><br /><br />
-      <Icon type="warning" style={{ fontSize: '1.8em', color: '#27e008' }} /> Use this
-      <a
-        href={applicationForm}
-        title="Token Purchase Application"
-        target="_blank"
-      >
-        <b>{' '}Form </b>
-      </a> to register your address by preforming a short AML/KYC procedure.<br /><br />
+      <Icon type="warning" style={{ fontSize: '1.8em', color: '#27e008' }} />
+      <KycFormLink formUrl={applicationForm} />
     </Col>
   );
 }

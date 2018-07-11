@@ -9,11 +9,13 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Icon } from 'antd';
 import { applicationForm } from 'utils/constants';
+import KycFormLink from 'components/KycFormLink';
 
 const BigSpan = styled.span`
   color: #8e8e8e;
   font-size: 1.5em;
 `;
+
 
 // ['NOT_REGISTRED', 'IN_PROGRESS', 'VERIFIED', 'DENIED','ERROR'];
 
@@ -27,14 +29,8 @@ function AmlStatus(props) {
         <h4> Verification status: </h4>
         <Icon type="close-circle-o" style={{ fontSize: '1.5em', color: 'red' }} />
         <BigSpan> Address not registrated for Mainnet usage</BigSpan>
-        <br />Use this
-        <a
-          href={formUrl}
-          title="Token Purchase Application"
-          target="_blank"
-        >
-          <b>{' '}Form </b>
-        </a> to register your address by preforming a short AML/KYC procedure.<br />
+        <br />
+        <KycFormLink formUrl={formUrl} />
       </span>
     );
   }

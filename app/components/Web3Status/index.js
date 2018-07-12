@@ -54,8 +54,9 @@ function Web3Status(props) {
       <TokenIcon symbol={tokenSymbol} />
       {/* <Symbol>{`(${tokenSymbol})`}</Symbol> */}
       <br />
-      Distribution Contract: <br />
+      {/* Distribution Contract: <br />
       <AddressLink address={distributionAddress} networkId={networkId} /><br /><br />
+      */}
       Token Contract: <br />
       <AddressLink address={tokenAddress} networkId={networkId} />
       <br /> <br />

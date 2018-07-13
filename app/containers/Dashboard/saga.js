@@ -263,7 +263,7 @@ function* getAddressInfoAsync() {
 
     console.log(`user address: ${address}`);
 
-    const requestURL = `${amlProvider}address=${address}`;
+    const requestURL = `${amlProvider}${address}`;
     const amlReply = yield call(request, requestURL);
 
     // if (!address) {
@@ -278,7 +278,7 @@ function* getAddressInfoAsync() {
 
     const [commitments, rewards] = yield call(getAllPromises);
 
-    const amlStatus = (amlReply && amlReply.message && amlReply.message.status) ? amlReply.message.status : 'ERROR';
+    const amlStatus = (amlReply && amlReply.status) ? amlReply.status : 'ERROR';
 
     const addressInfo = {
       address,

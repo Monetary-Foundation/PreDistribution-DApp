@@ -27,14 +27,16 @@ function Web3Status(props) {
     tokenName,
     tokenSymbol,
     tokenAddress,
-    distributionAddress,
+    // distributionAddress,
     // tokenList,
   } = props;
 
   if (initStatus === 'loading') {
     return (
       <Col sm={{ span: 10, offset: 1 }} xs={{ span: 23, offset: 1 }}>
-        <div> init in progress, check Mist/Metamask is <b>connected</b> to Ropsten / mainnet <b>and unlocked</b> ....</div>
+        <div> init in progress, check Mist/Metamask is <b>connected</b> to Ropsten / mainnet <b>and unlocked.</b>
+          Refresh page if necessary ....
+        </div>
       </Col>
     );
   }
@@ -81,7 +83,7 @@ Web3Status.propTypes = {
   tokenName: PropTypes.string,
   tokenSymbol: PropTypes.string,
   tokenAddress: PropTypes.string,
-  distributionAddress: PropTypes.string,
+  // distributionAddress: PropTypes.string,
   // tokenList: PropTypes.array,
 };
 

@@ -7,7 +7,7 @@ export const website = 'https://MonetaryCoin.io';
 export const github = 'https://github.com/Monetary-Foundation/PreDistribution-DApp';
 // export const amlProvider = 'http://localhost:3000/ask?';
 export const applicationForm = 'https://monetarycoin.org/token_application.html';
-export const amlProvider = 'https://l8moi7x8vf.execute-api.eu-west-1.amazonaws.com/dev/ask?';
+export const amlProvider = 'https://7fx9kdgf1b.execute-api.eu-west-1.amazonaws.com/dev/whitelist/';
 // case 1:
 // console.log('This is mainnet')
 // break

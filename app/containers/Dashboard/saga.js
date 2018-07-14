@@ -307,7 +307,7 @@ function* commitEthSendAsync() {
     distributionContract.methods.commitOn(window).send({
       from: defaultAccount,
       gas: (100000).toString(),
-      gasPrice: web3.utils.toWei((10).toString(), 'gwei'),
+      gasPrice: web3.utils.toWei((30).toString(), 'gwei'),
       value: web3.utils.toWei(amount.toString(), 'ether'),
     }).once('transactionHash', (tx) => {
       withdrawChannel.put({
@@ -357,7 +357,7 @@ function* withdrawSendAsync() {
     distributionContract.methods.withdraw(window).send({
       from: defaultAccount,
       gas: (100000).toString(),
-      gasPrice: web3.utils.toWei((10).toString(), 'gwei'),
+      gasPrice: web3.utils.toWei((30).toString(), 'gwei'),
       value: 0,
     })
       .once('transactionHash', (tx) => {

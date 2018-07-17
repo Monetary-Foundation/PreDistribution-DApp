@@ -8,6 +8,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 import { Div, BigSpan } from 'components/DistributionInfo/common';
+import { formatNumber } from 'utils/common';
 
 function AllocatedForWindow(props) {
   const { web3, tokenSymbol, allocation } = props;
@@ -15,7 +16,7 @@ function AllocatedForWindow(props) {
   return (
     <Div>
       Allocated for current window<br />
-      <BigSpan> {allocation ? parseInt(web3.utils.fromWei(allocation, 'ether'), 10).toFixed(0) : 0} {tokenSymbol} </BigSpan>
+      <BigSpan> {allocation ? formatNumber(parseInt(web3.utils.fromWei(allocation, 'ether'), 10).toFixed(0)) : 0} {tokenSymbol} </BigSpan>
     </Div>
   );
 }

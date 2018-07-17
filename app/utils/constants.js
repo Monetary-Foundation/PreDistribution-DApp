@@ -4,7 +4,7 @@ export const ONCE_TILL_UNMOUNT = '@@saga-injector/once-till-unmount';
 
 export const repoName = '/PreDistribution-DApp/';
 export const website = 'https://MonetaryCoin.io';
-export const github = 'https://github.com/Monetary-Foundation/PreDistribution-DApp';
+export const github = 'https://github.com/Monetary-Foundation/';
 // export const amlProvider = 'http://localhost:3000/ask?';
 export const applicationForm = 'https://monetarycoin.org/token_application.html';
 export const amlProvider = 'https://7fx9kdgf1b.execute-api.eu-west-1.amazonaws.com/dev/whitelist/';

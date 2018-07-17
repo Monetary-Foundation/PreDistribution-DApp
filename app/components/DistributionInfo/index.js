@@ -12,11 +12,14 @@ import WindowCountdown from 'components/WindowCountdown';
 import AllocatedForWindow from 'components/AllocatedForWindow';
 import CommitedForWindow from 'components/CommitedForWindow';
 import PriceForWindow from 'components/PriceForWindow';
+import DappDescription from 'components/DappDescription';
 
 import { Col, Spin } from 'antd';
 
 function DistributionInfo(props) {
-  const { web3, tokenSymbol, getDistributionInfoLoading, getDistributionInfoError, distributionInfo, onGetDistributionInfo } = props;
+  const {
+    web3, tokenSymbol, getDistributionInfoLoading, getDistributionInfoError, distributionInfo, onGetDistributionInfo,
+  } = props;
 
   if (getDistributionInfoLoading) {
     return (
@@ -78,6 +81,7 @@ function DistributionInfo(props) {
         <CommitedForWindow {...commitedForWindowProps} />
         <AllocatedForWindow {...allocatedForWindowProps} />
         <PriceForWindow {...priceForWindowProps} />
+        <DappDescription />
         {/* DistributionInfo component <pre> {distributionInfo && JSON.stringify(distributionInfo, 0, 0)}</pre>
               DistributionInfo component <br /> {distributionInfo && JSON.stringify(distributionInfo, 0, 2)} <br /> */}
         {/* totals:  totals && JSON.stringify(totals, 0, 0) */}

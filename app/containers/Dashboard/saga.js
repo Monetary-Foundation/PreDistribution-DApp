@@ -3,7 +3,7 @@ import { take, call, put, select, takeLatest, fork } from 'redux-saga/effects';
 
 import Web3 from 'web3';
 
-import { distributionContracts, amlProvider } from 'utils/constants';
+import { distributionContracts, amlProvider, gasPriceProvider, defaultGasPriceGwei } from 'utils/constants';
 
 import { distributionAbi } from 'utils/contracts/abi';
 import request from 'utils/request';
@@ -264,11 +264,12 @@ function* getAddressInfoAsync() {
     console.log(`user address: ${address}`);
 
     const requestURL = `${amlProvider}${address}`;
-    const amlReply = yield call(request, requestURL);
-
-    // if (!address) {
-    //   throw new Error('Wallet locked, unlock wallet to use Dapp');
-    // }
+    let amlReply = {};
+    try {
+      amlReply = yield call(request, requestURL);
+    } catch (err) {
+      amlReply.status = 'ERROR';
+    }
 
     const getCommitments = distributionContract.methods.getCommitmentsOf(address).call();
     const getRewards = distributionContract.methods.getAllRewards().call();
@@ -293,6 +294,20 @@ function* getAddressInfoAsync() {
   }
 }
 
+
+function* getGasPrice() {
+  const web3 = yield select(makeSelectWeb3());
+  let gasPrice;
+  try {
+    const gasPriceReply = yield call(request, gasPriceProvider);
+    const safeLowPrice = gasPriceReply.safeLow / 10;
+    gasPrice = web3.utils.toWei((safeLowPrice).toString(), 'gwei');
+  } catch (err) {
+    gasPrice = web3.utils.toWei(defaultGasPriceGwei, 'gwei');
+  }
+  return gasPrice;
+}
+
 /**
  * commitEthSendAsync
  */
@@ -304,10 +319,12 @@ function* commitEthSendAsync() {
 
     const defaultAccount = (yield call(() => web3.eth.getAccounts()))[0];
 
+    const gasPrice = yield call(getGasPrice);
+
     distributionContract.methods.commitOn(window).send({
       from: defaultAccount,
       gas: (100000).toString(),
-      gasPrice: web3.utils.toWei((30).toString(), 'gwei'),
+      gasPrice,
       value: web3.utils.toWei(amount.toString(), 'ether'),
     }).once('transactionHash', (tx) => {
       withdrawChannel.put({
@@ -353,11 +370,12 @@ function* withdrawSendAsync() {
 
     const defaultAccount = (yield call(() => web3.eth.getAccounts()))[0];
     // console.log(defaultAccount);
+    const gasPrice = yield call(getGasPrice);
 
     distributionContract.methods.withdraw(window).send({
       from: defaultAccount,
       gas: (100000).toString(),
-      gasPrice: web3.utils.toWei((30).toString(), 'gwei'),
+      gasPrice,
       value: 0,
     })
       .once('transactionHash', (tx) => {

@@ -27,6 +27,7 @@ import TotalsInfo from 'components/TotalsInfo';
 
 import AddressInfo from 'components/AddressInfo';
 
+import SuperFooter from 'components/SuperFooter';
 import PageFooter from 'components/PageFooter';
 import { Content } from 'components/PageFooter/sticky';
 
@@ -260,6 +261,7 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
           </Row>
           <TotalsInfo {...totalsInfoProps} />
           <AddressInfo {...addressInfoProps} />
+          <SuperFooter />
         </Content>
         <PageFooter />
       </div>

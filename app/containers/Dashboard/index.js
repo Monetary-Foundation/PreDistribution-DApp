@@ -18,6 +18,8 @@ import injectReducer from 'utils/injectReducer';
 import { Row } from 'antd';
 
 import Header from 'components/Header';
+import SubHeader from 'components/SubHeader';
+
 import Web3Status from 'components/Web3Status';
 import DistributionInfo from 'components/DistributionInfo';
 
@@ -170,6 +172,9 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       tokenList,
       onInitDashboard,
     };
+    const subHeaderProps = {
+      tokenSymbol,
+    };
     const initStatusProps = {
       initStatus,
       web3,
@@ -248,6 +253,7 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
 
         <Content>
           <Header {...headerProps} />
+          <SubHeader {...subHeaderProps} />
           <Row type="flex" align="middle">
             <Web3Status {...initStatusProps} />
             <DistributionInfo {...distributionInfoProps} />

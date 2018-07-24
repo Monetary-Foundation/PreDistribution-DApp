@@ -300,7 +300,7 @@ function* getGasPrice() {
   let gasPrice;
   try {
     const gasPriceReply = yield call(request, gasPriceProvider);
-    const safeLowPrice = gasPriceReply.safeLow / 10;
+    const safeLowPrice = (1.1 * gasPriceReply.safeLow) / 10; // add 10% to safe low gas price
     gasPrice = web3.utils.toWei((safeLowPrice).toString(), 'gwei');
   } catch (err) {
     gasPrice = web3.utils.toWei(defaultGasPriceGwei, 'gwei');

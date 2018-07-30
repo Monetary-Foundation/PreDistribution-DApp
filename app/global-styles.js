@@ -35,8 +35,8 @@ injectGlobal`
   
   hr {
     width: 92%;
-    text-align:center !important;
-    margin: 0 auto !important;
+    text-align:center;
+    margin: 0 auto;
   }
 
   .react-count-down {

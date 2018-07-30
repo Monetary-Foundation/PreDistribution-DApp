@@ -6,19 +6,25 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-// import styled from 'styled-components';
+import styled from 'styled-components';
 import CurrentWindow from 'components/CurrentWindow';
 import WindowCountdown from 'components/WindowCountdown';
 import AllocatedForWindow from 'components/AllocatedForWindow';
 import CommitedForWindow from 'components/CommitedForWindow';
 import PriceForWindow from 'components/PriceForWindow';
 import DappDescription from 'components/DappDescription';
+import TotalRaised from 'components/TotalRaised';
 
 import { Col, Spin } from 'antd';
 
+const HR = styled.hr`
+  width: 30%;
+  margin-left: 0;
+`;
+
 function DistributionInfo(props) {
   const {
-    web3, tokenSymbol, getDistributionInfoLoading, getDistributionInfoError, distributionInfo, onGetDistributionInfo,
+    web3, tokenSymbol, getDistributionInfoLoading, getDistributionInfoError, distributionInfo, onGetDistributionInfo, totalsSum
   } = props;
 
   if (getDistributionInfoLoading) {
@@ -72,15 +78,22 @@ function DistributionInfo(props) {
       secondPeriodSupply: distributionInfo.secondPeriodSupply,
     };
 
+    const totalRaisedProps = {
+      totalsSum,
+      tokenSymbol,
+    };
+
     // const { totals } = distributionInfo;
     // delete distributionInfo.totals;
     return (
-      <Col sm={{ span: 10, offset: 1 }} xs={{ span: 23, offset: 1 }}>
+      <Col sm={{ span: 10, offset: 1 }} xs={{ span: 23, offset: 1 }}>      
         <CurrentWindow {...currentWindowProps} />
         <WindowCountdown {...windowCountdownProps} />
         <CommitedForWindow {...commitedForWindowProps} />
         <AllocatedForWindow {...allocatedForWindowProps} />
         <PriceForWindow {...priceForWindowProps} />
+        <HR />
+        <TotalRaised {...totalRaisedProps} />
         <DappDescription />
         {/* DistributionInfo component <pre> {distributionInfo && JSON.stringify(distributionInfo, 0, 0)}</pre>
               DistributionInfo component <br /> {distributionInfo && JSON.stringify(distributionInfo, 0, 2)} <br /> */}
@@ -99,6 +112,7 @@ DistributionInfo.propTypes = {
   getDistributionInfoLoading: PropTypes.bool,
   getDistributionInfoError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   distributionInfo: PropTypes.object,
+  totalsSum: PropTypes.string,
 };
 
 export default DistributionInfo;

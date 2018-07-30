@@ -195,6 +195,7 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       getDistributionInfoLoading,
       getDistributionInfoError,
       distributionInfo,
+      totalsSum,
     };
 
     const addressInfoProps = { currentWindow, totalWindows };

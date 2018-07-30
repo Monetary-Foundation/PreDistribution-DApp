@@ -8,6 +8,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Collapse, List } from 'antd';
+import { formatNumber } from 'utils/common';
 const { Panel } = Collapse;
 const { Item } = List;
 
@@ -35,14 +36,14 @@ function WithdrawDetails(props) {
             size="large"
             footer={
               rewardsList.length >= 2
-                ? <div>Total reward: <Span>{rewardsTotal} {tokenSymbol}</Span></div>
+                ? <div>Total reward: <Span>{formatNumber(rewardsTotal)} {tokenSymbol}</Span></div>
                 : null
             }
             bordered
             dataSource={rewardsList}
             renderItem={(item) => (
               <Item>
-                Window: <Span>{item.window}</Span> Amount: <Span>{item.tokens_reward} {tokenSymbol}</Span>
+                Window: <Span>{item.window}</Span> Amount: <Span>{formatNumber(item.tokens_reward)} {tokenSymbol}</Span>
               </Item>)}
           />
         </Panel>

@@ -10,7 +10,7 @@ export const applicationForm = 'https://monetarycoin.org/token_application.html'
 export const amlProvider = 'https://7fx9kdgf1b.execute-api.eu-west-1.amazonaws.com/dev/whitelist/';
 export const gasPriceProvider = 'https://ethgasstation.info/json/ethgasAPI.json';
 
-export const defaultGasPriceGwei = '15';
+export const defaultGasPriceGwei = '10';
 // case 1:
 // console.log('This is mainnet')
 // break

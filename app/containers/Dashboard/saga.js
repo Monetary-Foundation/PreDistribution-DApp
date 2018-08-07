@@ -56,7 +56,7 @@ import {
 
   makeSelectCommitEthSendWindow,
   makeSelectCommitEthSendAmount,
-  makeSelectWithdrawWindow,
+  // makeSelectWithdrawWindow,
 } from './selectors';
 
 
@@ -363,7 +363,7 @@ function* commitEthSendAsync() {
 function* withdrawSendAsync() {
   try {
     const web3 = yield select(makeSelectWeb3());
-    const window = yield select(makeSelectWithdrawWindow());
+    // const window = yield select(makeSelectWithdrawWindow());
 
     // console.log('withdrawSendAsync');
     // console.log(`window: ${window}`);
@@ -372,9 +372,9 @@ function* withdrawSendAsync() {
     // console.log(defaultAccount);
     const gasPrice = yield call(getGasPrice);
 
-    distributionContract.methods.withdraw(window).send({
+    distributionContract.methods.withdrawAll().send({
       from: defaultAccount,
-      gas: (100000).toString(),
+      // gas: (300000).toString(),
       gasPrice,
       value: 0,
     })

@@ -3,10 +3,10 @@ import { take, call, put, select, takeLatest, fork } from 'redux-saga/effects';
 
 import Web3 from 'web3';
 
-import { distributionContracts } from 'utils/constants';
+import { distributionContracts, amlProvider, gasPriceProvider, defaultGasPriceGwei } from 'utils/constants';
 
 import { distributionAbi } from 'utils/contracts/abi';
-
+import request from 'utils/request';
 import {
   INIT_DASHBOARD,
   // ADD_NEW_SET_EVENT,
@@ -56,7 +56,7 @@ import {
 
   makeSelectCommitEthSendWindow,
   makeSelectCommitEthSendAmount,
-  makeSelectWithdrawWindow,
+  // makeSelectWithdrawWindow,
 } from './selectors';
 
 
@@ -246,6 +246,7 @@ function* getDistributionInfoAsync() {
     yield put(getDistributionInfoError(err.toString()));
   }
 }
+
 /**
  * getAddressInfoAsync
  */
@@ -262,9 +263,13 @@ function* getAddressInfoAsync() {
 
     console.log(`user address: ${address}`);
 
-    // if (!address) {
-    //   throw new Error('Wallet locked, unlock wallet to use Dapp');
-    // }
+    const requestURL = `${amlProvider}${address}`;
+    let amlReply = {};
+    try {
+      amlReply = yield call(request, requestURL);
+    } catch (err) {
+      amlReply.status = 'ERROR';
+    }
 
     const getCommitments = distributionContract.methods.getCommitmentsOf(address).call();
     const getRewards = distributionContract.methods.getAllRewards().call();
@@ -273,20 +278,34 @@ function* getAddressInfoAsync() {
       Promise.all([getCommitments, getRewards]);
 
     const [commitments, rewards] = yield call(getAllPromises);
-    const distributionInfo = {
+
+    const amlStatus = (amlReply && amlReply.status) ? amlReply.status : 'ERROR';
+
+    const addressInfo = {
       address,
       commitments,
       rewards,
+      amlStatus,
     };
 
-    // const getRewards = () => distributionContract.methods.getAllRewards().call();
-    // const rewards = yield call(getRewards);
-
-
-    yield put(getAddressInfoSuccess(distributionInfo));
+    yield put(getAddressInfoSuccess(addressInfo));
   } catch (err) {
     yield put(getAddressInfoError(err.toString()));
   }
+}
+
+
+function* getGasPrice() {
+  const web3 = yield select(makeSelectWeb3());
+  let gasPrice;
+  try {
+    const gasPriceReply = yield call(request, gasPriceProvider);
+    const safeLowPrice = (1.1 * gasPriceReply.safeLow) / 10; // add 10% to safe low gas price
+    gasPrice = web3.utils.toWei((safeLowPrice).toString(), 'gwei');
+  } catch (err) {
+    gasPrice = web3.utils.toWei(defaultGasPriceGwei, 'gwei');
+  }
+  return gasPrice;
 }
 
 /**
@@ -300,10 +319,12 @@ function* commitEthSendAsync() {
 
     const defaultAccount = (yield call(() => web3.eth.getAccounts()))[0];
 
+    const gasPrice = yield call(getGasPrice);
+
     distributionContract.methods.commitOn(window).send({
       from: defaultAccount,
       gas: (100000).toString(),
-      gasPrice: web3.utils.toWei((10).toString(), 'gwei'),
+      gasPrice,
       value: web3.utils.toWei(amount.toString(), 'ether'),
     }).once('transactionHash', (tx) => {
       withdrawChannel.put({
@@ -342,18 +363,19 @@ function* commitEthSendAsync() {
 function* withdrawSendAsync() {
   try {
     const web3 = yield select(makeSelectWeb3());
-    const window = yield select(makeSelectWithdrawWindow());
+    // const window = yield select(makeSelectWithdrawWindow());
 
     // console.log('withdrawSendAsync');
     // console.log(`window: ${window}`);
 
     const defaultAccount = (yield call(() => web3.eth.getAccounts()))[0];
     // console.log(defaultAccount);
+    const gasPrice = yield call(getGasPrice);
 
-    distributionContract.methods.withdraw(window).send({
+    distributionContract.methods.withdrawAll().send({
       from: defaultAccount,
-      gas: (100000).toString(),
-      gasPrice: web3.utils.toWei((10).toString(), 'gwei'),
+      // gas: (300000).toString(),
+      gasPrice,
       value: 0,
     })
       .once('transactionHash', (tx) => {

@@ -199,6 +199,23 @@ const makeSelectRewardsTotal = () => createSelector(
   }
 );
 
+const makeSelectAmlStatus = () => createSelector(
+  selectDashboardDomain,
+  (substate) => substate && substate.getIn(['addressInfo', 'amlStatus'])
+);
+
+const makeSelectCanParticipate = () => createSelector(
+  selectDashboardDomain,
+  (substate) => {
+    if (substate && substate.get('networkId') !== 1) {
+      return true;
+    }
+    if (substate && substate.getIn(['addressInfo', 'amlStatus']) === 'VERIFIED') {
+      return true;
+    }
+    return false;
+  }
+);
 /* CommitEth */
 
 const makeSelectCommitEthSendWindow = () => createSelector(
@@ -340,6 +357,8 @@ export {
   makeSelectAddressInfo,
   makeSelectCommitmentsList,
   makeSelectRewardsList,
+  makeSelectAmlStatus,
+  makeSelectCanParticipate,
 
   makeSelectCommitEthSendWindow,
   makeSelectCommitEthSendAmount,

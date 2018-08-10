@@ -25,40 +25,45 @@ function Withdraw(props) {
   const {
     networkId,
     currentWindow,
-    onChangeWithdrawWindow,
+    // onChangeWithdrawWindow,
     onWithdrawSend,
-    withdrawWindow,
+    // withdrawWindow,
     withdrawSendLoading,
     // withdrawMinedLoading,
     withdrawError,
     withdrawSendTx,
     withdrawMinedRecipt,
+    canParticipate,
   } = props;
 
   const conditionalSpace = (!withdrawSendTx && !withdrawError) ? <br /> : null;
 
   const noClosedWindows = (currentWindow === 0);
 
+  const withdrawDisabled = noClosedWindows || !canParticipate;
+
   return (
     <div>
       <h3> Withdraw tokens </h3>
       <DivS>
-        Window:{' '}
+        {/* Window:{' '}
         <InputNumber
           min={0}
           max={(currentWindow > 0) ? (currentWindow - 1) : 0}
           step={1}
           value={withdrawWindow}
           onChange={(value) => onChangeWithdrawWindow(value)}
+          disabled
         />
-        <br /><br /><br />
+        <br /><br /><br /> */}
+        <br />
         <Button
           type="primary"
           size="large"
           onClick={() => onWithdrawSend()}
-          disabled={noClosedWindows}
+          disabled={withdrawDisabled}
         >
-          Withdraw Tokens
+          Withdraw All
         </Button>
         <SendLoadingIndicator
           loading={withdrawSendLoading}
@@ -86,14 +91,15 @@ function Withdraw(props) {
 Withdraw.propTypes = {
   networkId: PropTypes.number,
   currentWindow: PropTypes.number,
-  onChangeWithdrawWindow: PropTypes.func,
+  // onChangeWithdrawWindow: PropTypes.func,
   onWithdrawSend: PropTypes.func,
-  withdrawWindow: PropTypes.number,
+  // withdrawWindow: PropTypes.number,
   withdrawSendLoading: PropTypes.bool,
   // withdrawMinedLoading: PropTypes.bool,
   withdrawError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   withdrawSendTx: PropTypes.string,
   withdrawMinedRecipt: PropTypes.object,
+  canParticipate: PropTypes.bool,
 };
 
 export default Withdraw;

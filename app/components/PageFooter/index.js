@@ -34,7 +34,7 @@ function PageFooter() {
       <Row>
         <Col sm={{ span: 11, offset: 1 }} xs={24}>
           <a href={github} target="_blank" rel="noopener">
-            MonetaryCoin Pre-Distribution DApp source (Github)
+            MonetaryCoin on Github
           </a> v{version}<br />
           Created using: web3@1.0, React.js, Ant design...
         </Col>

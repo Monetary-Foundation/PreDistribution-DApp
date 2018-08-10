@@ -11,6 +11,7 @@ import { Row, Col, Spin } from 'antd';
 import CommitLayout from 'components/CommitLayout';
 import WithdrawLayout from 'components/WithdrawLayout';
 import Instructions from 'components/Instructions';
+import AmlStatus from 'components/AmlStatus';
 
 
 const Div = styled.div`
@@ -23,6 +24,11 @@ const BigSpan = styled.span`
   font-size: 1.5em;
 `;
 
+const BigSpanRed = styled.span`
+  color: red;
+  font-size: 1.5em;
+`;
+
 const H2s = styled.h2`
   color: red;
   font-size: 1em;
@@ -30,7 +36,7 @@ const H2s = styled.h2`
 
 function AddressInfo(props) {
   const {
-    isWeb3Browser, getAddressInfoLoading, getAddressInfoError, addressInfo, ...rest
+    isWeb3Browser, getAddressInfoLoading, getAddressInfoError, addressInfo, amlStatus, ...rest
   } = props;
 
   if (getAddressInfoLoading) {
@@ -45,7 +51,7 @@ function AddressInfo(props) {
           <br />
           <br />
           <br />
-        </Spin>\
+        </Spin>
       </Div>
     );
   }
@@ -60,8 +66,10 @@ function AddressInfo(props) {
         <br /><hr />
         <Row type="flex" align="left" >
           <Col sm={{ span: 22, offset: 1 }} xs={{ span: 22, offset: 1 }}>
-            <BigSpan> No web3 browser detected. </BigSpan> <br />
-            You can use web3 browser such as Mist, Metamask or Trust wallet to commit Eth and withdraw tokens <b>directly from this page.</b>
+            <BigSpanRed> No web3 browser detected. </BigSpanRed> <br />
+            You can use Ethereum web3 browser such as Mist,
+            <a target="_blank" rel="noopener" href="https://metamask.io/"><b> MetaMask </b></a>
+            or Trust wallet to commit Eth and withdraw tokens <b>directly from this page.</b>
           </Col>
         </Row>
       </Div>
@@ -75,8 +83,10 @@ function AddressInfo(props) {
         <br /><hr />
         <Row type="flex" align="left" >
           <Col sm={{ span: 22, offset: 1 }} xs={{ span: 22, offset: 1 }}>
-            <BigSpan> Web3 browser detected. </BigSpan> <br />
-            You can use web3 browser such as Mist, Metamask or Trust wallet to commit Eth and withdraw tokens <b>directly from this page.</b>
+            <BigSpanRed> No web3 browser detected. </BigSpanRed> <br />
+            You can use Ethereum web3 browser such as Mist,
+            <a target="_blank" rel="noopener" href="https://metamask.io/"><b> MetaMask </b></a>
+            or Trust wallet to commit Eth and withdraw tokens <b>directly from this page.</b>
             <br /><br />
             <b> {getAddressInfoError} </b> <br />
           </Col>
@@ -96,7 +106,8 @@ function AddressInfo(props) {
       <Row type="flex" align="left" >
         <Col sm={{ span: 10, offset: 1 }} xs={{ span: 22, offset: 1 }} style={{ overflowX: 'hidden' }}>
           <h2> My Account </h2>
-          <h4> Address: </h4> <BigSpan> {addressComp} </BigSpan> <br />
+          <h4> Address: </h4> <BigSpan> {addressComp} </BigSpan> <br /><br />
+          <AmlStatus address={address} amlStatus={amlStatus} />
         </Col>
       </Row>
       <CommitLayout {...rest} />
@@ -110,6 +121,7 @@ AddressInfo.propTypes = {
   getAddressInfoLoading: PropTypes.bool,
   getAddressInfoError: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   addressInfo: PropTypes.object,
+  amlStatus: PropTypes.string,
 };
 
 export default AddressInfo;

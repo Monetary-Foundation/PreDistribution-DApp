@@ -41,10 +41,10 @@ function PriceForWindow(props) {
   const inversePrice = currentWindowEth.gt(new BN(0)) ? dailySupply.div(currentWindowEth) : 0;
 
   const price = inversePrice !== 0 && inversePrice.gt(new BN(0)) ? 1.0 / inversePrice : 0;
-  return (
+  return ( // eslint-disable-line
     <Div>
       Price Per Token <br />
-      <BigSpan> {price && price.toFixed(10)} ETH </BigSpan> <SmallSpan> ({inversePrice.toString()} tokens per ETH) </SmallSpan><br />
+      <BigSpan> {price && price.toFixed(11)} ETH </BigSpan> <SmallSpan> ({inversePrice.toString()} tokens per ETH) </SmallSpan><br />
       <SmallerSpan> *Price might increase until end of window </SmallerSpan> <br />
     </Div>
   );

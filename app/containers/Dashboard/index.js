@@ -18,6 +18,8 @@ import injectReducer from 'utils/injectReducer';
 import { Row } from 'antd';
 
 import Header from 'components/Header';
+import SubHeader from 'components/SubHeader';
+
 import Web3Status from 'components/Web3Status';
 import DistributionInfo from 'components/DistributionInfo';
 
@@ -25,6 +27,7 @@ import TotalsInfo from 'components/TotalsInfo';
 
 import AddressInfo from 'components/AddressInfo';
 
+import SuperFooter from 'components/SuperFooter';
 import PageFooter from 'components/PageFooter';
 import { Content } from 'components/PageFooter/sticky';
 
@@ -70,6 +73,8 @@ import {
   makeSelectAddressInfo,
   makeSelectCommitmentsList,
   makeSelectRewardsList,
+  makeSelectAmlStatus,
+  makeSelectCanParticipate,
 
   makeSelectCommitEthSendWindow,
   makeSelectCommitEthSendAmount,
@@ -131,6 +136,8 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       rewardsList,
       rewardsTotal,
       commitmentsTotal,
+      amlStatus,
+      canParticipate,
 
       commitEthSendWindow,
       commitEthSendAmount,
@@ -166,6 +173,9 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       tokenList,
       onInitDashboard,
     };
+    const subHeaderProps = {
+      tokenSymbol,
+    };
     const initStatusProps = {
       initStatus,
       web3,
@@ -185,6 +195,7 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       getDistributionInfoLoading,
       getDistributionInfoError,
       distributionInfo,
+      totalsSum,
     };
 
     const addressInfoProps = { currentWindow, totalWindows };
@@ -195,6 +206,8 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
       addressInfo,
       isWeb3Browser,
       networkId,
+      amlStatus,
+      canParticipate,
     };
     const commitProps = {
       commitmentsList,
@@ -242,12 +255,14 @@ export class Dashboard extends React.PureComponent { // eslint-disable-line reac
 
         <Content>
           <Header {...headerProps} />
+          <SubHeader {...subHeaderProps} />
           <Row type="flex" align="middle">
             <Web3Status {...initStatusProps} />
             <DistributionInfo {...distributionInfoProps} />
           </Row>
           <TotalsInfo {...totalsInfoProps} />
           <AddressInfo {...addressInfoProps} />
+          <SuperFooter />
         </Content>
         <PageFooter />
       </div>
@@ -288,6 +303,8 @@ Dashboard.propTypes = {
   rewardsList: PropTypes.array,
   commitmentsTotal: PropTypes.string,
   rewardsTotal: PropTypes.string,
+  amlStatus: PropTypes.string,
+  canParticipate: PropTypes.bool,
 
   commitEthSendWindow: PropTypes.number,
   commitEthSendAmount: PropTypes.number,
@@ -341,6 +358,8 @@ const mapStateToProps = createStructuredSelector({
   rewardsList: makeSelectRewardsList(),
   commitmentsTotal: makeSelectCommitmentsTotal(),
   rewardsTotal: makeSelectRewardsTotal(),
+  amlStatus: makeSelectAmlStatus(),
+  canParticipate: makeSelectCanParticipate(),
 
   commitEthSendWindow: makeSelectCommitEthSendWindow(),
   commitEthSendAmount: makeSelectCommitEthSendAmount(),

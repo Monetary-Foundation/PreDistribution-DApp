@@ -23,6 +23,7 @@ function TotalsList(props) {
   const { totalsList, totalsSum } = props;
   return (
     <Collapse>
+      {/* <Collapse defaultActiveKey={['1']}> */}
       {/*
       <Panel header="Totals list" key="1" style={customPanelStyle}>
         {totals && JSON.stringify(totals, 0, 2)}
@@ -31,7 +32,7 @@ function TotalsList(props) {
         {totalsList && JSON.stringify(totalsList, 0, 2)}
       </Panel>
       */}
-      <Panel header="Toggle commitments list" key="3" style={customPanelStyle}>
+      <Panel header="Toggle commitments list" key="1" style={customPanelStyle}>
         <List
           size="large"
           header={
@@ -39,10 +40,10 @@ function TotalsList(props) {
 
           }
           bordered
-          dataSource={totalsList}
+          dataSource={totalsList || []}
           renderItem={(item) => (
             <Item>
-              Window: <Span>{item.window}</Span> Amount: <Span>{item.eth_commited} Ethr</Span>
+              Window: <Span>{item.window}</Span> Amount: <Span>{item.eth_commited} Ether</Span>
             </Item>)}
         />
       </Panel>

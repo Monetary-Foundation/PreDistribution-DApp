@@ -7,11 +7,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import CurrentWindow from 'components/CurrentWindow';
-import WindowCountdown from 'components/WindowCountdown';
-import AllocatedForWindow from 'components/AllocatedForWindow';
-import CommitedForWindow from 'components/CommitedForWindow';
-import PriceForWindow from 'components/PriceForWindow';
+// import CurrentWindow from 'components/CurrentWindow';
+// import WindowCountdown from 'components/WindowCountdown';
+// import AllocatedForWindow from 'components/AllocatedForWindow';
+// import CommitedForWindow from 'components/CommitedForWindow';
+// import PriceForWindow from 'components/PriceForWindow';
 import DappDescription from 'components/DappDescription';
 import TotalRaised from 'components/TotalRaised';
 
@@ -24,7 +24,10 @@ const HR = styled.hr`
 
 function DistributionInfo(props) {
   const {
-    web3, tokenSymbol, getDistributionInfoLoading, getDistributionInfoError, distributionInfo, onGetDistributionInfo, totalsSum
+    // web3,
+    tokenSymbol, getDistributionInfoLoading, getDistributionInfoError, distributionInfo,
+    // onGetDistributionInfo,
+    totalsSum,
   } = props;
 
   if (getDistributionInfoLoading) {
@@ -46,37 +49,37 @@ function DistributionInfo(props) {
   }
 
   if (distributionInfo) {
-    const windowCountdownProps = {
-      onGetDistributionInfo,
-      remainingTime: Number(distributionInfo.remainingTime),
-    };
+    // const windowCountdownProps = {
+    //   onGetDistributionInfo,
+    //   remainingTime: Number(distributionInfo.remainingTime),
+    // };
 
-    const currentWindowProps = {
-      currentWindow: Number(distributionInfo.currentWindow),
-      totalWindows: Number(distributionInfo.totalWindows),
-    };
+    // const currentWindowProps = {
+    //   currentWindow: Number(distributionInfo.currentWindow),
+    //   totalWindows: Number(distributionInfo.totalWindows),
+    // };
 
-    const allocatedForWindowProps = {
-      web3,
-      tokenSymbol,
-      allocation: distributionInfo.allocation,
-    };
+    // const allocatedForWindowProps = {
+    //   web3,
+    //   tokenSymbol,
+    //   allocation: distributionInfo.allocation,
+    // };
 
-    const commitedForWindowProps = {
-      web3,
-      currentWindow: Number(distributionInfo.currentWindow),
-      totals: distributionInfo.totals,
-    };
+    // const commitedForWindowProps = {
+    //   web3,
+    //   currentWindow: Number(distributionInfo.currentWindow),
+    //   totals: distributionInfo.totals,
+    // };
 
-    const priceForWindowProps = {
-      web3,
-      currentWindow: distributionInfo.currentWindow,
-      totals: distributionInfo.totals,
-      firstPeriodWindows: distributionInfo.firstPeriodWindows,
-      secondPeriodWindows: distributionInfo.secondPeriodWindows,
-      firstPeriodSupply: distributionInfo.firstPeriodSupply,
-      secondPeriodSupply: distributionInfo.secondPeriodSupply,
-    };
+    // const priceForWindowProps = {
+    //   web3,
+    //   currentWindow: distributionInfo.currentWindow,
+    //   totals: distributionInfo.totals,
+    //   firstPeriodWindows: distributionInfo.firstPeriodWindows,
+    //   secondPeriodWindows: distributionInfo.secondPeriodWindows,
+    //   firstPeriodSupply: distributionInfo.firstPeriodSupply,
+    //   secondPeriodSupply: distributionInfo.secondPeriodSupply,
+    // };
 
     const totalRaisedProps = {
       totalsSum,
@@ -86,12 +89,15 @@ function DistributionInfo(props) {
     // const { totals } = distributionInfo;
     // delete distributionInfo.totals;
     return (
-      <Col sm={{ span: 10, offset: 1 }} xs={{ span: 23, offset: 1 }}>      
-        <CurrentWindow {...currentWindowProps} />
-        <WindowCountdown {...windowCountdownProps} />
-        <CommitedForWindow {...commitedForWindowProps} />
+      <Col sm={{ span: 10, offset: 1 }} xs={{ span: 23, offset: 1 }}>
+        {/* <CurrentWindow {...currentWindowProps} />
+        <WindowCountdown {...windowCountdownProps} /> */}
+        <h2>Pre-destribution concluded</h2><br />
+        <h2>Please withdraw tokens</h2>
+        {/* <CommitedForWindow {...commitedForWindowProps} />
         <AllocatedForWindow {...allocatedForWindowProps} />
-        <PriceForWindow {...priceForWindowProps} />
+        <PriceForWindow {...priceForWindowProps} /> */}
+        <br /><br /><br /><br />
         <HR />
         <TotalRaised {...totalRaisedProps} />
         <DappDescription />

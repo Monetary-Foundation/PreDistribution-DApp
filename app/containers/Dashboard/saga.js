@@ -190,14 +190,18 @@ function* getDistributionInfoAsync() {
 
     allCalls.push(web3.eth.getBlock('latest'));
     allCalls.push(distributionContract.methods.totalWindows().call());
-    // allCalls.push(distributionContract.methods.startTimestamp().call());
-    // allCalls.push(distributionContract.methods.windowLength().call());
+
     allCalls.push(distributionContract.methods.firstPeriodWindows().call());
     allCalls.push(distributionContract.methods.secondPeriodWindows().call());
     allCalls.push(distributionContract.methods.firstPeriodSupply().call());
     allCalls.push(distributionContract.methods.secondPeriodSupply().call());
     allCalls.push(distributionContract.methods.getTotals().call());
-    allCalls.push(distributionContract.methods.detailsOfWindow().call());
+    // Distribution is over
+    // allCalls.push(distributionContract.methods.detailsOfWindow().call());
+    // Hardcode values:
+    const remainingTime = 1;
+    const allocation = '1';
+    const number = 1;
 
     const getAllPromises = () => Promise.all(allCalls);
 
@@ -211,17 +215,17 @@ function* getDistributionInfoAsync() {
       firstPeriodSupply,
       secondPeriodSupply,
       totals,
-      detailsOfWindow,
+      // detailsOfWindow,
     ] = yield call(getAllPromises);
 
-    const {
-      // start,
-      // end,
-      remainingTime,
-      allocation,
-      // totalEth,
-      number,
-    } = detailsOfWindow;
+    // const {
+    //   // start,
+    //   // end,
+    //   remainingTime,
+    //   allocation,
+    //   // totalEth,
+    //   number,
+    // } = detailsOfWindow;
 
     const distributionInfo = {
       timestamp: latestBlock.timestamp,
@@ -238,7 +242,6 @@ function* getDistributionInfoAsync() {
       remainingTime,
       allocation,
     };
-
 
     yield put(getDistributionInfoSuccess(distributionInfo));
     yield put(getAddressInfo());
